@@ -1,0 +1,16 @@
+{
+  "syntax": "css",
+  "parser": "css",
+  "plugins": ["stylelint-order"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recess-order"
+  ],
+  "rules": {
+    "max-line-length": 200,
+    "indentation": 2,
+    "declaration-colon-newline-after": null,
+    "no-descending-specificity": null,
+    "value-list-comma-newline-after": "never-multi-line"
+  }
+}

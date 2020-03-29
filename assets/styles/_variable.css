@@ -1,0 +1,70 @@
+:root {
+  /* -------------------------------------------
+   *
+   * Color Variables
+   *
+  ------------------------------------------- */
+  --color-key-1:rgb(212, 234, 255);
+
+  /* -------------------------------------------
+   *
+   * font
+   *
+  ------------------------------------------- */
+  --font-noto-sans-serif: "Noto Sans JP", sans-serif;
+
+  /* -------------------------------------------
+   *
+   * Column Width Variables
+   *
+  ------------------------------------------- */
+  --width-column: 65px;
+  --width-gutter: 20px;
+  --width-design: 1280px;
+
+  /* --------------------
+   *
+   * Width
+   *
+  -------------------- */
+  --width-1: calc(var(--width-column) * 1 + var(--width-gutter) * (1 - 1)); /* 65 */
+  --width-2: calc(var(--width-column) * 2 + var(--width-gutter) * (2 - 1)); /* 150 */
+  --width-3: calc(var(--width-column) * 3 + var(--width-gutter) * (3 - 1)); /* 235 */
+  --width-4: calc(var(--width-column) * 4 + var(--width-gutter) * (4 - 1)); /* 320 */
+  --width-5: calc(var(--width-column) * 5 + var(--width-gutter) * (5 - 1)); /* 405 */
+  --width-6: calc(var(--width-column) * 6 + var(--width-gutter) * (6 - 1)); /* 490 */
+  --width-7: calc(var(--width-column) * 7 + var(--width-gutter) * (7 - 1)); /* 575 */
+  --width-8: calc(var(--width-column) * 8 + var(--width-gutter) * (8 - 1)); /* 660 */
+  --width-9: calc(var(--width-column) * 9 + var(--width-gutter) * (9 - 1)); /* 745 */
+  --width-10: calc(var(--width-column) * 10 + var(--width-gutter) * (10 - 1)); /* 830 */
+  --width-11: calc(var(--width-column) * 11 + var(--width-gutter) * (11 - 1)); /* 915 */
+  --width-12: calc(var(--width-column) * 12 + var(--width-gutter) * (12 - 1)); /* 1000 */
+  --width-13: calc(var(--width-column) * 13 + var(--width-gutter) * (13 - 1)); /* 1085 */
+  --width-14: calc(var(--width-column) * 14 + var(--width-gutter) * (14 - 1)); /* 1170 */
+  --width-15: calc(var(--width-column) * 15 + var(--width-gutter) * (15 - 1)); /* 1255 */
+  --width-16: calc(var(--width-column) * 16 + var(--width-gutter) * (16 - 1)); /* 1340 */
+  --width-17: calc(var(--width-column) * 17 + var(--width-gutter) * (17 - 1)); /* 1425 */
+  --width-18: calc(var(--width-column) * 18 + var(--width-gutter) * (18 - 1)); /* 1510 */
+
+  /* -------------------------------------------
+   *
+   * Font Size Variables
+   *
+  ------------------------------------------- */
+  --font-size-base: 1.4rem;
+  --font-size-h1: 3rem;
+  --font-size-h2: 2.6rem;
+  --font-size-h3: 1.8rem;
+  --font-size-1: 1.6rem;
+  --font-size-2: 1.4rem;
+  --font-size-3: 1.2rem;
+  --font-size-4: 1rem;
+}
+
+/* -------------------------------------------
+ *
+ * Media Queries
+ *
+------------------------------------------- */
+@custom-media --tablet (max-width: 1000px);
+@custom-media --mobile (max-width: 660px);
