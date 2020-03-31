@@ -8,6 +8,6 @@ html {
 }
 
 body {
-  font-family: var(--font-noto-sans-serif);
+  font-family: var(--font-helvetica-sans-serif);
   font-size: var(--font-size-base);
 }

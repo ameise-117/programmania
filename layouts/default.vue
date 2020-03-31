@@ -2,18 +2,25 @@
   div
     globalheader
     main.main
-      menulist
-      nuxt
+      navigation
+      div.main-block
+        nuxt
+        palet
+      command-line
 </template>
 
 <script>
 import Globalheader from '~/components/global/Globalheader.vue'
-import Menulist from '~/components/partial/Menulist.vue'
+import Navigation from '~/components/partial/Navigation.vue'
+import CommandLine from '~/components/partial/CommandLine.vue'
+import Palet from '~/components/partial/Palet.vue'
 
 export default {
   components: {
     Globalheader,
-    Menulist
+    Navigation,
+    CommandLine,
+    Palet
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-	.menu
+	.navigation
 		.title Menu
 		ul.list
 			li.item
@@ -16,12 +16,12 @@
 </template>
 
 <style scoped>
-.menu {
+.navigation {
 	width: 250px;
 	height: 100%;
 	background-color: #FBFBFA;
 	box-shadow: 3px 3px 5px rgba(49,100,160,.1), -3px 0 5px rgba(49,100,160,.1);
-	font-family: var(--font-helvetica-sans-serif);
+	z-index: 1;
 }
 
 .title {
