@@ -1,7 +1,8 @@
 <template lang="pug">
-  .section.main
-    .palet test
+  .practice 練習
 </template>
 
 <style scoped>
+.practice {
+}
 </style>

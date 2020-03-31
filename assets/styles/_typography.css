@@ -1,0 +1,13 @@
+/* -------------------------------------------
+ *
+ * typography settings
+ *
+------------------------------------------- */
+html {
+  font-size: var(--font-size-root);
+}
+
+body {
+  font-family: var(--font-noto-sans-serif);
+  font-size: var(--font-size-base);
+}
