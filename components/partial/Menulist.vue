@@ -9,8 +9,10 @@
 						nuxt-link.link(to="/practice/1") 直線を描く
 					li.item
 						nuxt-link.link(to="/practice/2") 回転させる
-					li.item 星座を見つける
-					li.item 星座を見つける
+					li.item
+						nuxt-link.link(to="/practice/3") 星座を見つける
+					li.item.star
+						nuxt-link.link(to="/practice/4") 星座を見つける
 </template>
 
 <style scoped>
@@ -19,6 +21,7 @@
 	height: 100%;
 	background-color: #FBFBFA;
 	box-shadow: 3px 3px 5px rgba(49,100,160,.1), -3px 0 5px rgba(49,100,160,.1);
+	font-family: var(--font-helvetica-sans-serif);
 }
 
 .title {
@@ -47,10 +50,7 @@
 	font-size: 1.6rem;
 
 	& .item {
-		height: 40px;
-		display: flex;
-		align-items: center;
-		padding-left: 25px;
+		position: relative;
 
 		& + .item {
 			border-top: 1px solid rgba(74, 111, 84, 0.1);
@@ -59,6 +59,30 @@
 		& .link {
 			color: var(--color-key-1);
 			text-decoration: none;
+			padding-left: 25px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			transition: all 0.2s ease-in-out;
+
+			&:hover {
+				background-color: #EFEFEB;
+			}
+		}
+
+		&.star {
+			&::before {
+				position: absolute;
+				top: calc(50% - (15px / 2));
+				left: 5px;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				content: url("../../assets/images/menu/icon_star.svg");
+				display: inline-block;
+				width: 15px;
+				height: 15px;
+			}
 		}
 	}
 }
