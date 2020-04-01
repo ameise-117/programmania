@@ -1,11 +1,10 @@
 <template lang="pug">
 	.command-line
 		.title スタート
-		.line
-			draggable(tag="ul", :options="{group:'ITEMS'}")
-				li(:key="1") ああ
-				li(:key="2") 回る
-				li(:key="3") 待つ
+		.body
+			draggable.line(tag="ul", :options="{ group: 'ITEMS' }")
+				li.item(:key="1")
+			.dummy(:class="{ hover: $store.state.isDummyHover }") ここに配置
 		.title ゴール
 </template>
 
@@ -41,5 +40,38 @@
 	padding-right: 30px;
 	font-size: 2rem;
 	z-index: 2;
+}
+
+.body {
+	position: relative;
+	height: 100%;
+}
+
+.line {
+	height: 100%;
+	padding: 10px 0 10px 30px;
+
+	& .item {
+		height: 0;
+		width: 100%;
+	}
+}
+
+.dummy {
+	height: 30px;
+	left: 30px;
+	width: calc(100% - 40px);
+	border: 1px dashed rgba(112, 112, 112, 0.5);
+	border-radius: 5px;
+	position: absolute;
+	top: 10px;
+	display: flex;
+	align-items: center;
+	padding: 0 15px;
+	color: rgba(112, 112, 112, 0.5);
+
+	&.hover {
+		box-shadow: 3px 3px 10px rgba(49,100,160,.1), -3px 0 10px rgba(49,100,160,.1) inset;
+	}
 }
 </style>

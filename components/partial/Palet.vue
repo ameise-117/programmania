@@ -2,11 +2,10 @@
 	.palet
 		.item
 			p.head 動き
-			.body
-				draggable(tag="ul", :options="{group:'ITEMS'}")
-					li(:key="1") 進む
-					li(:key="2") 回る
-					li(:key="3") 待つ
+			draggable.body(tag="ul", :options="{ group: 'ITEMS' }", @start="onStart", @end="onEnd")
+				li.item(:key="1", :class="{ move: isMoving }") 進む
+				li.item(:key="2") 回る
+				li.item(:key="3") 待つ
 		.item
 			p.head 方向
 			.body
@@ -14,6 +13,27 @@
 			p.head 演算
 			.body
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			isMoving: false
+		}
+	},
+  methods: {
+  	onStart() {
+  		console.log('***')
+  		this.isMoving = true
+  		this.$store.dispatch('isDummyHover', true)
+  	},
+    onEnd() {
+      console.log('***')
+      this.$store.dispatch('isDummyHover', false)
+    }
+  }
+}
+</script>
 
 <style scoped>
 .palet {
@@ -77,5 +97,31 @@
 .body {
 	height: 100%;
 	background-color: var(--color-bg-1);
+	padding: 15px 15px;
+
+	& .item {
+		padding: 0 15px;
+		border: 1px solid;
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
+		border-radius: 5px;
+		height: 30px;
+		width: fit-content;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:hover {
+			box-shadow: 3px 3px 10px rgba(49,100,160,.1), -3px 0 10px rgba(49,100,160,.1);
+		}
+
+		& + .item {
+			margin-top: 10px;
+		}
+
+		&.move {
+			margin-top: 0;
+		}
+	}
 }
 </style>
