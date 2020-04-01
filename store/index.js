@@ -6,8 +6,7 @@ export const strict = false
 
 export const state = () => ({
   isDummyHover: false,
-  isDragEnd: false,
-  dragGroupName: 'items1'
+  isDragEnd: false
 })
 
 export const mutations = {
@@ -16,9 +15,6 @@ export const mutations = {
   },
   setIsDragEnd(state, value) {
     state.isDragEnd = value
-  },
-  setDragGroupName(state, value) {
-    state.dragGroupName = value
   }
 }
 
@@ -28,8 +24,5 @@ export const actions = {
   },
   isDragEnd(context, value) {
     context.commit('setIsDragEnd', value)
-  },
-  dragGroupName(context, value) {
-    context.commit('setDragGroupName', value)
   }
 }

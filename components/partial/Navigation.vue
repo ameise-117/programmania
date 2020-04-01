@@ -78,7 +78,7 @@
 				top: 0;
 				bottom: 0;
 				margin: auto;
-				content: url("../../assets/images/menu/icon_star.svg");
+				content: url("../../assets/images/navigation/icon_star.svg");
 				display: inline-block;
 				width: 15px;
 				height: 15px;

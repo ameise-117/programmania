@@ -2,7 +2,7 @@
 	.command-line
 		.title スタート
 		.body
-			draggable.line(tag="ul", :options="{ group: $store.state.dragGroupName }", ref="elCommand", @end="onEnd")
+			draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
 				li.item(:key="1")
 			.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
 		.title ゴール

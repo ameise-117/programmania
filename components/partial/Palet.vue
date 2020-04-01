@@ -2,20 +2,24 @@
 	.palet
 		.item
 			p.head 動き
-			draggable.body(tag="ul", :options="{ group: 'items1' }", @start="onStart(1)", @end="onEnd")
-				li.item.motion(:key="1") 進む
-				li.item.motion(:key="2") 回る
+			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+				li.item.motion(:key="1")
+					p.text 進む
+					img.img(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+				li.item.motion(:key="2")
+					p.text 回る
+					img.img(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
 				li.item.motion(:key="3") 待つ
 		.item
 			p.head 方向
-			draggable.body(tag="ul", :options="{ group: 'items2' }", @start="onStart(2)", @end="onEnd")
+			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.direction(:key="1") 右に
 				li.item.direction(:key="2") 左に
 				li.item.direction(:key="3") 上に
 				li.item.direction(:key="4") 下に
 		.item
 			p.head 演算
-			draggable.body(tag="ul", :options="{ group: 'items3' }", @start="onStart(3)", @end="onEnd")
+			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.calculation(:key="1") 右に
 				li.item.calculation(:key="2") 左に
 				li.item.calculation(:key="3") 上に
@@ -23,21 +27,18 @@
 
 <script>
 export default {
-	// data() {
-	// 	return {
-	// 		isMoving: false
-	// 	}
-	// },
   methods: {
-  	onStart(groupNum) {
-  		// this.isMoving = true
+  	onStart() {
   		this.$store.dispatch('isDummyHover', true)
-  		let groupName = ('items' + groupNum)
-  		this.$store.dispatch('dragGroupName', groupName)
   	},
     onEnd() {
       this.$store.dispatch('isDummyHover', false)
       this.$store.dispatch('isDragEnd', true)
+    },
+    deleteItem(event) {
+    	console.log(event.currentTarget.parentNode)
+    	event.currentTarget.parentNode.remove()
+    	this.$store.dispatch('isDragEnd', true)
     }
   }
 }
@@ -81,6 +82,10 @@ export default {
 				height: 100%;
 				z-index: 2;
 			}
+		}
+
+		& .img {
+			display: none;
 		}
 	}
 }
@@ -148,6 +153,7 @@ export default {
 .command-line {
 	& .item {
 		border-radius: 5px 5px 5px 0;
+		cursor: initial;
 
 		&::before,
 		&::after {
@@ -168,6 +174,20 @@ export default {
 			left: -10px;
 		  border-style: solid;
 		  border-width: 0 0 7px 14px;
+		}
+
+		&:hover {
+			box-shadow: none;
+		}
+
+		& .img {
+			display: block;
+			position: absolute;
+			width: 15px;
+			height: 15px;
+			right: -7px;
+			top: -7px;
+			cursor: pointer;
 		}
 
 		&.motion {
