@@ -2,6 +2,10 @@
 	.command-line
 		.title スタート
 		.line
+			draggable(tag="ul", :options="{group:'ITEMS'}")
+				li(:key="1") ああ
+				li(:key="2") 回る
+				li(:key="3") 待つ
 		.title ゴール
 </template>
 

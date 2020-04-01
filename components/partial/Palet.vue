@@ -3,6 +3,10 @@
 		.item
 			p.head 動き
 			.body
+				draggable(tag="ul", :options="{group:'ITEMS'}")
+					li(:key="1") 進む
+					li(:key="2") 回る
+					li(:key="3") 待つ
 		.item
 			p.head 方向
 			.body

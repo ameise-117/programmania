@@ -31,7 +31,8 @@
     "nuxt": "^2.8.1",
     "ress": "^1.2.2",
     "vue-scrollto": "^2.15.0",
-    "vue-slide-up-down": "^2.0.0"
+    "vue-slide-up-down": "^2.0.0",
+    "vuedraggable": "^2.23.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
