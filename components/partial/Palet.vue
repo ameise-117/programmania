@@ -2,34 +2,40 @@
 	.palet
 		.item
 			p.head 動き
-			draggable.body(tag="ul", :options="{ group: 'ITEMS' }", @start="onStart", @end="onEnd")
-				li.item(:key="1", :class="{ move: isMoving }") 進む
-				li.item(:key="2") 回る
-				li.item(:key="3") 待つ
+			draggable.body(tag="ul", :options="{ group: 'ITEMS1' }", @start="onStart", @end="onEnd")
+				li.item.motion(:key="1") 進む
+				li.item.motion(:key="2") 回る
+				li.item.motion(:key="3") 待つ
 		.item
 			p.head 方向
-			.body
+			draggable.body(tag="ul", :options="{ group: 'ITEMS2' }", @start="onStart", @end="onEnd")
+				li.item.direction(:key="1") 右に
+				li.item.direction(:key="2") 左に
+				li.item.direction(:key="3") 上に
+				li.item.direction(:key="4") 下に
 		.item
 			p.head 演算
-			.body
+			draggable.body(tag="ul", :options="{ group: 'ITEMS3' }", @start="onStart", @end="onEnd")
+				li.item.calculation(:key="1") 右に
+				li.item.calculation(:key="2") 左に
+				li.item.calculation(:key="3") 上に
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			isMoving: false
-		}
-	},
+	// data() {
+	// 	return {
+	// 		isMoving: false
+	// 	}
+	// },
   methods: {
   	onStart() {
-  		console.log('***')
-  		this.isMoving = true
+  		// this.isMoving = true
   		this.$store.dispatch('isDummyHover', true)
   	},
     onEnd() {
-      console.log('***')
       this.$store.dispatch('isDummyHover', false)
+      this.$store.dispatch('isDragEnd', true)
     }
   }
 }
@@ -97,7 +103,7 @@ export default {
 .body {
 	height: 100%;
 	background-color: var(--color-bg-1);
-	padding: 15px 15px;
+	padding: 15px 20px;
 
 	& .item {
 		padding: 0 15px;
@@ -110,6 +116,7 @@ export default {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		position: relative;
 
 		&:hover {
 			box-shadow: 3px 3px 10px rgba(49,100,160,.1), -3px 0 10px rgba(49,100,160,.1);
@@ -118,9 +125,49 @@ export default {
 		& + .item {
 			margin-top: 10px;
 		}
+	}
+}
 
-		&.move {
-			margin-top: 0;
+.motion {
+	background-color: var(--color-key-8);
+	color: var(--color-key-5);
+}
+
+.direction {
+	background-color: var(--color-key-9);
+	color: var(--color-key-6);
+}
+
+.calculation {
+	background-color: var(--color-key-10);
+	color: var(--color-key-7);
+}
+
+.command-line {
+	& .item {
+		border-radius: 5px 5px 5px 0;
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			border: 1px solid;
+		}
+
+		&::before {
+			bottom: -1px;
+			left: -14px;
+		  border-style: solid;
+		  border-color: transparent transparent var(--color-key-5) transparent;
+		  border-width: 0 0 7px 14px;
+		}
+
+		&::after {
+			bottom: 0;
+			left: -10px;
+		  border-style: solid;
+		  border-color: transparent transparent var(--color-key-8) transparent;
+		  border-width: 0 0 7px 14px;
 		}
 	}
 }

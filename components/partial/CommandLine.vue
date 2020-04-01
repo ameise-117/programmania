@@ -2,11 +2,49 @@
 	.command-line
 		.title スタート
 		.body
-			draggable.line(tag="ul", :options="{ group: 'ITEMS' }")
+			draggable.line(tag="ul", :options="{ group: 'ITEMS1' }", ref="elCommand", @end="onEnd")
 				li.item(:key="1")
-			.dummy(:class="{ hover: $store.state.isDummyHover }") ここに配置
+			//- draggable.line(tag="ul", :options="{ group: 'ITEMS2' }", @end="onEnd")
+			//- 	li.item(:key="1")
+			//- draggable.line(tag="ul", :options="{ group: 'ITEMS3' }", @end="onEnd")
+			//- 	li.item(:key="1")
+			.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
 		.title ゴール
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			commandLineOffsetTop: 10
+		}
+	},
+  mounted() {
+    // ドラッグの終了を監視
+    this.$store.watch(
+      (state, getters) => state.isDragEnd,
+      (newVal, oldVal) => {
+        if (newVal) {
+          this.$store.dispatch('isDragEnd', false)
+          this.setDummyPosition()
+        }
+      }
+    )
+  },
+  methods: {
+  	setDummyPosition() {
+  		console.log(this.$refs.elCommand.$el.children.length)
+  		console.log(this.$refs.elCommand.length)
+  		let commandNum = (this.$refs.elCommand.$el.children.length - 1)
+  		let dummyOffset = (this.commandLineOffsetTop + commandNum * 30 + (commandNum * 10))
+  		this.$refs.elDummy.style.top = dummyOffset + 'px'
+  	},
+  	onEnd() {
+      this.$store.dispatch('isDragEnd', true)
+    }
+  }
+}
+</script>
 
 <style scoped>
 .command-line {
@@ -49,7 +87,7 @@
 
 .line {
 	height: 100%;
-	padding: 10px 0 10px 30px;
+	padding: 0 0 10px 30px;
 
 	& .item {
 		height: 0;
