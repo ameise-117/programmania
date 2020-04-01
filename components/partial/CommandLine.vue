@@ -2,12 +2,8 @@
 	.command-line
 		.title スタート
 		.body
-			draggable.line(tag="ul", :options="{ group: 'ITEMS1' }", ref="elCommand", @end="onEnd")
+			draggable.line(tag="ul", :options="{ group: $store.state.dragGroupName }", ref="elCommand", @end="onEnd")
 				li.item(:key="1")
-			//- draggable.line(tag="ul", :options="{ group: 'ITEMS2' }", @end="onEnd")
-			//- 	li.item(:key="1")
-			//- draggable.line(tag="ul", :options="{ group: 'ITEMS3' }", @end="onEnd")
-			//- 	li.item(:key="1")
 			.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
 		.title ゴール
 </template>
@@ -33,8 +29,6 @@ export default {
   },
   methods: {
   	setDummyPosition() {
-  		console.log(this.$refs.elCommand.$el.children.length)
-  		console.log(this.$refs.elCommand.length)
   		let commandNum = (this.$refs.elCommand.$el.children.length - 1)
   		let dummyOffset = (this.commandLineOffsetTop + commandNum * 30 + (commandNum * 10))
   		this.$refs.elDummy.style.top = dummyOffset + 'px'

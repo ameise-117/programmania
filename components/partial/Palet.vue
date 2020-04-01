@@ -2,20 +2,20 @@
 	.palet
 		.item
 			p.head 動き
-			draggable.body(tag="ul", :options="{ group: 'ITEMS1' }", @start="onStart", @end="onEnd")
+			draggable.body(tag="ul", :options="{ group: 'items1' }", @start="onStart(1)", @end="onEnd")
 				li.item.motion(:key="1") 進む
 				li.item.motion(:key="2") 回る
 				li.item.motion(:key="3") 待つ
 		.item
 			p.head 方向
-			draggable.body(tag="ul", :options="{ group: 'ITEMS2' }", @start="onStart", @end="onEnd")
+			draggable.body(tag="ul", :options="{ group: 'items2' }", @start="onStart(2)", @end="onEnd")
 				li.item.direction(:key="1") 右に
 				li.item.direction(:key="2") 左に
 				li.item.direction(:key="3") 上に
 				li.item.direction(:key="4") 下に
 		.item
 			p.head 演算
-			draggable.body(tag="ul", :options="{ group: 'ITEMS3' }", @start="onStart", @end="onEnd")
+			draggable.body(tag="ul", :options="{ group: 'items3' }", @start="onStart(3)", @end="onEnd")
 				li.item.calculation(:key="1") 右に
 				li.item.calculation(:key="2") 左に
 				li.item.calculation(:key="3") 上に
@@ -29,9 +29,11 @@ export default {
 	// 	}
 	// },
   methods: {
-  	onStart() {
+  	onStart(groupNum) {
   		// this.isMoving = true
   		this.$store.dispatch('isDummyHover', true)
+  		let groupName = ('items' + groupNum)
+  		this.$store.dispatch('dragGroupName', groupName)
   	},
     onEnd() {
       this.$store.dispatch('isDummyHover', false)
@@ -43,7 +45,7 @@ export default {
 
 <style scoped>
 .palet {
-	height: 300px;
+	height: 250px;
 	display: grid;
   grid-template-rows: auto;
   grid-template-areas: 'item-1 item-2 item-3';
@@ -158,7 +160,6 @@ export default {
 			bottom: -1px;
 			left: -14px;
 		  border-style: solid;
-		  border-color: transparent transparent var(--color-key-5) transparent;
 		  border-width: 0 0 7px 14px;
 		}
 
@@ -166,8 +167,37 @@ export default {
 			bottom: 0;
 			left: -10px;
 		  border-style: solid;
-		  border-color: transparent transparent var(--color-key-8) transparent;
 		  border-width: 0 0 7px 14px;
+		}
+
+		&.motion {
+			&::before {
+			  border-color: transparent transparent var(--color-key-5) transparent;
+			}
+
+			&::after {
+			  border-color: transparent transparent var(--color-key-8) transparent;
+			}
+		}
+
+		&.direction {
+			&::before {
+			  border-color: transparent transparent var(--color-key-6) transparent;
+			}
+
+			&::after {
+			  border-color: transparent transparent var(--color-key-9) transparent;
+			}
+		}
+
+		&.calculation {
+			&::before {
+			  border-color: transparent transparent var(--color-key-7) transparent;
+			}
+
+			&::after {
+			  border-color: transparent transparent var(--color-key-10) transparent;
+			}
 		}
 	}
 }
