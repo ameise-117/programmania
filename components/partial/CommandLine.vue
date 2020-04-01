@@ -44,7 +44,7 @@ export default {
 .command-line {
 	width: 250px;
 	height: 100%;
-	background-color: #FBFBFA;
+	background-color: #e2e2e2;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
