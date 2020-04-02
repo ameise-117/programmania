@@ -63,7 +63,7 @@
 			height: 40px;
 			display: flex;
 			align-items: center;
-			transition: all 0.2s ease-in-out;
+			transition: var(--transition-link);
 
 			&:hover {
 				background-color: #EFEFEB;
@@ -73,12 +73,13 @@
 		&.star {
 			&::before {
 				position: absolute;
-				top: calc(50% - (15px / 2));
 				left: 5px;
 				top: 0;
 				bottom: 0;
 				margin: auto;
-				content: url("../../assets/images/navigation/icon_star.svg");
+				content: "";
+				mask-image: url("../../assets/images/navigation/icon_star.svg");
+				background-color: #879D54;
 				display: inline-block;
 				width: 15px;
 				height: 15px;

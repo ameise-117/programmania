@@ -5,40 +5,40 @@
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.motion(:key="1")
 					p.text 進む
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 				li.item.motion(:key="2")
 					p.text 回る
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 				li.item.motion(:key="3")
 					p.text 待つ
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 		.item
 			p.head 方向
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.direction(:key="1")
 					p.text 右に
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="2")
 					p.text 左に
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="3")
 					p.text 上に
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="4")
 					p.text 下に
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 		.item
 			p.head 演算
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.calculation(:key="1")
 					p.text 右に
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 				li.item.calculation(:key="2")
 					p.text 左に
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 				li.item.calculation(:key="3")
 					p.text 上に
-					img.img.icon-close(src="~assets/images/palet/icon_close.svg", @click="deleteItem($event)")
+					.icon.icon-close(@click="deleteItem($event)")
 </template>
 
 <script>
@@ -105,7 +105,7 @@ export default {
 			}
 		}
 
-		& .img {
+		& .icon-close {
 			display: none;
 		}
 	}
@@ -137,7 +137,7 @@ export default {
 		padding: 0 15px;
 		border: 1px solid;
 		cursor: pointer;
-		transition: all 0.2s ease-in-out;
+		transition: var(--transition-link);
 		border-radius: 5px;
 		height: 30px;
 		width: fit-content;
@@ -201,7 +201,7 @@ export default {
 			box-shadow: none;
 		}
 
-		& .img {
+		& .icon-close {
 			display: block;
 			position: absolute;
 			width: 15px;
@@ -209,6 +209,13 @@ export default {
 			right: -7px;
 			top: -7px;
 			cursor: pointer;
+			background-image: url("../../assets/images/palet/icon_close.png");
+			background-size: contain;
+			transition: var(--transition-link);
+
+			&:hover {
+				opacity: 0.8;
+			}
 		}
 
 		&.motion {

@@ -1,9 +1,13 @@
 <template lang="pug">
 	.command-line
 		.title スタート
+		.buttons
+			.icon.icon-play
+			.icon.icon-stop
+			.icon.icon-clear(@click="clear")
 		.body
 			draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
-				li.item(:key="1")
+				li.item.top(:key="1")
 			.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
 		.title ゴール
 </template>
@@ -35,6 +39,18 @@ export default {
   	},
   	onEnd() {
       this.$store.dispatch('isDragEnd', true)
+    },
+    clear() {
+      let targets = this.$refs.elCommand.$el.children
+      console.log(targets)
+
+      if (targets && targets.length > 1) {
+      	for (var i = (targets.length - 1); i > 0; i--) {
+      		console.log('****')
+      		targets[i].remove()
+      	}
+      	this.$store.dispatch('isDragEnd', true)
+      }
     }
   }
 }
@@ -69,9 +85,77 @@ export default {
 	background-color: #4E4E4E;
 	color: var(--color-text-2);
 	font-weight: bold;
-	padding-right: 30px;
 	font-size: 2rem;
 	z-index: 2;
+}
+
+.buttons {
+	padding: 3px 10px 3px 0;
+	background-color: #4E4E4E;
+	display: flex;
+	justify-content: flex-end;
+	border-top: 1px solid var(--color-bg-1);
+
+	& .icon {
+		width: 20px;
+		height: 20px;
+		border: 1px solid var(--color-bg-1);
+		border-radius: 3px;
+		position: relative;
+		cursor: pointer;
+		transition: var(--transition-link);
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			background-color: var(--color-bg-1);
+			mask-size: cover;
+			display: inline-block;
+			mask-repeat: no-repeat;
+			transition: var(--transition-link);
+		}
+
+		&:hover {
+			background-color: var(--color-bg-1);
+
+			&::before {
+				background-color: #4E4E4E;
+			}
+		}
+
+		& + .icon {
+			margin-left: 5px;
+		}
+	}
+
+	& .icon-play {
+		&::before {
+			mask-image: url("../../assets/images/command_line/icon_play.svg");
+			width: 10px;
+			height: 10px;
+		}
+	}
+
+	& .icon-stop {
+		&::before {
+			mask-image: url("../../assets/images/command_line/icon_stop.svg");
+			width: 10px;
+			height: 10px;
+		}
+	}
+
+	& .icon-clear {
+		&::before {
+			mask-image: url("../../assets/images/command_line/icon_clear.svg");
+			width: 12px;
+			height: 12px;
+		}
+	}
 }
 
 .body {
