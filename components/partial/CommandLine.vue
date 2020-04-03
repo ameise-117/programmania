@@ -179,7 +179,7 @@ export default {
 	height: 100%;
 	border-left: 1px solid #D4D4D4;
 	border-right: 1px solid #D4D4D4;
-	background-color: #e2e2e2;
+	background-color: #ececeb;
 
 	&::before {
 		content: "";

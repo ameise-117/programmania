@@ -1,6 +1,6 @@
 <template lang="pug">
 	.palet
-		.item
+		.item.motion
 			p.head 動き
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.motion(:key="1", data-command-type="motion", data-command-val="go")
@@ -12,7 +12,7 @@
 				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait")
 					p.text 待つ
 					.icon.icon-close(@click="deleteItem($event)")
-		.item
+		.item.direction
 			p.head 方向
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.direction(:key="1")
@@ -27,7 +27,7 @@
 				li.item.direction(:key="4")
 					p.text 下に
 					.icon.icon-close(@click="deleteItem($event)")
-		.item
+		.item.calculation
 			p.head 演算
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.calculation(:key="1")
@@ -73,7 +73,6 @@ export default {
   grid-template-areas: 'item-1 item-2 item-3';
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
-  overflow: hidden;
   background-color: var(--color-bg-1);
   border: 1px solid #D4D4D4;
   margin: 0 10px 10px;
@@ -105,9 +104,9 @@ export default {
 				top: 0;
 				bottom: 0;
 				margin: auto;
-				left: -1.5px;
+				left: -0.5px;
 				width: 1px;
-				height: 90%;
+				height: 85%;
 				z-index: 2;
 			}
 		}
@@ -119,23 +118,51 @@ export default {
 }
 
 .head {
-	height: 35px;
-	position: relative;
-	text-align: center;
-	font-size: 1.7rem;
-	color: #A9A9A9;
-	letter-spacing: .5em;
-	text-indent: .5em;
-	padding-top: 5px;
+	height: 24px;
+	position: absolute;
+	top: -12px;
+	left: 5px;
+	font-size: 1.2rem;
+	color: var(--color-text-2);
+	letter-spacing: .3em;
+	text-indent: .3em;
+	padding: 0 15px 0 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 10px;
+		margin: auto;
+		background-color: var(--color-bg-1);
+		mask-size: cover;
+		display: inline-block;
+		mask-repeat: no-repeat;
+		width: 14px;
+		height: 14px;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: -10px;
+		left: 10px;
+		margin: auto;
+		border: 5px solid transparent;
+	}
 }
 
 .body {
 	height: 100%;
-	padding: 15px 20px;
+	padding: 35px 20px;
 
 	& .item {
 		padding: 0 15px;
-		border: 1px solid #D4D4D4;
+		border: 1px solid #c7c7c7;
 		cursor: pointer;
 		transition: var(--transition-link);
 		border-radius: 5px;
@@ -155,22 +182,64 @@ export default {
 		& + .item {
 			margin-top: 10px;
 		}
+
+		&.motion {
+			background-color: var(--color-key-8);
+			color: var(--color-key-5);
+		}
+
+		&.direction {
+			background-color: var(--color-key-9);
+			color: var(--color-key-6);
+		}
+
+		&.calculation {
+			background-color: var(--color-key-10);
+			color: var(--color-key-7);
+		}
 	}
 }
 
 .motion {
-	background-color: var(--color-key-8);
-	color: var(--color-key-5);
+	& .head {
+		background-color: var(--color-key-5);
+
+		&::before {
+			mask-image: url("../../assets/images/palet/icon_motion.svg");
+		}
+
+		&::after {
+			border-top: 5px solid var(--color-key-5);
+		}
+	}
 }
 
 .direction {
-	background-color: var(--color-key-9);
-	color: var(--color-key-6);
+	& .head {
+		background-color: var(--color-key-6);
+
+		&::before {
+			mask-image: url("../../assets/images/palet/icon_direction.svg");
+		}
+
+		&::after {
+			border-top: 5px solid var(--color-key-6);
+		}
+	}
 }
 
 .calculation {
-	background-color: var(--color-key-10);
-	color: var(--color-key-7);
+	& .head {
+		background-color: var(--color-key-7);
+
+		&::before {
+			mask-image: url("../../assets/images/palet/icon_calculation.svg");
+		}
+
+		&::after {
+			border-top: 5px solid var(--color-key-7);
+		}
+	}
 }
 
 .command-line {
@@ -190,7 +259,7 @@ export default {
 			left: -14px;
 		  border-style: solid;
 		  border-width: 0 0 7px 14px;
-		  border-color: transparent transparent #D4D4D4 transparent;
+		  border-color: transparent transparent #c7c7c7 transparent;
 		}
 
 		&::after {
@@ -201,7 +270,8 @@ export default {
 		}
 
 		&:hover {
-			box-shadow: none;
+			box-shadow: 0 2px 2px rgba(49,100,160,.1);
+			transform: none;
 		}
 
 		& .icon-close {
