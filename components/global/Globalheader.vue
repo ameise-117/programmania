@@ -1,6 +1,9 @@
 <template lang="pug">
   header.globalheader
     .logo LOGO
+    .instruction
+      img.icon(src="~/assets/images/header/icon_book.svg")
+      p.text 使い方
 </template>
 
 <style scoped>
@@ -22,6 +25,32 @@
 
   @media (--medium) {
     padding: 0 10px 0 15px;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    right: 70px;
+    top: 0;
+    background-image: url("../../assets/images/header/gear.png");
+    background-size: contain;
+    z-index: -1;
+  }
+}
+
+.instruction {
+  display: flex;
+  cursor: pointer;
+  transition: var(--transition-link);
+
+  &:hover {
+    opacity: var(--opacity);
+  }
+
+  & .text {
+    margin-left: 5px;
   }
 }
 </style>

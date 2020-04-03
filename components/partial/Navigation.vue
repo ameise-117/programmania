@@ -1,6 +1,11 @@
 <template lang="pug">
 	.navigation
-		.title Menu
+		.title
+			.menu-trigger
+				span.line
+				span.line
+				span.line
+			p.text Menu
 		ul.list
 			li.item
 				p.head 基礎編
@@ -32,7 +37,59 @@
 	display: flex;
 	align-items: center;
 	font-size: 2rem;
-	padding-left: 30px;
+	padding-left: 15px;
+
+	& .text {
+		margin-left: 8px;
+	}
+}
+
+.menu-trigger {
+	display: inline-block;
+  transition: all .3s;
+  box-sizing: border-box;
+  position: relative;
+  width: 20px;
+  height: 16px;
+  cursor: pointer;
+
+  & .line {
+  	display: inline-block;
+	  transition: all .3s;
+	  box-sizing: border-box;
+	  position: absolute;
+	  left: 0;
+	  width: 100%;
+	  height: 2px;
+	  background-color: var(--color-text-2);
+	  border-radius: 2px;
+
+	  &:nth-of-type(1) {
+		  top: 0;
+		}
+
+		&:nth-of-type(2) {
+		  top: 7px;
+		}
+
+		&:nth-of-type(3) {
+		  bottom: 0;
+		}
+  }
+
+	&:hover {
+		& .line {
+			&:nth-of-type(1) {
+				width: 10px;
+			  transform: translate(-1px, 4px) rotate(-45deg);
+			}
+
+			&:nth-of-type(3) {
+				width: 10px;
+			  transform: translate(-1px, -4px) rotate(45deg);
+			}
+		}
+	}
 }
 
 .head {
@@ -43,7 +100,29 @@
 	font-size: 1.8rem;
 	color: var(--color-key-1);
 	font-weight: bold;
-	padding-left: 25px;
+	padding-left: 15px;
+	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: 20px;
+		height: 10px;
+		right: 15px;
+		top: calc(50% - 5px);
+		margin: auto;
+		cursor: pointer;
+		background-image: url("../../assets/images/navigation/arrow_b.png");
+		background-size: contain;
+		background-position: center;
+		transition: var(--transition-link);
+	}
+
+	&:hover {
+		&::before {
+			transform: rotate(180deg);
+		}
+	}
 }
 
 .contents {
@@ -59,7 +138,7 @@
 		& .link {
 			color: var(--color-key-1);
 			text-decoration: none;
-			padding-left: 25px;
+			padding-left: 30px;
 			height: 40px;
 			display: flex;
 			align-items: center;
@@ -73,9 +152,9 @@
 		&.star {
 			&::before {
 				position: absolute;
-				left: 5px;
+				left: 10px;
 				top: 0;
-				bottom: 0;
+				bottom: 2px;
 				margin: auto;
 				content: "";
 				mask-image: url("../../assets/images/navigation/icon_star.svg");

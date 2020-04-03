@@ -2,7 +2,7 @@
 	.command-line
 		.title スタート
 		.buttons
-			.icon.icon-play
+			.icon.icon-play(@click="play")
 			.icon.icon-stop
 			.icon.icon-clear(@click="clear")
 		.body
@@ -40,15 +40,24 @@ export default {
   	onEnd() {
       this.$store.dispatch('isDragEnd', true)
     },
+    play() {
+      let targets = this.$refs.elCommand.$el.children
+
+      if (targets) {
+      	for (var i = 1; i < targets.length; i++) {
+      		let command = targets[i]
+	      	let commandType = command.dataset.commandType
+	      	let commandVal = command.dataset.commandVal
+      	}
+      }
+    },
     clear() {
       let targets = this.$refs.elCommand.$el.children
-      console.log(targets)
 
-      if (targets && targets.length > 1) {
-      	for (var i = (targets.length - 1); i > 0; i--) {
-      		console.log('****')
-      		targets[i].remove()
-      	}
+      if (targets) {
+      	while (targets.length > 1) {
+				  targets.item(1).remove()
+				}
       	this.$store.dispatch('isDragEnd', true)
       }
     }
@@ -90,11 +99,12 @@ export default {
 }
 
 .buttons {
-	padding: 3px 10px 3px 0;
+	padding: 3px 5px 3px 0;
 	background-color: #4E4E4E;
 	display: flex;
 	justify-content: flex-end;
 	border-top: 1px solid var(--color-bg-1);
+	z-index: 2;
 
 	& .icon {
 		width: 20px;

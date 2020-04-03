@@ -3,13 +3,13 @@
 		.item
 			p.head 動き
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.motion(:key="1")
+				li.item.motion(:key="1", data-command-type="motion", data-command-val="go")
 					p.text 進む
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="2")
+				li.item.motion(:key="2", data-command-type="motion", data-command-val="rolate")
 					p.text 回る
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="3")
+				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait")
 					p.text 待つ
 					.icon.icon-close(@click="deleteItem($event)")
 		.item
