@@ -1,24 +1,44 @@
 <template lang="pug">
-	.navigation
-		.title
+	.navigation(:class="{ close: !isMenuActive }")
+		.title(@click="toggleMenu")
 			.menu-trigger
 				span.line
 				span.line
 				span.line
-			p.text Menu
-		ul.list
+			p.text(v-if="isMenuActive") Menu
+		ul.list(v-if="isMenuActive")
 			li.item
-				p.head 基礎編
-				ul.contents
-					li.item
-						nuxt-link.link(to="/practice/1") 直線を描く
-					li.item
-						nuxt-link.link(to="/practice/2") 回転させる
-					li.item
-						nuxt-link.link(to="/practice/3") 星座を見つける
-					li.item.star
-						nuxt-link.link(to="/practice/4") 星座を見つける
+				p.head(@click="toggleHead", :class="{ close: !isG1Active }") 基礎編
+				slide-up-down(:active="isG1Active", :duration="300")
+					ul.contents
+						li.item
+							nuxt-link.link(to="/practice/1") 直線を描く
+						li.item
+							nuxt-link.link(to="/practice/2") 回転させる
+						li.item
+							nuxt-link.link(to="/practice/3") 星座を見つける
+						li.item.star
+							nuxt-link.link(to="/practice/4") 星座を見つける
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			isMenuActive: true,
+			isG1Active: true
+		}
+	},
+  methods: {
+  	toggleMenu() {
+  		this.isMenuActive = !this.isMenuActive
+  	},
+  	toggleHead() {
+  		this.isG1Active = !this.isG1Active
+  	}
+  }
+}
+</script>
 
 <style scoped>
 .navigation {
@@ -27,6 +47,7 @@
 	background-color: #FBFBFA;
 	box-shadow: 3px 3px 5px rgba(49,100,160,.1), -3px 0 5px rgba(49,100,160,.1);
 	z-index: 1;
+	transition: all .3s;
 }
 
 .title {
@@ -38,9 +59,26 @@
 	align-items: center;
 	font-size: 2rem;
 	padding-left: 15px;
+	cursor: pointer;
 
 	& .text {
 		margin-left: 8px;
+	}
+
+	&:hover {
+		& .menu-trigger {
+			& .line {
+				&:nth-of-type(1) {
+					width: 10px;
+				  transform: translate(-1px, 4px) rotate(-45deg);
+				}
+
+				&:nth-of-type(3) {
+					width: 10px;
+				  transform: translate(-1px, -4px) rotate(45deg);
+				}
+			}
+		}
 	}
 }
 
@@ -51,7 +89,6 @@
   position: relative;
   width: 20px;
   height: 16px;
-  cursor: pointer;
 
   & .line {
   	display: inline-block;
@@ -76,20 +113,6 @@
 		  bottom: 0;
 		}
   }
-
-	&:hover {
-		& .line {
-			&:nth-of-type(1) {
-				width: 10px;
-			  transform: translate(-1px, 4px) rotate(-45deg);
-			}
-
-			&:nth-of-type(3) {
-				width: 10px;
-			  transform: translate(-1px, -4px) rotate(45deg);
-			}
-		}
-	}
 }
 
 .head {
@@ -102,6 +125,7 @@
 	font-weight: bold;
 	padding-left: 15px;
 	position: relative;
+	cursor: pointer;
 
 	&::before {
 		content: "";
@@ -116,11 +140,21 @@
 		background-size: contain;
 		background-position: center;
 		transition: var(--transition-link);
+		transition: all .3s;
 	}
 
-	&:hover {
+	&:hover,
+	&.close {
 		&::before {
 			transform: rotate(180deg);
+		}
+	}
+
+	&.close {
+		&:hover {
+			&::before {
+				transform: rotate(0deg);
+			}
 		}
 	}
 }
@@ -145,7 +179,7 @@
 			transition: var(--transition-link);
 
 			&:hover {
-				background-color: #EFEFEB;
+				background-color: #f9f9ed;
 			}
 		}
 
@@ -162,6 +196,32 @@
 				display: inline-block;
 				width: 15px;
 				height: 15px;
+				transition: all .3s;
+			}
+		}
+	}
+}
+
+.close {
+	&.navigation {
+		width: 50px;
+		background-color: var(--color-key-1);
+
+		& .title {
+			&:hover {
+				& .menu-trigger {
+					& .line {
+						&:nth-of-type(1) {
+							width: 10px;
+						  transform: translate(11px, 4px) rotate(45deg);
+						}
+
+						&:nth-of-type(3) {
+							width: 10px;
+						  transform: translate(11px, -4px) rotate(-45deg);
+						}
+					}
+				}
 			}
 		}
 	}

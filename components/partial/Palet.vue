@@ -135,7 +135,7 @@ export default {
 
 	& .item {
 		padding: 0 15px;
-		border: 1px solid;
+		border: 1px solid #D4D4D4;
 		cursor: pointer;
 		transition: var(--transition-link);
 		border-radius: 5px;
@@ -145,9 +145,11 @@ export default {
 		align-items: center;
 		justify-content: center;
 		position: relative;
+		box-shadow: 0 2px 2px rgba(49,100,160,.1);
 
 		&:hover {
-			box-shadow: 3px 3px 10px rgba(49,100,160,.1), -3px 0 10px rgba(49,100,160,.1);
+			transform: translateY(-2px);
+			box-shadow: 0px 5px 10px rgba(49,100,160,.1);
 		}
 
 		& + .item {
@@ -188,6 +190,7 @@ export default {
 			left: -14px;
 		  border-style: solid;
 		  border-width: 0 0 7px 14px;
+		  border-color: transparent transparent #D4D4D4 transparent;
 		}
 
 		&::after {
@@ -219,30 +222,18 @@ export default {
 		}
 
 		&.motion {
-			&::before {
-			  border-color: transparent transparent var(--color-key-5) transparent;
-			}
-
 			&::after {
 			  border-color: transparent transparent var(--color-key-8) transparent;
 			}
 		}
 
 		&.direction {
-			&::before {
-			  border-color: transparent transparent var(--color-key-6) transparent;
-			}
-
 			&::after {
 			  border-color: transparent transparent var(--color-key-9) transparent;
 			}
 		}
 
 		&.calculation {
-			&::before {
-			  border-color: transparent transparent var(--color-key-7) transparent;
-			}
-
 			&::after {
 			  border-color: transparent transparent var(--color-key-10) transparent;
 			}

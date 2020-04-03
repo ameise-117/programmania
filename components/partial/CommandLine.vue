@@ -67,7 +67,7 @@ export default {
 
 <style scoped>
 .command-line {
-	width: 250px;
+	width: 350px;
 	height: 100%;
 	background-color: #e2e2e2;
 	display: flex;
@@ -107,7 +107,7 @@ export default {
 	z-index: 2;
 
 	& .icon {
-		width: 20px;
+		width: 40px;
 		height: 20px;
 		border: 1px solid var(--color-bg-1);
 		border-radius: 3px;

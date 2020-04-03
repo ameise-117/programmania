@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import draggable from 'vuedraggable'
+import SlideUpDown from 'vue-slide-up-down'
 Vue.component('draggable', draggable)
+Vue.component('slide-up-down', SlideUpDown)
 
 export const strict = false
 
