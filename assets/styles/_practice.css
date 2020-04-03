@@ -1,10 +1,10 @@
 .practice {
 	flex: 1;
-	padding: 10px 25px 0;
 
 	& .step {
 		width: 100%;
 		display: flex;
+		padding: 10px 25px 20px;
 
 		& .item {
 			width: 90px;
@@ -17,23 +17,28 @@
 			border: 1px solid var(--color-key-4);
 			border-radius: 3px;
 			cursor: pointer;
+			transition: var(--transition-link);
 
 			& + .item {
 				margin-left: 10px;
 			}
-		}
 
-		& .active {
-			font-weight: bold;
-			color: var(--color-text-2);
-			background-color: var(--color-key-4);
+			&.active,
+			&:hover {
+				font-weight: bold;
+				color: var(--color-text-2);
+				background-color: var(--color-key-4);
+			}
 		}
+	}
+
+	& .contents {
+		padding: 0 25px;
 	}
 
 	& .table {
 		width: 100%;
 		border-collapse: collapse;
-		margin-top: 20px;
 
 		& .tr {
 			width: 100%;
@@ -41,7 +46,7 @@
 		}
 
 		& .td {
-			border: 1px solid;
+			border: 1px solid transparent;
 			position: relative;
 		}
 

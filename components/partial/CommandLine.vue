@@ -1,15 +1,16 @@
 <template lang="pug">
 	.command-line
-		.title スタート
-		.buttons
-			.icon.icon-play(@click="play")
-			.icon.icon-stop
-			.icon.icon-clear(@click="clear")
-		.body
-			draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
-				li.item.top(:key="1")
-			.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
-		.title ゴール
+		.wrap
+			.title.start スタート
+			.buttons
+				.icon.icon-play(@click="play")
+				.icon.icon-stop
+				.icon.icon-clear(@click="clear")
+			.body
+				draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
+					li.item.top(:key="1")
+				.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
+			.title.goal ゴール
 </template>
 
 <script>
@@ -69,25 +70,20 @@ export default {
 .command-line {
 	width: 350px;
 	height: 100%;
-	background-color: #e2e2e2;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	position: relative;
+	padding: 10px 10px 10px 0;
 
-	&::before {
-		content: "";
-		width: 10px;
+	& .wrap {
+		width: 100%;
 		height: 100%;
-		background-color: rgba(112, 112, 112, 0.2);
-		position: absolute;
-		top: 0;
-		left: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		position: relative;
+		box-shadow: 1px 5px 10px rgba(49,100,160,.1), -1px 0 10px rgba(49,100,160,.1);
 	}
 }
 
 .title {
-	height: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -96,6 +92,16 @@ export default {
 	font-weight: bold;
 	font-size: 2rem;
 	z-index: 2;
+
+	&.start {
+		height: 45px;
+		border-radius: 3px 3px 0 0;
+	}
+
+	&.goal {
+		height: 40px;
+		border-radius: 0 0 3px 3px;
+	}
 }
 
 .buttons {
@@ -171,6 +177,19 @@ export default {
 .body {
 	position: relative;
 	height: 100%;
+	border-left: 1px solid #D4D4D4;
+	border-right: 1px solid #D4D4D4;
+	background-color: #e2e2e2;
+
+	&::before {
+		content: "";
+		width: 10px;
+		height: 100%;
+		background-color: rgba(112, 112, 112, 0.2);
+		position: absolute;
+		top: 0;
+		left: 10px;
+	}
 }
 
 .line {

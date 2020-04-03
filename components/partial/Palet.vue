@@ -74,6 +74,11 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
   overflow: hidden;
+  background-color: var(--color-bg-1);
+  border: 1px solid #D4D4D4;
+  margin: 0 10px 10px;
+  border-radius: 3px;
+  box-shadow: 1px 5px 10px rgba(49,100,160,.1), -1px 0 10px rgba(49,100,160,.1);
 
 	& > .item {
 		position: relative;
@@ -97,10 +102,12 @@ export default {
 				background-image: linear-gradient(to bottom, #D4D4D4, #D4D4D4 6px, transparent 6px, transparent 12px);
 				background-repeat: repeat-y;
 				position: absolute;
-				top: 15px;
+				top: 0;
+				bottom: 0;
+				margin: auto;
 				left: -1.5px;
-				width: 3px;
-				height: 100%;
+				width: 1px;
+				height: 90%;
 				z-index: 2;
 			}
 		}
@@ -112,11 +119,7 @@ export default {
 }
 
 .head {
-	border: 3px solid var(--color-bg-1);
-	border-top: 3px solid #D4D4D4;
-	border-radius: 50px;
 	height: 35px;
-	background-color: var(--color-bg-1);
 	position: relative;
 	text-align: center;
 	font-size: 1.7rem;
@@ -124,13 +127,10 @@ export default {
 	letter-spacing: .5em;
 	text-indent: .5em;
 	padding-top: 5px;
-	margin-left: -7.5px;
-  margin-right: -7.5px;
 }
 
 .body {
 	height: 100%;
-	background-color: var(--color-bg-1);
 	padding: 15px 20px;
 
 	& .item {
@@ -148,7 +148,7 @@ export default {
 		box-shadow: 0 2px 2px rgba(49,100,160,.1);
 
 		&:hover {
-			transform: translateY(-2px);
+			transform: translateY(-1px);
 			box-shadow: 0px 5px 10px rgba(49,100,160,.1);
 		}
 
