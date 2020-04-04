@@ -19,7 +19,9 @@ import { TweenMax, TimelineMax } from 'gsap'
 export default {
 	data() {
 		return {
-			commandLineOffsetTop: 10
+			commandLineOffsetTop: 10,
+			stepWidth: 100,
+			stepHeight: 50
 		}
 	},
   mounted() {
@@ -62,7 +64,6 @@ export default {
 
 	      	if (commandType == 'motion') {
 	      		if (isHorizontal) {
-	      			stepNum = stepNum * 100
 	      			this.moveHorizontal(tm, target, stepNum)
 	      			isHorizontal = false
 	      		} else if (isVertical) {
@@ -79,10 +80,20 @@ export default {
 	      		if (stepNum && stepNum > 0) {
 	      			switch(commandVal) {
 		      			case 'right':
+		      				stepNum = (stepNum * this.stepWidth)
 		      				isHorizontal = true
 		      				break
 		      			case 'left':
+		      				stepNum = (-1 * stepNum * this.stepWidth)
 		      				isHorizontal = true
+		      				break
+		      			case 'top':
+		      				stepNum = (-1 * stepNum * this.stepHeight)
+		      				isVertical = true
+		      				break
+		      			case 'bottom':
+		      				stepNum = (stepNum * this.stepHeight)
+		      				isVertical = true
 		      				break
 		      		}
 		      		continue
@@ -112,12 +123,12 @@ export default {
       }
     },
     moveHorizontal(tm, target, val) {
-    	return tm.to(target, 1, {
+    	return tm.to(target, 0.5, {
       	x: val
       })
     },
     moveVertical(tm, target, val) {
-    	return tm.to(target, 1, {
+    	return tm.to(target, 0.5, {
       	y: val
       })
     }

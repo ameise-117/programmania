@@ -1,0 +1,30 @@
+.next-enter-active, .next-leave-active,
+.prev-enter-active, .prev-leave-active {
+  transition: all .5s cubic-bezier(0, 0, 1, 1) 0s;
+}
+
+.next-enter {
+  transform: translateX(80vw);
+}
+.next-enter-to {
+  transform: translateX(0);
+}
+.next-leave {
+  transform: translateX(0);
+}
+.next-leave-to {
+  transform: translateX(-80vw);
+}
+
+.prev-enter {
+  transform: translateX(-80vw);
+}
+.prev-enter-to {
+  transform: translateX(0);
+}
+.prev-leave {
+  transform: translateX(0);
+}
+.prev-leave-to {
+  transform: translateX(80vw);
+}

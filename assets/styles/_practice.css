@@ -1,10 +1,16 @@
 .practice {
 	flex: 1;
+	display: flex;
+  flex-direction: column;
+	margin: 10px;
+	border: 1px solid #D4D4D4;
+  border-radius: 3px;
+  box-shadow: 1px 5px 10px rgba(49,100,160,.1), -1px 0 10px rgba(49,100,160,.1);
 
 	& .step {
 		width: 100%;
 		display: flex;
-		padding: 10px 25px 20px;
+		padding: 10px 10px 20px;
 
 		& .item {
 			width: 90px;
@@ -33,9 +39,18 @@
 	}
 
 	& .contents {
+		flex: 1;
+		display: flex;
+    align-items: center;
+    justify-content: space-between;
+	}
+
+	& .task {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		width: 100%;
+		height: 100%;
 	}
 
 	& .table {
@@ -63,27 +78,50 @@
 		& .start {
 			&::before {
 				position: absolute;
+				content: "スタート";
+				text-align: center;
+				width: 80px;
+				left: -40px;
+				bottom: -30px;
+				font-size: 1.2rem;
+			}
+
+			& .point {
+				position: absolute;
 				content: "";
-				width: 15px;
-				height: 15px;
+				width: 16px;
+				height: 16px;
 				border-radius: 50%;
+				border: 1px solid var(--color-text-1);
 				background-color: var(--color-text-1);
-				left: -7.5px;
+				left: -8px;
 				bottom: -12px;
+				box-shadow: 0 0 5px rgba(49,100,160,.1);
 			}
 		}
 
 		& .end {
 			&::before {
 				position: absolute;
+				content: "ゴール";
+				text-align: center;
+				width: 80px;
+				right: -40px;
+				bottom: -30px;
+				font-size: 1.2rem;
+			}
+
+			& .point {
+				position: absolute;
 				content: "";
-				width: 15px;
-				height: 15px;
+				width: 16px;
+				height: 16px;
 				border-radius: 50%;
-				border: 1px solid var(--color-text-1);
+				border: 1px solid #D4D4D4;
 				background-color: var(--color-bg-1);
-				right: -7.5px;
+				right: -8px;
 				bottom: -12px;
+				box-shadow: 0 0 5px rgba(49,100,160,.1);
 			}
 		}
 
@@ -100,7 +138,7 @@
 				    background-image: linear-gradient(to bottom, #4e4e4e, #4e4e4e 3px, transparent 3px, transparent 5px);
 				    background-repeat: repeat-y;
 				    position: absolute;
-				    bottom: -10px;
+				    bottom: -11px;
 				    left: -0.5px;
 				    width: 1px;
 				    height: 14px;

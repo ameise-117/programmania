@@ -27,13 +27,13 @@
 						input.input(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="3")
+				li.item.direction(:key="3", data-command-type="direction", data-command-val="top")
 					p.text
 						span 上に
 						input.input(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="4")
+				li.item.direction(:key="4", data-command-type="direction", data-command-val="bottom")
 					p.text
 						span 下に
 						input.input(maxlength="1")
@@ -90,7 +90,7 @@ export default {
 
 <style scoped>
 .palet {
-	height: 250px;
+	height: 230px;
 	display: grid;
   grid-template-rows: auto;
   grid-template-areas: 'item-1 item-2 item-3';
@@ -143,7 +143,7 @@ export default {
 .head {
 	height: 24px;
 	position: absolute;
-	top: -12px;
+	top: -5px;
 	left: 5px;
 	font-size: 1.2rem;
 	color: var(--color-text-2);
@@ -182,7 +182,7 @@ export default {
 
 .body {
 	height: 100%;
-	padding: 35px 20px;
+	padding: 40px 20px;
 
 	& .item {
 		padding: 0 15px;
