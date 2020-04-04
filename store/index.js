@@ -7,11 +7,15 @@ Vue.component('slide-up-down', SlideUpDown)
 export const strict = false
 
 export const state = () => ({
+  targetEl: null,
   isDummyHover: false,
   isDragEnd: false
 })
 
 export const mutations = {
+  setTargetEl(state, value) {
+    state.targetEl = value
+  },
   setIsDummyHover(state, value) {
     state.isDummyHover = value
   },
@@ -21,6 +25,9 @@ export const mutations = {
 }
 
 export const actions = {
+  targetEl(context, value) {
+    context.commit('setTargetEl', value)
+  },
   isDummyHover(context, value) {
     context.commit('setIsDummyHover', value)
   },

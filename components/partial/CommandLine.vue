@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { TweenMax, TimelineMax } from 'gsap'
+
 export default {
 	data() {
 		return {
@@ -42,25 +44,45 @@ export default {
       this.$store.dispatch('isDragEnd', true)
     },
     play() {
-      let targets = this.$refs.elCommand.$el.children
+      let commands = this.$refs.elCommand.$el.children
 
-      if (targets) {
-      	for (var i = 1; i < targets.length; i++) {
-      		let command = targets[i]
+      if (commands) {
+      	for (var i = 1; i < commands.length; i++) {
+      		let command = commands[i]
 	      	let commandType = command.dataset.commandType
 	      	let commandVal = command.dataset.commandVal
       	}
       }
+
+      let tm = new TimelineMax()
+      let target = this.$store.state.targetEl
+      for (var i = 0; i < 2; i++) {
+      	if (i == 0) {
+      		this.moveHorizontal(tm, target, 50)
+      	} else {
+      		this.moveVertical(tm, target, 50)
+      	}
+      }
     },
     clear() {
-      let targets = this.$refs.elCommand.$el.children
+      let commands = this.$refs.elCommand.$el.children
 
-      if (targets) {
-      	while (targets.length > 1) {
-				  targets.item(1).remove()
+      if (commands) {
+      	while (commands.length > 1) {
+				  commands.item(1).remove()
 				}
       	this.$store.dispatch('isDragEnd', true)
       }
+    },
+    moveHorizontal(tm, target, val) {
+    	return tm.to(target, 1, {
+      	x: val
+      })
+    },
+    moveVertical(tm, target, val) {
+    	return tm.to(target, 1, {
+      	y: val
+      })
     }
   }
 }
@@ -90,7 +112,7 @@ export default {
 	background-color: #4E4E4E;
 	color: var(--color-text-2);
 	font-weight: bold;
-	font-size: 2rem;
+	font-size: 1.8rem;
 	z-index: 2;
 
 	&.start {
@@ -216,7 +238,8 @@ export default {
 	color: rgba(112, 112, 112, 0.5);
 
 	&.hover {
-		box-shadow: 3px 3px 10px rgba(49,100,160,.1), -3px 0 10px rgba(49,100,160,.1) inset;
+		box-shadow: 0 0 10px rgba(49,100,160,.1) inset;
+		color: transparent;
 	}
 }
 </style>

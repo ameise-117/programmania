@@ -15,10 +15,10 @@
 		.item.direction
 			p.head 方向
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.direction(:key="1")
+				li.item.direction(:key="1", data-command-type="direction", data-command-val="right")
 					p.text 右に
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="2")
+				li.item.direction(:key="2", data-command-type="direction", data-command-val="left")
 					p.text 左に
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="3")
@@ -130,6 +130,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	border-radius: 1px;
 
 	&::before {
 		content: "";

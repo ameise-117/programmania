@@ -25,11 +25,16 @@
 						td.td
 					tr.tr
 						td.td.start.line.bottom
+							.target(ref="targetEl")
 						td.td.line.bottom
 						td.td.end.line.bottom
 </template>
 
-<style scoped>
-.practice {
+<script>
+export default {
+  mounted() {
+    // 動作対象を設定
+    this.$store.dispatch('targetEl', this.$refs.targetEl)
+  }
 }
-</style>
+</script>
