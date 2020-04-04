@@ -82,9 +82,21 @@
 				content: "スタート";
 				text-align: center;
 				width: 80px;
-				left: -40px;
-				bottom: -30px;
 				font-size: 1.2rem;
+			}
+
+			&.bottom {
+				&::before {
+					left: -40px;
+					bottom: -30px;
+				}
+			}
+
+			&.left {
+				&::before {
+					left: -44px;
+					bottom: -30px;
+				}
 			}
 
 			& .point {
@@ -95,9 +107,21 @@
 				border-radius: 50%;
 				border: 1px solid var(--color-text-1);
 				background-color: var(--color-text-1);
-				left: -8px;
-				bottom: -12px;
 				box-shadow: 0 0 5px rgba(49,100,160,.1);
+			}
+
+			&.bottom {
+				& .point {
+					left: -8px;
+					bottom: -12px;
+				}
+			}
+
+			&.left {
+				& .point {
+					left: -12px;
+					bottom: -8px;
+				}
 			}
 		}
 
@@ -107,9 +131,21 @@
 				content: "ゴール";
 				text-align: center;
 				width: 80px;
-				right: -40px;
-				bottom: -30px;
 				font-size: 1.2rem;
+			}
+
+			&.bottom {
+				&::before {
+					right: -40px;
+					bottom: -30px;
+				}
+			}
+
+			&.left {
+				&::before {
+					left: -44px;
+					top: -30px;
+				}
 			}
 
 			& .point {
@@ -120,9 +156,21 @@
 				border-radius: 50%;
 				border: 1px solid #D4D4D4;
 				background-color: var(--color-bg-1);
-				right: -8px;
-				bottom: -12px;
 				box-shadow: 0 0 5px rgba(49,100,160,.1);
+			}
+
+			&.bottom {
+				& .point {
+					right: -8px;
+					bottom: -12px;
+				}
+			}
+
+			&.left {
+				& .point {
+					left: -12px;
+					top: -8px;
+				}
 			}
 		}
 
@@ -131,19 +179,25 @@
 				border-bottom: 8px solid #DCDCD9;
 			}
 
+			&.left {
+				border-left: 8px solid #DCDCD9;
+			}
+
 			&.td {
-				& + .td {
-					&::after {
-						content: "";
-				    background-size: 3px 5px;
-				    background-image: linear-gradient(to bottom, #4e4e4e, #4e4e4e 3px, transparent 3px, transparent 5px);
-				    background-repeat: repeat-y;
-				    position: absolute;
-				    bottom: -11px;
-				    left: -0.5px;
-				    width: 1px;
-				    height: 14px;
-				    z-index: 2;
+				&.bottom {
+					& + .td {
+						&::after {
+							content: "";
+					    background-size: 3px 5px;
+					    background-image: linear-gradient(to bottom, #4e4e4e, #4e4e4e 3px, transparent 3px, transparent 5px);
+					    background-repeat: repeat-y;
+					    position: absolute;
+					    bottom: -11px;
+					    left: -0.5px;
+					    width: 1px;
+					    height: 14px;
+					    z-index: 2;
+						}
 					}
 				}
 			}

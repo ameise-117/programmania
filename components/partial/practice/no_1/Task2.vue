@@ -2,29 +2,21 @@
 	.task
 		table.table
 			tbody
-				tr.tr
+				tr.tr.left
 					td.td
+					td.td.end.line.left
+						.point
 					td.td
+				tr.tr.left
 					td.td
-				tr.tr
+					td.td.line.left
 					td.td
+				tr.tr.left
 					td.td
-					td.td
-				tr.tr
-					td.td
-					td.td
-					td.td
-				tr.tr
-					td.td
-					td.td
-					td.td
-				tr.tr
-					td.td.start.line.bottom
+					td.td.start.line.left
 						.point
 						.target(ref="targetEl")
-					td.td.line.bottom
-					td.td.end.line.bottom
-						.point
+					td.td
 </template>
 
 <script>

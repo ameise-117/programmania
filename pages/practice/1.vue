@@ -3,14 +3,11 @@
     ul.step
       li.item(@click="changeTask(1, $refs.task1)", :class="{ active: (taskNo == 1) }") STEP1
       li.item(@click="changeTask(2, $refs.task2)", :class="{ active: (taskNo == 2) }") STEP2
-      li.item(@click="changeTask(3, $refs.task3)", :class="{ active: (taskNo == 3) }") STEP3
     .contents
       transition(:name="slideType")
         Task1(v-show="taskNo == 1", ref="task1")
       transition(:name="slideType")
         Task2(v-show="taskNo == 2", ref="task2")
-      transition(:name="slideType")
-        Task2(v-show="taskNo == 3", ref="task3")
 </template>
 
 <script>

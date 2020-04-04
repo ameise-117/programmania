@@ -8,7 +8,7 @@
 			p.text(v-if="isMenuActive") Menu
 		ul.list(v-if="isMenuActive")
 			li.item
-				p.head(@click="toggleHead", :class="{ close: !isG1Active }") 基礎編
+				p.head(@click="isG1Active = !isG1Active", :class="{ close: !isG1Active }") 基礎編
 				slide-up-down(:active="isG1Active", :duration="300")
 					ul.contents
 						li.item
@@ -16,9 +16,23 @@
 						li.item
 							nuxt-link.link(to="/practice/2") 回転させる
 						li.item
-							nuxt-link.link(to="/practice/3") 星座を見つける
-						li.item.star
-							nuxt-link.link(to="/practice/4") 星座を見つける
+							nuxt-link.link(to="/practice/3") 時間を設定する
+						li.item
+							nuxt-link.link(to="/practice/4") 並び替えする
+						li.item
+							nuxt-link.link(to="/practice/4") 繰り返しを行う
+			li.item
+				p.head(@click="isG2Active = !isG2Active", :class="{ close: !isG2Active }") 発展編
+				slide-up-down(:active="isG2Active", :duration="300")
+					ul.contents
+						li.item
+							nuxt-link.link(to="/practice/1") 星座を見つける
+						li.item
+							nuxt-link.link(to="/practice/2") かけっこする
+						li.item
+							nuxt-link.link(to="/practice/3") 料理を作る
+						li.item
+							nuxt-link.link(to="/practice/4") 迷路に挑戦
 </template>
 
 <script>
@@ -26,15 +40,13 @@ export default {
 	data() {
 		return {
 			isMenuActive: true,
-			isG1Active: true
+			isG1Active: true,
+			isG2Active: true
 		}
 	},
   methods: {
   	toggleMenu() {
   		this.isMenuActive = !this.isMenuActive
-  	},
-  	toggleHead() {
-  		this.isG1Active = !this.isG1Active
   	}
   }
 }
@@ -82,6 +94,12 @@ export default {
 	}
 }
 
+.list {
+	& > .item {
+		padding-bottom: 1px;
+	}
+}
+
 .menu-trigger {
 	display: inline-block;
   transition: all .3s;
@@ -117,7 +135,7 @@ export default {
 
 .head {
 	background-color: #D2DFDC;
-	height: 40px;
+	height: 35px;
 	display: flex;
 	align-items: center;
 	font-size: 1.8rem;
@@ -161,6 +179,7 @@ export default {
 
 .contents {
 	font-size: 1.6rem;
+	padding-bottom: 30px;
 
 	& .item {
 		position: relative;
@@ -173,7 +192,7 @@ export default {
 			color: var(--color-key-1);
 			text-decoration: none;
 			padding-left: 30px;
-			height: 40px;
+			height: 35px;
 			display: flex;
 			align-items: center;
 			transition: var(--transition-link);
