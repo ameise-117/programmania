@@ -6,6 +6,7 @@
 	border: 1px solid #D4D4D4;
   border-radius: 3px;
   box-shadow: 1px 5px 10px rgba(49,100,160,.1), -1px 0 10px rgba(49,100,160,.1);
+  overflow: hidden;
 
 	& .step {
 		width: 100%;

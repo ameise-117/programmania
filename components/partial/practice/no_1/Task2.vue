@@ -29,9 +29,11 @@
 
 <script>
 export default {
-  mounted() {
-    // 動作対象を設定
-    this.$store.dispatch('targetEl', this.$refs.targetEl)
+  methods: {
+  	setTargetEl() {
+      // 動作対象を設定
+    	this.$store.dispatch('targetEl', this.$refs.targetEl)
+	  }
   }
 }
 </script>
