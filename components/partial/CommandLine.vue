@@ -4,7 +4,7 @@
 			.title.start スタート
 			.buttons
 				.icon.icon-play(@click="play")
-				.icon.icon-stop
+				.icon.icon-reset(@click="reset")
 				.icon.icon-clear(@click="clear")
 			.body
 				draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
@@ -47,22 +47,59 @@ export default {
       let commands = this.$refs.elCommand.$el.children
 
       if (commands) {
+      	this.reset()
+      	
+      	let tm = new TimelineMax()
+      	let target = this.$store.state.targetEl
+      	let isHorizontal = false
+      	let isVertical = false
+      	let stepNum = 0
+
       	for (var i = 1; i < commands.length; i++) {
       		let command = commands[i]
 	      	let commandType = command.dataset.commandType
 	      	let commandVal = command.dataset.commandVal
-      	}
-      }
 
-      let tm = new TimelineMax()
-      let target = this.$store.state.targetEl
-      for (var i = 0; i < 2; i++) {
-      	if (i == 0) {
-      		this.moveHorizontal(tm, target, 50)
-      	} else {
-      		this.moveVertical(tm, target, 50)
+	      	if (commandType == 'motion') {
+	      		if (isHorizontal) {
+	      			stepNum = stepNum * 100
+	      			this.moveHorizontal(tm, target, stepNum)
+	      			isHorizontal = false
+	      		} else if (isVertical) {
+	      			this.moveVertical(tm, target, stepNum)
+	      			isVertical = false
+	      		} else {
+	      			break
+	      		}
+	      	}
+
+	      	if (commandType == 'direction') {
+	      		stepNum = command.querySelector('.input').value
+
+	      		if (stepNum && stepNum > 0) {
+	      			switch(commandVal) {
+		      			case 'right':
+		      				isHorizontal = true
+		      				break
+		      			case 'left':
+		      				isHorizontal = true
+		      				break
+		      		}
+		      		continue
+	      		} else {
+	      			break
+	      		}
+	      	}
       	}
       }
+    },
+    reset() {
+    	let tm = new TimelineMax()
+      let target = this.$store.state.targetEl
+    	tm.to(target, 0, {
+      	x: 0,
+      	y: 0
+      })
     },
     clear() {
       let commands = this.$refs.elCommand.$el.children
@@ -179,11 +216,11 @@ export default {
 		}
 	}
 
-	& .icon-stop {
+	& .icon-reset {
 		&::before {
-			mask-image: url("../../assets/images/command_line/icon_stop.svg");
-			width: 10px;
-			height: 10px;
+			mask-image: url("../../assets/images/command_line/icon_reload.svg");
+			width: 12px;
+			height: 12px;
 		}
 	}
 

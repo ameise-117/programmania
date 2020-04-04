@@ -16,28 +16,51 @@
 			p.head 方向
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.direction(:key="1", data-command-type="direction", data-command-val="right")
-					p.text 右に
+					p.text
+						span 右に
+						input.input(maxlength="1")
+						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="2", data-command-type="direction", data-command-val="left")
-					p.text 左に
+					p.text
+						span 左に
+						input.input(maxlength="1")
+						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="3")
-					p.text 上に
+					p.text
+						span 上に
+						input.input(maxlength="1")
+						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="4")
-					p.text 下に
+					p.text
+						span 下に
+						input.input(maxlength="1")
+						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 		.item.calculation
 			p.head 演算
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.calculation(:key="1")
-					p.text 右に
+					p.text
+						input.input(maxlength="3")
+						span 度
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.calculation(:key="2")
-					p.text 左に
+					p.text
+						span ＋
+						input.input(maxlength="3")
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.calculation(:key="3")
-					p.text 上に
+					p.text
+						span ー
+						input.input(maxlength="3")
+					.icon.icon-close(@click="deleteItem($event)")
+				li.item.calculation(:key="3")
+					p.text
+						span ÷
+						input.input(maxlength="3")
 					.icon.icon-close(@click="deleteItem($event)")
 </template>
 
@@ -174,6 +197,22 @@ export default {
 		justify-content: center;
 		position: relative;
 		box-shadow: 0 2px 2px rgba(49,100,160,.1);
+		width: max-content;
+
+		& .text {
+			display: flex;
+			align-items: center;
+		}
+
+		& .input {
+			width: 30px;
+			background-color: var(--color-bg-1);
+			outline: none;
+			margin: 0 5px;
+			padding: 0 5px;
+			text-align: right;
+			color: var(--color-text-1);
+		}
 
 		&:hover {
 			transform: translateY(-1px);
