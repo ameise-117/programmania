@@ -11,7 +11,8 @@ export const state = () => ({
   startPoint: null,
   endPoint: null,
   isDummyHover: false,
-  isDragEnd: false
+  isDragEnd: false,
+  isComplete: false
 })
 
 export const mutations = {
@@ -29,6 +30,9 @@ export const mutations = {
   },
   setIsDragEnd(state, value) {
     state.isDragEnd = value
+  },
+  setIsComplete(state, value) {
+    state.isComplete = value
   }
 }
 
@@ -47,5 +51,8 @@ export const actions = {
   },
   isDragEnd(context, value) {
     context.commit('setIsDragEnd', value)
+  },
+  isComplete(context, value) {
+    context.commit('setIsComplete', value)
   }
 }

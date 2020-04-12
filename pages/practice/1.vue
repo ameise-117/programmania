@@ -8,6 +8,7 @@
         Task1(v-show="taskNo == 1", ref="task1")
       transition(:name="slideType")
         Task2(v-show="taskNo == 2", ref="task2")
+    img.complete(src="~/assets/images/practice/complete.gif", :class="{ visible: $store.state.isComplete }")
 </template>
 
 <script>

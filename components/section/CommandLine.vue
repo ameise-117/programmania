@@ -22,7 +22,8 @@ export default {
 			commandLineOffsetTop: 10,
 			stepWidth: 100,
 			stepHeight: 50,
-			endPosition: { x: 0, y: 0 }
+			translateTerm: 0.5,
+			translateCount: 0
 		}
 	},
   mounted() {
@@ -67,6 +68,7 @@ export default {
 
 	      	// 動き
 	      	if (commandType == 'motion') {
+	      		this.translateCount++
 	      		if (isHorizontal) {
 	      			this.moveHorizontal(tm, target, stepNum)
 	      			isHorizontal = false
@@ -86,22 +88,18 @@ export default {
 	      			switch(commandVal) {
 		      			case 'right':
 		      				stepNum = (stepNum * this.stepWidth)
-		      				this.endPosition.x = stepNum
 		      				isHorizontal = true
 		      				break
 		      			case 'left':
 		      				stepNum = (-1 * stepNum * this.stepWidth)
-		      				this.endPosition.x = stepNum
 		      				isHorizontal = true
 		      				break
 		      			case 'top':
 		      				stepNum = (-1 * stepNum * this.stepHeight)
-		      				this.endPosition.y = stepNum
 		      				isVertical = true
 		      				break
 		      			case 'bottom':
 		      				stepNum = (stepNum * this.stepHeight)
-		      				this.endPosition.y = stepNum
 		      				isVertical = true
 		      				break
 		      		}
@@ -113,15 +111,20 @@ export default {
       	}
 
       	// 最終位置チェック
-      	console.log('****')
-      	let targetPosition = target.getBoundingClientRect()
-      	let endPointPosition = endPoint.getBoundingClientRect()
-      	if (((targetPosition.top + this.endPosition.y) === endPointPosition.top) && ((targetPosition.left + this.endPosition.x) === endPointPosition.left)) {
-      		console.log('大当たり！')
-      	}
+      	let self = this
+      	let timeout = ++self.translateCount * self.translateTerm * 1000
+      	setTimeout(() => {
+					let targetPosition = target.getBoundingClientRect()
+	      	let endPointPosition = endPoint.getBoundingClientRect()
+	      	if ((targetPosition.top === endPointPosition.top) && (targetPosition.left === endPointPosition.left)) {
+	      		self.$store.dispatch('isComplete', true)
+	      	}
+				}, timeout)
       }
     },
     reset() {
+    	this.$store.dispatch('isComplete', false)
+    	this.translateCount = 0
     	let tm = new TimelineMax()
       let target = this.$store.state.targetEl
     	tm.to(target, 0, {
@@ -130,6 +133,8 @@ export default {
       })
     },
     clear() {
+    	this.$store.dispatch('isComplete', false)
+    	this.translateCount = 0
       let commands = this.$refs.elCommand.$el.children
 
       if (commands) {
@@ -140,12 +145,12 @@ export default {
       }
     },
     moveHorizontal(tm, target, val) {
-    	return tm.to(target, 0.5, {
+    	return tm.to(target, this.translateTerm, {
       	x: val
       })
     },
     moveVertical(tm, target, val) {
-    	return tm.to(target, 0.5, {
+    	return tm.to(target, this.translateTerm, {
       	y: val
       })
     }
