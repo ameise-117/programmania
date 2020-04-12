@@ -12,27 +12,29 @@
 				slide-up-down(:active="isG1Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link(to="/practice/1") 直線を描く
+							nuxt-link.link(to="/practice/1") 直線を引く
 						li.item
-							nuxt-link.link(to="/practice/2") 回転させる
+							nuxt-link.link(to="/practice/2") 回転する
 						li.item
-							nuxt-link.link(to="/practice/3") 時間を設定する
+							nuxt-link.link(to="/practice/basic/3") 時間を設定する
 						li.item
-							nuxt-link.link(to="/practice/4") 並び替えする
-						li.item
-							nuxt-link.link(to="/practice/4") 繰り返しを行う
+							nuxt-link.link(to="/practice/basic/4") 繰り返しを行う
 			li.item
 				p.head(@click="isG2Active = !isG2Active", :class="{ close: !isG2Active }") 発展編
 				slide-up-down(:active="isG2Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link(to="/practice/1") 星座を見つける
+							nuxt-link.link(to="/practice/advance/1") 正多角形を描く
 						li.item
-							nuxt-link.link(to="/practice/2") かけっこする
+							nuxt-link.link(to="/practice/advance/1") UFOキャッチャー
 						li.item
-							nuxt-link.link(to="/practice/3") 料理を作る
+							nuxt-link.link(to="/practice/advance/2") 星座を見つける
 						li.item
-							nuxt-link.link(to="/practice/4") 迷路に挑戦
+							nuxt-link.link(to="/practice/advance/3") かけっこする
+						li.item
+							nuxt-link.link(to="/practice/advance/4") 料理を作る
+						li.item
+							nuxt-link.link(to="/practice/advance/5") 迷路に挑戦
 </template>
 
 <script>

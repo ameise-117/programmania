@@ -72,8 +72,6 @@
 			content: url("../../assets/images/practice/target_hippo.png");
 			width: 50px;
 			height: 50px;
-			left: -25px;
-			bottom: 0;
 		}
 
 		& .start {
@@ -83,20 +81,6 @@
 				text-align: center;
 				width: 80px;
 				font-size: 1.2rem;
-			}
-
-			&.bottom {
-				&::before {
-					left: -40px;
-					bottom: -30px;
-				}
-			}
-
-			&.left {
-				&::before {
-					left: -44px;
-					bottom: -30px;
-				}
 			}
 
 			& .point {
@@ -110,7 +94,17 @@
 				box-shadow: 0 0 5px rgba(49,100,160,.1);
 			}
 
+			& .target {
+				left: -25px;
+				bottom: 0;
+			}
+
 			&.bottom {
+				&::before {
+					left: -40px;
+					bottom: -30px;
+				}
+
 				& .point {
 					left: -8px;
 					bottom: -12px;
@@ -118,6 +112,11 @@
 			}
 
 			&.left {
+				&::before {
+					left: -44px;
+					bottom: -30px;
+				}
+
 				& .point {
 					left: -12px;
 					bottom: -8px;
@@ -134,20 +133,6 @@
 				font-size: 1.2rem;
 			}
 
-			&.bottom {
-				&::before {
-					right: -40px;
-					bottom: -30px;
-				}
-			}
-
-			&.left {
-				&::before {
-					left: -44px;
-					top: -30px;
-				}
-			}
-
 			& .point {
 				position: absolute;
 				content: "";
@@ -159,7 +144,18 @@
 				box-shadow: 0 0 5px rgba(49,100,160,.1);
 			}
 
+			& .target {
+				right: -26px;
+				bottom: 0;
+				visibility: hidden;
+			}
+
 			&.bottom {
+				&::before {
+					right: -40px;
+					bottom: -30px;
+				}
+
 				& .point {
 					right: -8px;
 					bottom: -12px;
@@ -167,6 +163,11 @@
 			}
 
 			&.left {
+				&::before {
+					left: -44px;
+					top: -30px;
+				}
+
 				& .point {
 					left: -12px;
 					top: -8px;

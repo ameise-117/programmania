@@ -17,6 +17,7 @@
 					td.td.line.bottom
 					td.td.end.line.bottom
 						.point
+						.target(ref="endPoint")
 </template>
 
 <script>
@@ -25,6 +26,7 @@ export default {
   	setTargetEl() {
       // 動作対象を設定
     	this.$store.dispatch('targetEl', this.$refs.targetEl)
+    	this.$store.dispatch('endPoint', this.$refs.endPoint)
 	  }
   }
 }

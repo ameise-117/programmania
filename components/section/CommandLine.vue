@@ -21,7 +21,8 @@ export default {
 		return {
 			commandLineOffsetTop: 10,
 			stepWidth: 100,
-			stepHeight: 50
+			stepHeight: 50,
+			endPosition: { x: 0, y: 0 }
 		}
 	},
   mounted() {
@@ -53,6 +54,8 @@ export default {
       	
       	let tm = new TimelineMax()
       	let target = this.$store.state.targetEl
+      	let startPoint = this.$store.state.startPoint
+      	let endPoint = this.$store.state.endPoint
       	let isHorizontal = false
       	let isVertical = false
       	let stepNum = 0
@@ -62,6 +65,7 @@ export default {
 	      	let commandType = command.dataset.commandType
 	      	let commandVal = command.dataset.commandVal
 
+	      	// 動き
 	      	if (commandType == 'motion') {
 	      		if (isHorizontal) {
 	      			this.moveHorizontal(tm, target, stepNum)
@@ -74,6 +78,7 @@ export default {
 	      		}
 	      	}
 
+	      	// 方向
 	      	if (commandType == 'direction') {
 	      		stepNum = command.querySelector('.input').value
 
@@ -81,18 +86,22 @@ export default {
 	      			switch(commandVal) {
 		      			case 'right':
 		      				stepNum = (stepNum * this.stepWidth)
+		      				this.endPosition.x = stepNum
 		      				isHorizontal = true
 		      				break
 		      			case 'left':
 		      				stepNum = (-1 * stepNum * this.stepWidth)
+		      				this.endPosition.x = stepNum
 		      				isHorizontal = true
 		      				break
 		      			case 'top':
 		      				stepNum = (-1 * stepNum * this.stepHeight)
+		      				this.endPosition.y = stepNum
 		      				isVertical = true
 		      				break
 		      			case 'bottom':
 		      				stepNum = (stepNum * this.stepHeight)
+		      				this.endPosition.y = stepNum
 		      				isVertical = true
 		      				break
 		      		}
@@ -101,6 +110,14 @@ export default {
 	      			break
 	      		}
 	      	}
+      	}
+
+      	// 最終位置チェック
+      	console.log('****')
+      	let targetPosition = target.getBoundingClientRect()
+      	let endPointPosition = endPoint.getBoundingClientRect()
+      	if (((targetPosition.top + this.endPosition.y) === endPointPosition.top) && ((targetPosition.left + this.endPosition.x) === endPointPosition.left)) {
+      		console.log('大当たり！')
       	}
       }
     },
