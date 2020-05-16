@@ -13,7 +13,7 @@
 				tr.tr
 					td.td.start.line.bottom
 						.point
-						.target(ref="targetEl")
+						.target.right(ref="targetEl")
 					td.td.line.bottom
 					td.td.end.line.bottom
 						.point

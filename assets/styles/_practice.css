@@ -70,9 +70,20 @@
 
 		& .target {
 			position: absolute;
-			content: url("../../assets/images/practice/target_hippo.png");
-			width: 50px;
-			height: 50px;
+			width: 40px;
+			z-index: 2;
+
+			&.left {
+				content: url("../../assets/images/practice/target_left.png");
+			}
+
+			&.right {
+				content: url("../../assets/images/practice/target_right.png");
+			}
+
+			&.center {
+				content: url("../../assets/images/practice/target_center.png");
+			}
 		}
 
 		& .start {
@@ -96,7 +107,7 @@
 			}
 
 			& .target {
-				left: -25px;
+				left: -20px;
 				bottom: 0;
 			}
 

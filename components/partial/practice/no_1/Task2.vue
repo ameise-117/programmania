@@ -15,7 +15,7 @@
 					td.td
 					td.td.start.line.left
 						.point
-						.target(ref="targetEl")
+						.target.center(ref="targetEl")
 					td.td
 </template>
 
