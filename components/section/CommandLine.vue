@@ -21,7 +21,6 @@ export default {
 		return {
 			commandLineOffsetTop: 10,
 			stepWidth: 100,
-			stepHeight: 50,
 			translateTerm: 0.5,
 			translateCount: 0
 		}
@@ -93,11 +92,11 @@ export default {
 		      				isHorizontal = true
 		      				break
 		      			case 'top':
-		      				stepNum = (-1 * stepNum * this.stepHeight)
+		      				stepNum = (-1 * stepNum * this.stepWidth)
 		      				isVertical = true
 		      				break
 		      			case 'bottom':
-		      				stepNum = (stepNum * this.stepHeight)
+		      				stepNum = (stepNum * this.stepWidth)
 		      				isVertical = true
 		      				break
 		      		}
@@ -138,7 +137,8 @@ export default {
     	let timeout = translateCount * translateTerm * 1000
     	setTimeout(() => {
 				let targetPosition = this.$store.state.targetEl.getBoundingClientRect()
-      	if ((targetPosition.left === this.$store.state.endPointX) && (targetPosition.top === this.$store.state.endPointY)) {
+				let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
+      	if ((targetPosition.left === goalPosition.left) && (targetPosition.top === goalPosition.top)) {
       		this.$store.dispatch('isComplete', true)
       	}
 			}, timeout)

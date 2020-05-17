@@ -15,7 +15,7 @@
 				text(transform="translate(829 509)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
 					tspan(x="-17.58" y="0") ゴール
 				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
-				rect(ref="endPoint" width="40" height="38.62" transform="translate(809 447)" fill="none")
+				rect(ref="goalEl" width="40" height="38.62" transform="translate(809 447)" fill="none")
 </template>
 
 <script>
@@ -31,11 +31,9 @@ export default {
   	setTargetEl() {
       // 動作対象を設定
     	this.$store.dispatch('targetEl', this.$refs.targetEl)
+    	this.$store.dispatch('goalEl', this.$refs.goalEl)
     	this.$store.dispatch('startPointX', 509)
     	this.$store.dispatch('startPointY', 447)
-    	let endPoint = this.$refs.endPoint.getBoundingClientRect()
-    	this.$store.dispatch('endPointX', endPoint.left)
-    	this.$store.dispatch('endPointY', endPoint.top)
 	  }
   }
 }
