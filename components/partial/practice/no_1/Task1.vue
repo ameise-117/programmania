@@ -43,9 +43,11 @@ export default {
     	this.$store.dispatch('startPointY', 282)
 
     	// チェックポイントを格納
+    	let routeEls = []
     	for (var i = 1; i <= this.checkPoint; i++) {
-    		this.$store.dispatch('routeEls', this.$refs['routeEl' + i])
+    		routeEls.push(this.$refs['routeEl' + i])
     	}
+    	this.$store.dispatch('routeEls', routeEls)
 	  }
   }
 }

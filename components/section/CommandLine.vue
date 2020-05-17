@@ -23,7 +23,9 @@ export default {
 			stepWidth: 100,
 			translateTerm: 0.5,
 			positionX: 0,
-			positionY: 0
+			positionY: 0,
+			routeNum: 0,
+			isRouteComplete: true
 		}
 	},
   mounted() {
@@ -114,6 +116,8 @@ export default {
     reset() {
     	this.positionX = this.$store.state.startPointX
     	this.positionY = this.$store.state.startPointY
+    	this.routeNum = 0
+    	this.isRouteComplete = true
     	this.$store.dispatch('isComplete', false)
     	let tm = new TimelineMax()
       let target = this.$store.state.targetEl
@@ -134,12 +138,23 @@ export default {
       }
     },
     check(isComplete) {
-    	// isComplete=trueの場合のみ最終位置チェック⭐️⭐️⭐️⭐️⭐️
-
     	let targetPosition = this.$store.state.targetEl.getBoundingClientRect()
-			let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
-    	if ((targetPosition.left === goalPosition.left) && (targetPosition.top === goalPosition.top)) {
-    		this.$store.dispatch('isComplete', true)
+
+    	// 最終位置確認
+    	if (isComplete) {
+				let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
+	    	if (this.isRouteComplete && (targetPosition.left === goalPosition.left) && (targetPosition.top === goalPosition.top)) {
+	    		this.$store.dispatch('isComplete', true)
+	    	}
+
+	    // チェックポイント通過確認
+    	} else {
+    		let routePosition = this.$store.state.routeEls[this.routeNum].getBoundingClientRect()
+    		if (this.isRouteComplete && (targetPosition.left === routePosition.left) && (targetPosition.top === routePosition.top)) {
+	    		this.routeNum++
+	    	} else {
+	    		this.isRouteComplete = false
+	    	}
     	}
     },
     moveHorizontal(tm, target, stepNum, direction, isLastCommand) {
