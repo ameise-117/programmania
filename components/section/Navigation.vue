@@ -24,17 +24,19 @@
 				slide-up-down(:active="isG2Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link(to="/practice/advance/1") 正多角形を描く
-						li.item
-							nuxt-link.link(to="/practice/advance/1") UFOキャッチャー
-						li.item
-							nuxt-link.link(to="/practice/advance/2") 星座を見つける
-						li.item
-							nuxt-link.link(to="/practice/advance/3") かけっこする
-						li.item
-							nuxt-link.link(to="/practice/advance/4") 料理を作る
-						li.item
-							nuxt-link.link(to="/practice/advance/5") 迷路に挑戦
+							nuxt-link.link.disabled(to="/practice/advance/1") 準備中...
+						//- li.item
+						//- 	nuxt-link.link(to="/practice/advance/1") 正多角形を描く
+						//- li.item
+						//- 	nuxt-link.link(to="/practice/advance/1") UFOキャッチャー
+						//- li.item
+						//- 	nuxt-link.link(to="/practice/advance/2") 星座を見つける
+						//- li.item
+						//- 	nuxt-link.link(to="/practice/advance/3") かけっこする
+						//- li.item
+						//- 	nuxt-link.link(to="/practice/advance/4") 料理を作る
+						//- li.item
+						//- 	nuxt-link.link(to="/practice/advance/5") 迷路に挑戦
 </template>
 
 <script>
@@ -202,6 +204,10 @@ export default {
 			&:hover {
 				background-color: #f9f9ed;
 			}
+		}
+
+		& .disabled {
+			pointer-events: none;
 		}
 
 		&.star {

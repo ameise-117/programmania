@@ -6,14 +6,15 @@
       li.item(@click="changeTask(3, $refs.task3)", :class="{ active: (taskNo == 3) }") STEP3
       li.item(@click="changeTask(4, $refs.task4)", :class="{ active: (taskNo == 4) }") STEP4
     .contents
-      transition(:name="slideType")
-        Task1(v-show="taskNo == 1", ref="task1")
-      transition(:name="slideType")
-        Task2(v-show="taskNo == 2", ref="task2")
-      transition(:name="slideType")
-        Task3(v-show="taskNo == 3", ref="task3")
-      transition(:name="slideType")
-        Task4(v-show="taskNo == 4", ref="task4")
+      .wrap
+        transition(:name="slideType")
+          Task1(v-show="taskNo == 1", ref="task1")
+        transition(:name="slideType")
+          Task2(v-show="taskNo == 2", ref="task2")
+        transition(:name="slideType")
+          Task3(v-show="taskNo == 3", ref="task3")
+        transition(:name="slideType")
+          Task4(v-show="taskNo == 4", ref="task4")
     img.complete(src="~/assets/images/practice/complete.gif", :class="{ visible: $store.state.isComplete }")
 </template>
 
