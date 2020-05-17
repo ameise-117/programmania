@@ -1,6 +1,10 @@
 <template lang="pug">
   header.globalheader
-    .logo LOGO
+    .logo
+      img.img(src="~/assets/images/header/logo.png")
+      p.title
+        span.sub プログラミング的思考力
+        span.text 育成道場
     .instruction
       img.icon(src="~/assets/images/header/icon_book.svg")
       p.text 使い方
@@ -37,6 +41,33 @@
     background-image: url("../../assets/images/header/gear.png");
     background-size: contain;
     z-index: -1;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: flex-end;
+
+  & .img {
+    width: 45px;
+  }
+
+  & .title {
+    margin-left: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+    
+    & .sub {
+      font-size: 10px;
+    }
+
+    & .text {
+      font-size: 22px;
+      letter-spacing: .25em;
+      font-weight: bold;
+    }
   }
 }
 

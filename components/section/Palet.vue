@@ -49,17 +49,17 @@
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.calculation(:key="2")
 					p.text
-						span ＋
+						span.operator +
 						input.input(maxlength="3")
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.calculation(:key="3")
 					p.text
-						span ー
+						span.operator -
 						input.input(maxlength="3")
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.calculation(:key="3")
 					p.text
-						span ÷
+						span.operator ÷
 						input.input(maxlength="3")
 					.icon.icon-close(@click="deleteItem($event)")
 </template>
@@ -280,6 +280,13 @@ export default {
 			border-top: 5px solid var(--color-key-7);
 		}
 	}
+}
+
+.operator {
+	width: 15px;
+	text-align: center;
+	font-size: 17px;
+	margin-top: -3.5px;
 }
 
 .command-line {
