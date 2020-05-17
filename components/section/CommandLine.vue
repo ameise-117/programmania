@@ -21,8 +21,7 @@ export default {
 		return {
 			commandLineOffsetTop: 10,
 			stepWidth: 100,
-			translateTerm: 0.5,
-			translateCount: 0
+			translateTerm: 0.5
 		}
 	},
   mounted() {
@@ -57,20 +56,21 @@ export default {
       	let isHorizontal = false
       	let isVertical = false
       	let stepNum = 0
+      	let isLastCommand = false
 
       	for (var i = 1; i < commands.length; i++) {
       		let command = commands[i]
 	      	let commandType = command.dataset.commandType
 	      	let commandVal = command.dataset.commandVal
+	      	isLastCommand = ((i + 1) === commands.length)
 
 	      	// 動き
 	      	if (commandType == 'motion') {
-	      		this.translateCount++
 	      		if (isHorizontal) {
-	      			this.moveHorizontal(tm, target, stepNum)
+	      			this.moveHorizontal(tm, target, stepNum, isLastCommand)
 	      			isHorizontal = false
 	      		} else if (isVertical) {
-	      			this.moveVertical(tm, target, stepNum)
+	      			this.moveVertical(tm, target, stepNum, isLastCommand)
 	      			isVertical = false
 	      		} else {
 	      			break
@@ -84,19 +84,15 @@ export default {
 	      		if (stepNum && stepNum > 0) {
 	      			switch(commandVal) {
 		      			case 'right':
-		      				stepNum = (stepNum * this.stepWidth)
 		      				isHorizontal = true
 		      				break
 		      			case 'left':
-		      				stepNum = (-1 * stepNum * this.stepWidth)
 		      				isHorizontal = true
 		      				break
 		      			case 'top':
-		      				stepNum = (-1 * stepNum * this.stepWidth)
 		      				isVertical = true
 		      				break
 		      			case 'bottom':
-		      				stepNum = (stepNum * this.stepWidth)
 		      				isVertical = true
 		      				break
 		      		}
@@ -106,14 +102,10 @@ export default {
 	      		}
 	      	}
       	}
-
-      	// 最終位置チェック
-      	this.check(++this.translateCount, this.translateTerm)
       }
     },
     reset() {
     	this.$store.dispatch('isComplete', false)
-    	this.translateCount = 0
     	let tm = new TimelineMax()
       let target = this.$store.state.targetEl
     	tm.to(target, 0, {
@@ -123,7 +115,6 @@ export default {
     },
     clear() {
     	this.$store.dispatch('isComplete', false)
-    	this.translateCount = 0
       let commands = this.$refs.elCommand.$el.children
 
       if (commands) {
@@ -133,25 +124,44 @@ export default {
       	this.$store.dispatch('isDragEnd', true)
       }
     },
-    check(translateCount, translateTerm) {
-    	let timeout = translateCount * translateTerm * 1000
-    	setTimeout(() => {
-				let targetPosition = this.$store.state.targetEl.getBoundingClientRect()
-				let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
-      	if ((targetPosition.left === goalPosition.left) && (targetPosition.top === goalPosition.top)) {
-      		this.$store.dispatch('isComplete', true)
-      	}
-			}, timeout)
+    check(isComplete) {
+    	// isComplete=trueの場合のみ最終位置チェック⭐️⭐️⭐️⭐️⭐️
+
+    	let targetPosition = this.$store.state.targetEl.getBoundingClientRect()
+			let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
+    	if ((targetPosition.left === goalPosition.left) && (targetPosition.top === goalPosition.top)) {
+    		this.$store.dispatch('isComplete', true)
+    	}
     },
-    moveHorizontal(tm, target, val) {
-    	return tm.to(target, this.translateTerm, {
-      	x: this.$store.state.startPointX + val
-      })
+    moveHorizontal(tm, target, stepNum, isLastCommand) {
+    	let positionX = this.$store.state.startPointX
+    	for (var i = 0; i < stepNum; i++) {
+    		positionX += this.stepWidth
+    		let isComplete = isLastCommand && (i === (stepNum - 1))
+
+    		let self = this
+    		tm.to(target, this.translateTerm, {
+	      	x: positionX,
+	      	onComplete: function() {
+	      		self.check(isComplete)
+	      	}
+	      })
+    	}
     },
-    moveVertical(tm, target, val) {
-    	return tm.to(target, this.translateTerm, {
-      	y: this.$store.state.startPointY + val
-      })
+    moveVertical(tm, target, stepNum, isLastCommand) {
+    	let positionY = this.$store.state.startPointY
+    	for (var i = 0; i < stepNum; i++) {
+    		positionY += this.stepWidth
+    		let isComplete = isLastCommand && (i === (stepNum - 1))
+
+    		let self = this
+    		tm.to(target, this.translateTerm, {
+	      	y: positionY,
+	      	onComplete: function() {
+	      		self.check(isComplete)
+	      	}
+	      })
+    	}
     }
   }
 }
