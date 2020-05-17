@@ -8,8 +8,10 @@ export const strict = false
 
 export const state = () => ({
   targetEl: null,
-  startPoint: null,
-  endPoint: null,
+  startPointX: 0,
+  startPointY: 0,
+  endPointX: 0,
+  endPointY: 0,
   isDummyHover: false,
   isDragEnd: false,
   isComplete: false
@@ -19,11 +21,17 @@ export const mutations = {
   setTargetEl(state, value) {
     state.targetEl = value
   },
-  setStartPoint(state, value) {
-    state.startPoint = value
+  setStartPointX(state, value) {
+    state.startPointX = value
   },
-  setEndPoint(state, value) {
-    state.endPoint = value
+  setStartPointY(state, value) {
+    state.startPointY = value
+  },
+  setEndPointX(state, value) {
+    state.endPointX = value
+  },
+  setEndPointY(state, value) {
+    state.endPointY = value
   },
   setIsDummyHover(state, value) {
     state.isDummyHover = value
@@ -40,11 +48,17 @@ export const actions = {
   targetEl(context, value) {
     context.commit('setTargetEl', value)
   },
-  startPoint(context, value) {
-    context.commit('setStartPoint', value)
+  startPointX(context, value) {
+    context.commit('setStartPointX', value)
   },
-  endPoint(context, value) {
-    context.commit('setEndPoint', value)
+  startPointY(context, value) {
+    context.commit('setStartPointY', value)
+  },
+  endPointX(context, value) {
+    context.commit('setEndPointX', value)
+  },
+  endPointY(context, value) {
+    context.commit('setEndPointY', value)
   },
   isDummyHover(context, value) {
     context.commit('setIsDummyHover', value)

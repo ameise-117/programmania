@@ -55,8 +55,6 @@ export default {
       	
       	let tm = new TimelineMax()
       	let target = this.$store.state.targetEl
-      	let startPoint = this.$store.state.startPoint
-      	let endPoint = this.$store.state.endPoint
       	let isHorizontal = false
       	let isVertical = false
       	let stepNum = 0
@@ -111,15 +109,7 @@ export default {
       	}
 
       	// 最終位置チェック
-      	let self = this
-      	let timeout = ++self.translateCount * self.translateTerm * 1000
-      	setTimeout(() => {
-					let targetPosition = target.getBoundingClientRect()
-	      	let endPointPosition = endPoint.getBoundingClientRect()
-	      	if ((targetPosition.top === endPointPosition.top) && (targetPosition.left === endPointPosition.left)) {
-	      		self.$store.dispatch('isComplete', true)
-	      	}
-				}, timeout)
+      	this.check(++this.translateCount, this.translateTerm)
       }
     },
     reset() {
@@ -128,8 +118,8 @@ export default {
     	let tm = new TimelineMax()
       let target = this.$store.state.targetEl
     	tm.to(target, 0, {
-      	x: 0,
-      	y: 0
+      	x: this.$store.state.startPointX,
+      	y: this.$store.state.startPointY
       })
     },
     clear() {
@@ -144,14 +134,23 @@ export default {
       	this.$store.dispatch('isDragEnd', true)
       }
     },
+    check(translateCount, translateTerm) {
+    	let timeout = translateCount * translateTerm * 1000
+    	setTimeout(() => {
+				let targetPosition = this.$store.state.targetEl.getBoundingClientRect()
+      	if ((targetPosition.left === this.$store.state.endPointX) && (targetPosition.top === this.$store.state.endPointY)) {
+      		this.$store.dispatch('isComplete', true)
+      	}
+			}, timeout)
+    },
     moveHorizontal(tm, target, val) {
     	return tm.to(target, this.translateTerm, {
-      	x: val
+      	x: this.$store.state.startPointX + val
       })
     },
     moveVertical(tm, target, val) {
     	return tm.to(target, this.translateTerm, {
-      	y: val
+      	y: this.$store.state.startPointY + val
       })
     }
   }
