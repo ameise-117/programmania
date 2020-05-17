@@ -1,6 +1,6 @@
 <template lang="pug">
 	.task
-		svg(width="81" height="241" viewBox="0 0 81 241")
+		svg.svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="81" height="241" viewBox="0 0 81 241")
 			g(transform="translate(-505 -600)")
 				g(transform="translate(1012 104) rotate(90)")
 					rect(width="200" height="8" transform="translate(529 483)" fill="#dcdcd9")
@@ -37,8 +37,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.task {
-}
-</style>

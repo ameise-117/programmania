@@ -9,6 +9,7 @@ export const strict = false
 export const state = () => ({
   targetEl: null,
   goalEl: null,
+  routeEls: null,
   startPointX: 0,
   startPointY: 0,
   isDummyHover: false,
@@ -22,6 +23,9 @@ export const mutations = {
   },
   setGoalEl(state, value) {
     state.goalEl = value
+  },
+  setRouteEls(state, value) {
+    state.routeEls = value
   },
   setStartPointX(state, value) {
     state.startPointX = value
@@ -46,6 +50,9 @@ export const actions = {
   },
   goalEl(context, value) {
     context.commit('setGoalEl', value)
+  },
+  routeEls(context, value) {
+    context.commit('setRouteEls', value)
   },
   startPointX(context, value) {
     context.commit('setStartPointX', value)
