@@ -1,6 +1,6 @@
 <template lang="pug">
   header.globalheader
-    .logo
+    a.logo(href="/")
       img.img(src="~/assets/images/header/logo.png")
       p.title
         span.sub プログラミング的思考力
@@ -58,6 +58,7 @@
     flex-direction: column;
     align-items: center;
     line-height: 1.2;
+    font-family: var(--font-hiragino-gothic);
     
     & .sub {
       font-size: 10px;
