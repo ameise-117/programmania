@@ -94,11 +94,9 @@ export default {
 			      		break
 			      	case 'rolate':
 			      		if (isRotate) {
-			      // 			let self = this
-			      // 			setTimeout(() => {
-									// 	self.rotate(target, calcNum)
-									// }, (self.translateTerm * 1000))
+			      			this.rotate(tm, target, calcNum)
 			      		}
+			      		break
 	      		}
 	      		continue
 	      	}
@@ -158,9 +156,10 @@ export default {
     	this.$store.dispatch('isComplete', false)
     	let tm = new TimelineMax()
       let target = this.$store.state.targetEl
-    	tm.to(target, 0, {
+    	tm.to(target, this.translateTerm, {
       	x: this.$store.state.startPointX,
-      	y: this.$store.state.startPointY
+      	y: this.$store.state.startPointY,
+      	rotation: 0
       })
     },
     clear() {
@@ -223,18 +222,10 @@ export default {
     	}
     },
     moveDiagonal(tm, target, stepNum, calcNum, direction, isLastCommand) {
-    	// let stepWidth = Math.cos(calcNum * (Math.PI / 180)) * stepNum
-    	// let stepHeight = Math.sin(calcNum * (Math.PI / 180)) * stepNum
-    	// console.log('****')
-    	// console.log(stepWidth)
-    	// console.log(stepHeight)
     	for (var i = 0; i < stepNum; i++) {
-    		this.positionX += (Math.cos(calcNum * (Math.PI / 180)) * (stepNum * this.stepWidth) * direction)
-    		this.positionY += (Math.sin(calcNum * (Math.PI / 180)) * (stepNum * this.stepWidth) * direction)
+    		this.positionX += (Math.cos(calcNum * (Math.PI / 180)) * this.stepWidth * direction)
+    		this.positionY += (Math.sin(calcNum * (Math.PI / 180)) * this.stepWidth * direction)
     		let isComplete = isLastCommand && (i === (stepNum - 1))
-
-    		console.log(this.positionX)
-    		console.log(this.positionY)
 
     		let self = this
     		tm.to(target, this.translateTerm, {
@@ -246,9 +237,10 @@ export default {
 	      })
     	}
     },
-    rotate(target, calcNum) {
-    	let test = target.getAttribute('transform')
-  	  target.setAttribute('style', 'transform: ' + test + ' rotate(' + calcNum + 'deg)')
+    rotate(tm, target, calcNum) {
+    	tm.to(target, this.translateTerm, {
+    		rotation: calcNum
+	    })
     }
   }
 }
