@@ -175,18 +175,30 @@ export default {
     },
     check(isComplete) {
     	let targetPosition = this.$store.state.targetEl.getBoundingClientRect()
+    	let targetPositionLeft = Math.round(targetPosition.left)
+			let targetPositionTop = Math.round(targetPosition.top)
 
     	// 最終位置確認
     	if (isComplete) {
 				let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
-	    	if (this.isRouteComplete && (targetPosition.left === goalPosition.left) && (targetPosition.top === goalPosition.top)) {
+				let goalPositionLeft = Math.round(goalPosition.left)
+				let goalPositionTop = Math.round(goalPosition.top)
+				let isSamePositionLeft = ((goalPositionLeft == targetPositionLeft) || (goalPositionLeft + 1 == targetPositionLeft) || (goalPositionLeft - 1 == targetPositionLeft))
+				let isSamePositionTop = ((goalPositionTop == targetPositionTop) || (goalPositionTop + 1 == targetPositionTop) || (goalPositionTop - 1 == targetPositionTop))
+
+	    	if (this.isRouteComplete && isSamePositionLeft && isSamePositionTop) {
 	    		this.$store.dispatch('isComplete', true)
 	    	}
 
 	    // チェックポイント通過確認
     	} else {
     		let routePosition = this.$store.state.routeEls[this.routeNum].getBoundingClientRect()
-    		if (this.isRouteComplete && (targetPosition.left === routePosition.left) && (targetPosition.top === routePosition.top)) {
+    		let routePositionLeft = Math.round(routePosition.left)
+				let routePositionTop = Math.round(routePosition.top)
+				let isSamePositionLeft = ((routePositionLeft == targetPositionLeft) || (routePositionLeft + 1 == targetPositionLeft) || (routePositionLeft - 1 == targetPositionLeft))
+				let isSamePositionTop = ((routePositionTop == targetPositionTop) || (routePositionTop + 1 == targetPositionTop) || (routePositionTop - 1 == targetPositionTop))
+				
+				if (this.isRouteComplete && isSamePositionLeft && isSamePositionTop) {
 	    		this.routeNum++
 	    	} else {
 	    		this.isRouteComplete = false
@@ -239,7 +251,8 @@ export default {
     },
     rotate(tm, target, calcNum) {
     	tm.to(target, this.translateTerm, {
-    		rotation: calcNum
+    		rotation: calcNum,
+    		transformOrigin: 'center'
 	    })
     }
   }
