@@ -49,7 +49,9 @@
   align-items: flex-end;
 
   & .img {
-    width: 45px;
+    width: 35px;
+    height: auto;
+    margin-bottom: 2px;
   }
 
   & .title {
@@ -65,8 +67,8 @@
     }
 
     & .text {
-      font-size: 22px;
-      letter-spacing: .25em;
+      font-size: 24px;
+      letter-spacing: .17em;
       font-weight: bold;
     }
   }

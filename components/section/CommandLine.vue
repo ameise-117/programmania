@@ -59,7 +59,9 @@ export default {
       	let target = this.$store.state.targetEl
       	let isHorizontal = false
       	let isVertical = false
+      	let isRotate = false
       	let stepNum = 0
+      	let calcNum = 0
       	let direction = 1
       	let isLastCommand = false
 
@@ -71,15 +73,34 @@ export default {
 
 	      	// 動き
 	      	if (commandType == 'motion') {
-	      		if (isHorizontal) {
-	      			this.moveHorizontal(tm, target, stepNum, direction, isLastCommand)
-	      			isHorizontal = false
-	      		} else if (isVertical) {
-	      			this.moveVertical(tm, target, stepNum, direction, isLastCommand)
-	      			isVertical = false
-	      		} else {
-	      			break
+	      		switch(commandVal) {
+	      			case 'go':
+	      				// 斜めに動く場合
+	      				if (isRotate) {
+	      					this.moveDiagonal(tm, target, stepNum, calcNum, direction, isLastCommand)
+	      					isRotate = false
+	      					isHorizontal = false
+	      					isVertical = false
+	      				// 直線で動く場合
+	      				} else {
+	      					if (isHorizontal) {
+				      			this.moveHorizontal(tm, target, stepNum, direction, isLastCommand)
+				      			isHorizontal = false
+				      		} else if (isVertical) {
+				      			this.moveVertical(tm, target, stepNum, direction, isLastCommand)
+				      			isVertical = false
+				      		}
+	      				}
+			      		break
+			      	case 'rolate':
+			      		if (isRotate) {
+			      // 			let self = this
+			      // 			setTimeout(() => {
+									// 	self.rotate(target, calcNum)
+									// }, (self.translateTerm * 1000))
+			      		}
 	      		}
+	      		continue
 	      	}
 
 	      	// 方向
@@ -103,6 +124,22 @@ export default {
 		      			case 'bottom':
 		      				isVertical = true
 		      				direction = 1
+		      				break
+		      		}
+		      		continue
+	      		} else {
+	      			break
+	      		}
+	      	}
+
+	      	// 演算
+	      	if (commandType == 'calculation') {
+	      		calcNum = command.querySelector('.input').value
+
+	      		if (calcNum) {
+	      			switch(commandVal) {
+		      			case 'degree':
+		      				isRotate = true
 		      				break
 		      		}
 		      		continue
@@ -184,6 +221,34 @@ export default {
 	      	}
 	      })
     	}
+    },
+    moveDiagonal(tm, target, stepNum, calcNum, direction, isLastCommand) {
+    	// let stepWidth = Math.cos(calcNum * (Math.PI / 180)) * stepNum
+    	// let stepHeight = Math.sin(calcNum * (Math.PI / 180)) * stepNum
+    	// console.log('****')
+    	// console.log(stepWidth)
+    	// console.log(stepHeight)
+    	for (var i = 0; i < stepNum; i++) {
+    		this.positionX += (Math.cos(calcNum * (Math.PI / 180)) * (stepNum * this.stepWidth) * direction)
+    		this.positionY += (Math.sin(calcNum * (Math.PI / 180)) * (stepNum * this.stepWidth) * direction)
+    		let isComplete = isLastCommand && (i === (stepNum - 1))
+
+    		console.log(this.positionX)
+    		console.log(this.positionY)
+
+    		let self = this
+    		tm.to(target, this.translateTerm, {
+    			x: this.positionX,
+	      	y: this.positionY,
+	      	onComplete: function() {
+	      		self.check(isComplete)
+	      	}
+	      })
+    	}
+    },
+    rotate(target, calcNum) {
+    	let test = target.getAttribute('transform')
+  	  target.setAttribute('style', 'transform: ' + test + ' rotate(' + calcNum + 'deg)')
     }
   }
 }

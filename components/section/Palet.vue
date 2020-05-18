@@ -42,25 +42,30 @@
 		.item.calculation
 			p.head 演算
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.calculation(:key="1")
+				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree")
 					p.text
 						input.input(maxlength="3")
 						span 度
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.calculation(:key="2")
+				li.item.calculation(:key="2", data-command-type="calculation", data-command-val="plus")
 					p.text
 						span.operator +
-						input.input(maxlength="3")
+						input.input(maxlength="2")
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.calculation(:key="3")
+				li.item.calculation(:key="3", data-command-type="calculation", data-command-val="minus")
 					p.text
 						span.operator -
-						input.input(maxlength="3")
+						input.input(maxlength="2")
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.calculation(:key="3")
+				li.item.calculation(:key="4", data-command-type="calculation", data-command-val="multiply")
+					p.text
+						span.operator ×
+						input.input(maxlength="2")
+					.icon.icon-close(@click="deleteItem($event)")
+				li.item.calculation(:key="5", data-command-type="calculation", data-command-val="division")
 					p.text
 						span.operator ÷
-						input.input(maxlength="3")
+						input.input(maxlength="2")
 					.icon.icon-close(@click="deleteItem($event)")
 </template>
 
