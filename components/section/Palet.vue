@@ -44,7 +44,7 @@
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree")
 					p.text
-						input.input(maxlength="3")
+						input.input(maxlength="4")
 						span 度
 					.icon.icon-close(@click="deleteItem($event)")
 				//- li.item.calculation(:key="2", data-command-type="calculation", data-command-val="plus")

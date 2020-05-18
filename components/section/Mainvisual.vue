@@ -1,7 +1,7 @@
 <template lang="pug">
 	.mainvisual
 		.lead
-			img.img(src="~/assets/images/mainvisual/main_character.png")
+			img.img(src="~/assets/images/practice/target_center.png")
 </template>
 
 <style scoped>
