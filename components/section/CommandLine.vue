@@ -175,30 +175,26 @@ export default {
     },
     check(isComplete) {
     	let targetPosition = this.$store.state.targetEl.getBoundingClientRect()
-    	let targetPositionLeft = Math.round(targetPosition.left)
-			let targetPositionTop = Math.round(targetPosition.top)
+    	let targetPositionLeft = Math.round(targetPosition.left * 10) / 10
+    	let targetPositionTop = Math.round(targetPosition.top * 10) / 10
 
     	// 最終位置確認
     	if (isComplete) {
-				let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
-				let goalPositionLeft = Math.round(goalPosition.left)
-				let goalPositionTop = Math.round(goalPosition.top)
-				let isSamePositionLeft = ((goalPositionLeft == targetPositionLeft) || (goalPositionLeft + 1 == targetPositionLeft) || (goalPositionLeft - 1 == targetPositionLeft))
-				let isSamePositionTop = ((goalPositionTop == targetPositionTop) || (goalPositionTop + 1 == targetPositionTop) || (goalPositionTop - 1 == targetPositionTop))
+    		let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
+    		let goalPositionLeft = Math.round(goalPosition.left * 10) / 10
+    		let goalPositionTop = Math.round(goalPosition.top * 10) / 10
 
-	    	if (this.isRouteComplete && isSamePositionLeft && isSamePositionTop) {
+	    	if (this.isRouteComplete && (goalPositionLeft == targetPositionLeft) && (goalPositionTop == targetPositionTop)) {
 	    		this.$store.dispatch('isComplete', true)
 	    	}
 
 	    // チェックポイント通過確認
     	} else {
     		let routePosition = this.$store.state.routeEls[this.routeNum].getBoundingClientRect()
-    		let routePositionLeft = Math.round(routePosition.left)
-				let routePositionTop = Math.round(routePosition.top)
-				let isSamePositionLeft = ((routePositionLeft == targetPositionLeft) || (routePositionLeft + 1 == targetPositionLeft) || (routePositionLeft - 1 == targetPositionLeft))
-				let isSamePositionTop = ((routePositionTop == targetPositionTop) || (routePositionTop + 1 == targetPositionTop) || (routePositionTop - 1 == targetPositionTop))
+    		let routePositionLeft = Math.round(routePosition.left * 10) / 10
+    		let routePositionTop = Math.round(routePosition.top * 10) / 10
 				
-				if (this.isRouteComplete && isSamePositionLeft && isSamePositionTop) {
+				if (this.isRouteComplete && (routePositionLeft == targetPositionLeft) && (routePositionTop == targetPositionTop)) {
 	    		this.routeNum++
 	    	} else {
 	    		this.isRouteComplete = false

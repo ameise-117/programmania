@@ -23,8 +23,8 @@
 					circle(cx="8" cy="8" r="7.25" fill="none")
 				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/practice/target_left.png")
 				rect(ref="routeEl1" width="40" height="38.62" transform="translate(643 1630)" fill="none")
-				rect(ref="routeEl2" width="40" height="38.62" transform="translate(542.781 1630.613)" fill="none")
-				rect(ref="goalEl" width="40" height="38.62" transform="translate(468.91 1573.182) rotate(30)" fill="none")
+				rect(ref="routeEl2" width="40" height="38.62" transform="translate(543 1630)" fill="none")
+				rect(ref="goalEl" width="40" height="38.62" transform="matrix(0.86603,0.5,-0.5,0.86603,468.73215,1572.58703)" fill="none")
 </template>
 
 <script>
