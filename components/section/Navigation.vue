@@ -12,19 +12,19 @@
 				slide-up-down(:active="isG1Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link(to="/basic/1") 直線を引く
+							nuxt-link.link(to="/basic/1", :class="{ hover: $route.path == '/basic/1' }") 直線を引く
 						li.item
-							nuxt-link.link(to="/basic/2") 回転する
+							nuxt-link.link(to="/basic/2", :class="{ hover: $route.path == '/basic/2' }") 回転する
 						li.item
-							nuxt-link.link(to="/basic/3") 時間を設定する
+							nuxt-link.link(to="/basic/3", :class="{ hover: $route.path == '/basic/3' }") 時間を設定する
 						li.item
-							nuxt-link.link(to="/basic/4") 繰り返しを行う
+							nuxt-link.link(to="/basic/4", :class="{ hover: $route.path == '/basic/4' }") 繰り返しを行う
 			li.item
 				p.head(@click="isG2Active = !isG2Active", :class="{ close: !isG2Active }") 発展編
 				slide-up-down(:active="isG2Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link.disabled(to="/advance/1") 準備中...
+							nuxt-link.link.disabled(to="/advance/1", :class="{ hover: $route.path == '/advance/1' }") 準備中...
 						//- li.item
 						//- 	nuxt-link.link(to="/practice/advance/1") 正多角形を描く
 						//- li.item
@@ -201,7 +201,8 @@ export default {
 			align-items: center;
 			transition: var(--transition-link);
 
-			&:hover {
+			&:hover,
+			&.hover {
 				background-color: #f9f9ed;
 			}
 		}

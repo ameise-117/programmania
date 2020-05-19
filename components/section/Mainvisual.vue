@@ -10,7 +10,7 @@
 				br.br
 				| ハリネズミを動かそう！
 			img.img(src="~/assets/images/practice/target_center.png")
-		a.button(href="/practice/1") スタート
+		a.button(href="/basic/1") スタート
 </template>
 
 <style scoped>
