@@ -15,7 +15,7 @@
           Task3(v-show="taskNo == 3", ref="task3")
         transition(:name="slideType")
           Task4(v-show="taskNo == 4", ref="task4")
-    img.complete(src="~/assets/images/practice/complete.gif", :class="{ visible: $store.state.isComplete }")
+    img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
 </template>
 
 <script>

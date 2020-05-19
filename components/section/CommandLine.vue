@@ -40,6 +40,11 @@ export default {
       }
     )
   },
+  watch: {
+		'$route' (to, from) {
+			this.clear()
+		}
+	},
   methods: {
   	setDummyPosition() {
   		let commandNum = (this.$refs.elCommand.$el.children.length - 1)
@@ -185,7 +190,9 @@ export default {
     		let goalPositionTop = Math.round(goalPosition.top * 10) / 10
 
 	    	if (this.isRouteComplete && (goalPositionLeft == targetPositionLeft) && (goalPositionTop == targetPositionTop)) {
-	    		this.$store.dispatch('isComplete', true)
+	    		setTimeout(() => {
+	    			this.$store.dispatch('isComplete', true)
+	    		}, 100)
 	    	}
 
 	    // チェックポイント通過確認

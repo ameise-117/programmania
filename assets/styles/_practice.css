@@ -72,12 +72,14 @@
 		top: 0;
 		bottom: 0;
 		margin: auto;
-		width: 250px;
-		height: 250px;
-		display: none;
+		width: 300px;
+		height: 300px;
+		opacity: 0;
+		pointer-events: none;
+		transition: var(--transition-link);
 
 		&.visible {
-			display: block;
+			opacity: 1;
 		}
 	}
 }
