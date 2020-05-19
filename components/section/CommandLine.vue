@@ -325,11 +325,28 @@ export default {
 			transition: var(--transition-link);
 		}
 
+		&::after {
+			position: absolute;
+			top: -25px;
+			height: 20px;
+			background-color: rgba(255, 255, 255, 0.8);
+			font-size: 10px;
+			border-radius: 3px;
+			display: none;
+			align-items: center;
+			justify-content: center;
+			transition: var(--transition-link);
+		}
+
 		&:hover {
 			background-color: var(--color-bg-1);
 
 			&::before {
 				background-color: #4E4E4E;
+			}
+
+			&::after {
+				display: flex;
 			}
 		}
 
@@ -344,6 +361,12 @@ export default {
 			width: 10px;
 			height: 10px;
 		}
+
+		&::after {
+			content: "実行";
+			left: calc(50% - 20px);
+			width: 40px;
+		}
 	}
 
 	& .icon-reset {
@@ -352,6 +375,12 @@ export default {
 			width: 12px;
 			height: 12px;
 		}
+
+		&::after {
+			content: "元の位置に戻す";
+			left: calc(50% - 45px);
+			width: 90px;
+		}
 	}
 
 	& .icon-clear {
@@ -359,6 +388,12 @@ export default {
 			mask-image: url("../../assets/images/command_line/icon_clear.svg");
 			width: 12px;
 			height: 12px;
+		}
+
+		&::after {
+			content: "コマンド削除";
+			left: calc(50% - 40px);
+			width: 80px;
 		}
 	}
 }

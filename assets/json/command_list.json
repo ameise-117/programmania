@@ -1,5 +1,5 @@
 {
-	"practice": {
+	"basic": {
 		"1": {
 			"motion": [ true, false, false ],
 			"direction": [ true, true, true, true ],
@@ -9,6 +9,11 @@
 			"motion": [ true, true, false ],
 			"direction": [ true, true, false, false ],
 			"calculation": [ true, false, false, false ]
+		},
+		"3": {
+			"motion": [ false, true, true ],
+			"direction": [ false, false, false, false ],
+			"calculation": [ true, true, false, false ]
 		}
 	}
 }
