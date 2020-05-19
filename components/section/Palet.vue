@@ -3,49 +3,54 @@
 		.item.motion
 			p.head 動き
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.motion(:key="1", data-command-type="motion", data-command-val="go")
+				li.item.motion(:key="1", data-command-type="motion", data-command-val="go", v-if="motion[0]")
 					p.text 進む
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="2", data-command-type="motion", data-command-val="rolate")
+				li.item.motion(:key="2", data-command-type="motion", data-command-val="rolate", v-if="motion[1]")
 					p.text 回る
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait")
+				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait", v-if="motion[2]")
 					p.text 待つ
 					.icon.icon-close(@click="deleteItem($event)")
 		.item.direction
 			p.head 方向
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.direction(:key="1", data-command-type="direction", data-command-val="right")
+				li.item.direction(:key="1", data-command-type="direction", data-command-val="right", v-if="direction[0]")
 					p.text
 						span 右に
 						input.input(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="2", data-command-type="direction", data-command-val="left")
+				li.item.direction(:key="2", data-command-type="direction", data-command-val="left", v-if="direction[1]")
 					p.text
 						span 左に
 						input.input(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="3", data-command-type="direction", data-command-val="top")
+				li.item.direction(:key="3", data-command-type="direction", data-command-val="top", v-if="direction[2]")
 					p.text
 						span 上に
 						input.input(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="4", data-command-type="direction", data-command-val="bottom")
+				li.item.direction(:key="4", data-command-type="direction", data-command-val="bottom", v-if="direction[3]")
 					p.text
 						span 下に
 						input.input(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 		.item.calculation
-			p.head 演算
+			p.head 計算
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree")
+				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree", v-if="calculation[0]")
 					p.text
 						input.input(maxlength="4")
 						span 度
+					.icon.icon-close(@click="deleteItem($event)")
+				li.item.calculation(:key="2", data-command-type="calculation", data-command-val="time", v-if="calculation[1]")
+					p.text
+						input.input(maxlength="1")
+						span 秒
 					.icon.icon-close(@click="deleteItem($event)")
 				//- li.item.calculation(:key="2", data-command-type="calculation", data-command-val="plus")
 				//- 	p.text
@@ -70,8 +75,34 @@
 </template>
 
 <script>
+import commandList from '~/assets/json/command_list.json'
+
 export default {
+	data() {
+		return {
+			motion: [],
+			direction: [],
+			calculation: []
+		}
+	},
+	mounted() {
+		this.setCommand()
+	},
+	watch: {
+		'$route' (to, from) {
+			this.setCommand()
+		}
+	},
   methods: {
+  	setCommand() {
+  		let path = this.$route.path
+  		let structure = path.split('/')
+  		let level = structure[(structure.length - 2)]
+  		let no = structure[(structure.length - 1)]
+  		this.motion = commandList[level][no]['motion']
+  		this.direction = commandList[level][no]['direction']
+  		this.calculation = commandList[level][no]['calculation']
+  	},
   	onStart() {
   		this.$store.dispatch('isDummyHover', true)
   	},
@@ -188,6 +219,7 @@ export default {
 .body {
 	height: 100%;
 	padding: 40px 20px;
+	min-width: 155px;
 
 	& .item {
 		padding: 0 15px;
