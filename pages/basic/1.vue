@@ -42,6 +42,8 @@ export default {
   mounted() {
     // 起点設定
     this.$refs.task1.setTargetEl()
+    // 回転チェックフラグ設定
+    this.$store.dispatch('checkRotate', false)
   },
   methods: {
   	changeTask(num, task) {

@@ -25,7 +25,9 @@ export default {
 			positionX: 0,
 			positionY: 0,
 			routeNum: 0,
-			isRouteComplete: true
+			isRouteComplete: true,
+			startDegree: 0,
+			currentDegree: 0
 		}
 	},
   mounted() {
@@ -55,102 +57,19 @@ export default {
       this.$store.dispatch('isDragEnd', true)
     },
     play() {
-      let commands = this.$refs.elCommand.$el.children
-
-      if (commands) {
+    	// 回転のみチェックする場合
+      if (this.$store.state.checkRotate) {
+      	this.translateTerm = 1
+      	this.startDegree = this.$store.state.startDegree
       	this.reset()
-      	
-      	let tm = new TimelineMax()
-      	let target = this.$store.state.targetEl
-      	let isHorizontal = false
-      	let isVertical = false
-      	let isRotate = false
-      	let stepNum = 0
-      	let calcNum = 0
-      	let direction = 1
-      	let isLastCommand = false
+      	this.checkRotate()
 
-      	for (var i = 1; i < commands.length; i++) {
-      		let command = commands[i]
-	      	let commandType = command.dataset.commandType
-	      	let commandVal = command.dataset.commandVal
-	      	isLastCommand = ((i + 1) === commands.length)
-
-	      	// 動き
-	      	if (commandType == 'motion') {
-	      		switch(commandVal) {
-	      			case 'go':
-	      				// 斜めに動く場合
-	      				if (isRotate) {
-	      					this.moveDiagonal(tm, target, stepNum, calcNum, direction, isLastCommand)
-	      					isRotate = false
-	      					isHorizontal = false
-	      					isVertical = false
-	      				// 直線で動く場合
-	      				} else {
-	      					if (isHorizontal) {
-				      			this.moveHorizontal(tm, target, stepNum, direction, isLastCommand)
-				      			isHorizontal = false
-				      		} else if (isVertical) {
-				      			this.moveVertical(tm, target, stepNum, direction, isLastCommand)
-				      			isVertical = false
-				      		}
-	      				}
-			      		break
-			      	case 'rolate':
-			      		if (isRotate) {
-			      			this.rotate(tm, target, calcNum)
-			      		}
-			      		break
-	      		}
-	      		continue
-	      	}
-
-	      	// 方向
-	      	if (commandType == 'direction') {
-	      		stepNum = command.querySelector('.input').value
-
-	      		if (stepNum && stepNum > 0) {
-	      			switch(commandVal) {
-		      			case 'right':
-		      				isHorizontal = true
-		      				direction = 1
-		      				break
-		      			case 'left':
-		      				isHorizontal = true
-		      				direction = -1
-		      				break
-		      			case 'top':
-		      				isVertical = true
-		      				direction = -1
-		      				break
-		      			case 'bottom':
-		      				isVertical = true
-		      				direction = 1
-		      				break
-		      		}
-		      		continue
-	      		} else {
-	      			break
-	      		}
-	      	}
-
-	      	// 演算
-	      	if (commandType == 'calculation') {
-	      		calcNum = command.querySelector('.input').value
-
-	      		if (calcNum) {
-	      			switch(commandVal) {
-		      			case 'degree':
-		      				isRotate = true
-		      				break
-		      		}
-		      		continue
-	      		} else {
-	      			break
-	      		}
-	      	}
-      	}
+      // 通過ルートをチェックする場合
+      } else {
+      	this.translateTerm = 0.5
+      	this.startDegree = 0
+      	this.reset()
+      	this.checkRoute()
       }
     },
     reset() {
@@ -164,7 +83,7 @@ export default {
     	tm.to(target, this.translateTerm, {
       	x: this.$store.state.startPointX,
       	y: this.$store.state.startPointY,
-      	rotation: 0
+      	rotation: this.startDegree
       })
     },
     clear() {
@@ -178,7 +97,7 @@ export default {
       	this.$store.dispatch('isDragEnd', true)
       }
     },
-    check(isComplete) {
+    checkPosition(isComplete) {
     	let targetPosition = this.$store.state.targetEl.getBoundingClientRect()
     	let targetPositionLeft = Math.round(targetPosition.left * 10) / 10
     	let targetPositionTop = Math.round(targetPosition.top * 10) / 10
@@ -197,15 +116,129 @@ export default {
 
 	    // チェックポイント通過確認
     	} else {
-    		let routePosition = this.$store.state.routeEls[this.routeNum].getBoundingClientRect()
-    		let routePositionLeft = Math.round(routePosition.left * 10) / 10
-    		let routePositionTop = Math.round(routePosition.top * 10) / 10
-				
-				if (this.isRouteComplete && (routePositionLeft == targetPositionLeft) && (routePositionTop == targetPositionTop)) {
-	    		this.routeNum++
-	    	} else {
-	    		this.isRouteComplete = false
-	    	}
+    		// 回転のみチェックする場合
+    		if (this.$store.state.checkRotate) {
+    			// TODO
+
+    		// 通過ルートをチェックする場合
+    		} else {
+    			let routePosition = this.$store.state.routeEls[this.routeNum].getBoundingClientRect()
+	    		let routePositionLeft = Math.round(routePosition.left * 10) / 10
+	    		let routePositionTop = Math.round(routePosition.top * 10) / 10
+					
+					if (this.isRouteComplete && (routePositionLeft == targetPositionLeft) && (routePositionTop == targetPositionTop)) {
+		    		this.routeNum++
+		    	} else {
+		    		this.isRouteComplete = false
+		    	}
+    		}
+    	}
+    },
+    checkRotate() {
+    	let tm = new TimelineMax()
+    	let commands = this.$refs.elCommand.$el.children
+    	let target = this.$store.state.targetEl
+    	let stepNum = this.$store.state.rotateStep
+    	let isLastCommand = false
+
+    	// 起点角度が90°の場合
+    	if (this.startDegree === 90) {
+    		// 下方向に進む
+    		this.moveVertical(tm, target, stepNum, 1, isLastCommand)
+    	}
+    },
+    checkRoute() {
+    	let tm = new TimelineMax()
+    	let commands = this.$refs.elCommand.$el.children
+    	let target = this.$store.state.targetEl
+    	let isHorizontal = false
+    	let isVertical = false
+    	let isRotate = false
+    	let stepNum = 0
+    	let calcNum = 0
+    	let direction = 1
+    	let isLastCommand = false
+
+    	for (var i = 1; i < commands.length; i++) {
+    		let command = commands[i]
+      	let commandType = command.dataset.commandType
+      	let commandVal = command.dataset.commandVal
+      	isLastCommand = ((i + 1) === commands.length)
+
+      	// 動き
+      	if (commandType == 'motion') {
+      		switch(commandVal) {
+      			case 'go':
+      				// 斜めに動く場合
+      				if (isRotate) {
+      					this.moveDiagonal(tm, target, stepNum, calcNum, direction, isLastCommand)
+      					isRotate = false
+      					isHorizontal = false
+      					isVertical = false
+      				// 直線で動く場合
+      				} else {
+      					if (isHorizontal) {
+			      			this.moveHorizontal(tm, target, stepNum, direction, isLastCommand)
+			      			isHorizontal = false
+			      		} else if (isVertical) {
+			      			this.moveVertical(tm, target, stepNum, direction, isLastCommand)
+			      			isVertical = false
+			      		}
+      				}
+		      		break
+		      	case 'rolate':
+		      		if (isRotate) {
+		      			this.rotate(tm, target, calcNum)
+		      		}
+		      		break
+      		}
+      		continue
+      	}
+
+      	// 方向
+      	if (commandType == 'direction') {
+      		stepNum = command.querySelector('.input').value
+
+      		if (stepNum && stepNum > 0) {
+      			switch(commandVal) {
+	      			case 'right':
+	      				isHorizontal = true
+	      				direction = 1
+	      				break
+	      			case 'left':
+	      				isHorizontal = true
+	      				direction = -1
+	      				break
+	      			case 'top':
+	      				isVertical = true
+	      				direction = -1
+	      				break
+	      			case 'bottom':
+	      				isVertical = true
+	      				direction = 1
+	      				break
+	      		}
+	      		continue
+      		} else {
+      			break
+      		}
+      	}
+
+      	// 演算
+      	if (commandType == 'calculation') {
+      		calcNum = command.querySelector('.input').value
+
+      		if (calcNum) {
+      			switch(commandVal) {
+	      			case 'degree':
+	      				isRotate = true
+	      				break
+	      		}
+	      		continue
+      		} else {
+      			break
+      		}
+      	}
     	}
     },
     moveHorizontal(tm, target, stepNum, direction, isLastCommand) {
@@ -217,7 +250,7 @@ export default {
     		tm.to(target, this.translateTerm, {
 	      	x: this.positionX,
 	      	onComplete: function() {
-	      		self.check(isComplete)
+	      		self.checkPosition(isComplete)
 	      	}
 	      })
     	}
@@ -231,7 +264,7 @@ export default {
     		tm.to(target, this.translateTerm, {
 	      	y: this.positionY,
 	      	onComplete: function() {
-	      		self.check(isComplete)
+	      		self.checkPosition(isComplete)
 	      	}
 	      })
     	}
@@ -247,7 +280,7 @@ export default {
     			x: this.positionX,
 	      	y: this.positionY,
 	      	onComplete: function() {
-	      		self.check(isComplete)
+	      		self.checkPosition(isComplete)
 	      	}
 	      })
     	}

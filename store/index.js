@@ -14,7 +14,10 @@ export const state = () => ({
   startPointY: 0,
   isDummyHover: false,
   isDragEnd: false,
-  isComplete: false
+  isComplete: false,
+  checkRotate: false,
+  rotateStep: 0,
+  startDegree: 0
 })
 
 export const mutations = {
@@ -41,6 +44,15 @@ export const mutations = {
   },
   setIsComplete(state, value) {
     state.isComplete = value
+  },
+  setCheckRotate(state, value) {
+    state.checkRotate = value
+  },
+  setRotateStep(state, value) {
+    state.rotateStep = value
+  },
+  setStartDegree(state, value) {
+    state.startDegree = value
   }
 }
 
@@ -68,5 +80,14 @@ export const actions = {
   },
   isComplete(context, value) {
     context.commit('setIsComplete', value)
+  },
+  checkRotate(context, value) {
+    context.commit('setCheckRotate', value)
+  },
+  rotateStep(context, value) {
+    context.commit('setRotateStep', value)
+  },
+  startDegree(context, value) {
+    context.commit('setStartDegree', value)
   }
 }

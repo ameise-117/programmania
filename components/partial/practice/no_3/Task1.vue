@@ -27,7 +27,10 @@
 export default {
 	data() {
 		return {
-			checkPoint: 1
+			checkPoint: 1,
+			checkRotate: [ 45 ],
+			rotateStep: 3,
+			startDegree: 90
 		}
 	},
 	computed: {
@@ -46,11 +49,9 @@ export default {
     	this.$store.dispatch('startPointY', 884.426)
 
     	// チェックポイントを格納
-    	let routeEls = []
-    	for (var i = 1; i <= this.checkPoint; i++) {
-    		routeEls.push(this.$refs['routeEl' + i])
-    	}
-    	this.$store.dispatch('routeEls', routeEls)
+    	this.$store.dispatch('rotateStep', this.rotateStep)
+    	// 起点角度を設定
+    	this.$store.dispatch('startDegree', this.startDegree)
 	  }
   }
 }
