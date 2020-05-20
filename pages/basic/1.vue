@@ -15,6 +15,9 @@
           Task3(v-show="taskNo == 3", ref="task3")
         transition(:name="slideType")
           Task4(v-show="taskNo == 4", ref="task4")
+    li.icon-list
+      ul.item.icon-hint ?
+      ul.item.icon-answer A
     img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
 </template>
 
