@@ -12,31 +12,41 @@
 				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait", v-if="motion[2]")
 					p.text 待つ
 					.icon.icon-close(@click="deleteItem($event)")
+				li.item.motion(:key="4", data-command-type="motion", data-command-val="roopStart", v-if="motion[1]")
+					p.text
+						| 繰り返し&nbsp;
+						span.small.bold 開始
+					.icon.icon-close(@click="deleteItem($event)")
+				li.item.motion(:key="5", data-command-type="motion", data-command-val="roopEnd", v-if="motion[1]")
+					p.text
+						| 繰り返し&nbsp;
+						span.small.bold 終了
+					.icon.icon-close(@click="deleteItem($event)")
 		.item.direction
 			p.head 方向
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.direction(:key="1", data-command-type="direction", data-command-val="right", v-if="direction[0]")
 					p.text
 						span 右に
-						input.input(maxlength="1")
+						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="2", data-command-type="direction", data-command-val="left", v-if="direction[1]")
 					p.text
 						span 左に
-						input.input(maxlength="1")
+						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="3", data-command-type="direction", data-command-val="top", v-if="direction[2]")
 					p.text
 						span 上に
-						input.input(maxlength="1")
+						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.direction(:key="4", data-command-type="direction", data-command-val="bottom", v-if="direction[3]")
 					p.text
 						span 下に
-						input.input(maxlength="1")
+						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
 		.item.calculation
@@ -44,34 +54,20 @@
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree", v-if="calculation[0]")
 					p.text
-						input.input(maxlength="4")
+						input.input.wide(maxlength="4")
 						span 度
 					.icon.icon-close(@click="deleteItem($event)")
 				li.item.calculation(:key="2", data-command-type="calculation", data-command-val="time", v-if="calculation[1]")
 					p.text
-						input.input(maxlength="1")
+						input.input.narrow(maxlength="1")
 						span 秒
 					.icon.icon-close(@click="deleteItem($event)")
-				//- li.item.calculation(:key="2", data-command-type="calculation", data-command-val="plus")
-				//- 	p.text
-				//- 		span.operator +
-				//- 		input.input(maxlength="2")
-				//- 	.icon.icon-close(@click="deleteItem($event)")
-				//- li.item.calculation(:key="3", data-command-type="calculation", data-command-val="minus")
-				//- 	p.text
-				//- 		span.operator -
-				//- 		input.input(maxlength="2")
-				//- 	.icon.icon-close(@click="deleteItem($event)")
-				//- li.item.calculation(:key="4", data-command-type="calculation", data-command-val="multiply")
-				//- 	p.text
-				//- 		span.operator ×
-				//- 		input.input(maxlength="2")
-				//- 	.icon.icon-close(@click="deleteItem($event)")
-				//- li.item.calculation(:key="5", data-command-type="calculation", data-command-val="division")
-				//- 	p.text
-				//- 		span.operator ÷
-				//- 		input.input(maxlength="2")
-				//- 	.icon.icon-close(@click="deleteItem($event)")
+				li.item.calculation(:key="3", data-command-type="calculation", data-command-val="multiply", v-if="calculation[0]")
+					p.text
+						span.operator ×
+						input.input.narrow(maxlength="1")
+						span 回
+					.icon.icon-close(@click="deleteItem($event)")
 </template>
 
 <script>
@@ -239,16 +235,31 @@ export default {
 		& .text {
 			display: flex;
 			align-items: center;
+
+			& .small {
+				font-size: 11px;
+			}
+
+			& .bold {
+				font-weight: bold;
+			}
 		}
 
 		& .input {
-			width: 30px;
 			background-color: var(--color-bg-1);
 			outline: none;
 			margin: 0 5px;
 			padding: 0 5px;
 			text-align: right;
 			color: var(--color-text-1);
+
+			&.narrow {
+				width: 30px;
+			}
+
+			&.wide {
+				width: 40px;
+			}
 		}
 
 		&:hover {
@@ -320,10 +331,7 @@ export default {
 }
 
 .operator {
-	width: 15px;
-	text-align: center;
 	font-size: 17px;
-	margin-top: -3.5px;
 }
 
 .command-line {
