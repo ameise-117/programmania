@@ -12,16 +12,13 @@
           Task2(v-show="taskNo == 2", ref="task2")
         transition(:name="slideType")
           Task3(v-show="taskNo == 3", ref="task3")
-    li.icon-list
-      ul.item.icon-hint ?
-      ul.item.icon-answer A
     img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
 </template>
 
 <script>
-import Task1 from '~/components/partial/practice/no_2/Task1.vue'
-import Task2 from '~/components/partial/practice/no_2/Task2.vue'
-import Task3 from '~/components/partial/practice/no_2/Task3.vue'
+import Task1 from '~/components/partial/practice/no_4/Task1.vue'
+import Task2 from '~/components/partial/practice/no_4/Task2.vue'
+import Task3 from '~/components/partial/practice/no_4/Task3.vue'
 
 export default {
 	components: {

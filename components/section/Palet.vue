@@ -12,12 +12,12 @@
 				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait", v-if="motion[2]")
 					p.text 待つ
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="4", data-command-type="motion", data-command-val="roopStart", v-if="motion[1]")
+				li.item.motion(:key="4", data-command-type="motion", data-command-val="roopStart", v-if="motion[3]")
 					p.text
 						| 繰り返し&nbsp;
 						span.small.bold 開始
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="5", data-command-type="motion", data-command-val="roopEnd", v-if="motion[1]")
+				li.item.motion(:key="5", data-command-type="motion", data-command-val="roopEnd", v-if="motion[4]")
 					p.text
 						| 繰り返し&nbsp;
 						span.small.bold 終了
@@ -62,7 +62,7 @@
 						input.input.narrow(maxlength="1")
 						span 秒
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.calculation(:key="3", data-command-type="calculation", data-command-val="multiply", v-if="calculation[0]")
+				li.item.calculation(:key="3", data-command-type="calculation", data-command-val="multiply", v-if="calculation[2]")
 					p.text
 						span.operator ×
 						input.input.narrow(maxlength="1")
@@ -337,7 +337,6 @@ export default {
 .command-line {
 	& .item {
 		border-radius: 5px 5px 5px 0;
-		cursor: initial;
 
 		&::before,
 		&::after {
