@@ -12,6 +12,14 @@
           Task2(v-show="taskNo == 2", ref="task2")
         transition(:name="slideType")
           Task3(v-show="taskNo == 3", ref="task3")
+      .countdown
+        ul.flip
+          li.item 0
+          li.item {{ countSecond }}
+        p.unit 秒
+    li.icon-list
+      ul.item.icon-hint ?
+      ul.item.icon-answer A
     img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
 </template>
 
@@ -37,6 +45,11 @@ export default {
     this.$refs.task1.setTargetEl()
     // 回転チェックフラグ設定
     this.$store.dispatch('checkRotate', true)
+  },
+  computed: {
+    countSecond() {
+      return this.$store.state.countSecond
+    }
   },
   methods: {
   	changeTask(num, task) {

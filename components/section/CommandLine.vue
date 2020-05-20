@@ -119,6 +119,7 @@ export default {
     		// 回転のみチェックする場合
     		if (this.$store.state.checkRotate) {
     			// TODO
+    			this.$store.dispatch('countSecond', ++this.$store.state.countSecond)
 
     		// 通過ルートをチェックする場合
     		} else {

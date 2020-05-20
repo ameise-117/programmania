@@ -17,7 +17,8 @@ export const state = () => ({
   isComplete: false,
   checkRotate: false,
   rotateStep: 0,
-  startDegree: 0
+  startDegree: 0,
+  countSecond: 0
 })
 
 export const mutations = {
@@ -53,6 +54,9 @@ export const mutations = {
   },
   setStartDegree(state, value) {
     state.startDegree = value
+  },
+  setCountSecond(state, value) {
+    state.countSecond = value
   }
 }
 
@@ -89,5 +93,8 @@ export const actions = {
   },
   startDegree(context, value) {
     context.commit('setStartDegree', value)
+  },
+  countSecond(context, value) {
+    context.commit('setCountSecond', value)
   }
 }
