@@ -21,12 +21,10 @@ export default {
 		return {
 			commandLineOffsetTop: 10,
 			stepWidth: 100,
-			translateTerm: 0.5,
 			positionX: 0,
 			positionY: 0,
 			routeNum: 0,
 			isRouteComplete: true,
-			startDegree: 0,
 			currentDegree: 0
 		}
 	},
@@ -42,6 +40,14 @@ export default {
       }
     )
   },
+  computed: {
+		startDegree() {
+      return (this.$store.state.checkRotate ? this.$store.state.startDegree : 0)
+		},
+		translateTerm() {
+      return (this.$store.state.checkRotate ? 1 : 0.5)
+		}
+	},
   watch: {
 		'$route' (to, from) {
 			this.clear()
@@ -57,18 +63,15 @@ export default {
       this.$store.dispatch('isDragEnd', true)
     },
     play() {
+    	// リセット
+    	this.reset()
+
     	// 回転のみチェックする場合
       if (this.$store.state.checkRotate) {
-      	this.translateTerm = 1
-      	this.startDegree = this.$store.state.startDegree
-      	this.reset()
       	this.checkRotate()
 
       // 通過ルートをチェックする場合
       } else {
-      	this.translateTerm = 0.5
-      	this.startDegree = 0
-      	this.reset()
       	this.checkRoute()
       }
     },
