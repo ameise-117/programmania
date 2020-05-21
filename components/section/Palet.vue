@@ -2,54 +2,54 @@
 	.palet
 		.item.motion
 			p.head 動き
-			draggable.body(tag="ul", :group="{ name: $store.state.structure, pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.motion(:key="1", data-command-type="motion", data-command-val="go", v-if="motion[0]")
+			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+				li.item.motion(:key="1", data-command-type="motion", data-command-val="go", v-if="dragItems.motion[0]")
 					p.text 進む
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="2", data-command-type="motion", data-command-val="rolate", v-if="motion[1]")
+				li.item.motion(:key="2", data-command-type="motion", data-command-val="rolate", v-if="dragItems.motion[1]")
 					p.text 回る
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait", v-if="motion[2]")
+				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait", v-if="dragItems.motion[2]")
 					p.text 待つ
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="4", data-command-type="motion", data-command-val="roopStart", v-if="motion[3]")
+				li.item.motion(:key="4", data-command-type="motion", data-command-val="roopStart", v-if="dragItems.motion[3]")
 					p.text
 						| 繰り返し&nbsp;
 						span.small.bold 開始
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="5", data-command-type="motion", data-command-val="roopEnd", v-if="motion[4]")
+				li.item.motion(:key="5", data-command-type="motion", data-command-val="roopEnd", v-if="dragItems.motion[4]")
 					p.text
 						| 繰り返し&nbsp;
 						span.small.bold 終了
 					.icon.icon-close(@click="deleteItem($event)")
 		.item.direction
 			p.head 方向
-			draggable.body(tag="ul", :group="{ name: $store.state.structure, pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.direction(:key="1", data-command-type="direction", data-command-val="right", v-if="direction[0]")
+			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+				li.item.direction(:key="1", data-command-type="direction", data-command-val="right", v-if="dragItems.direction[0]")
 					p.text
 						span 右に
 						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="2", data-command-type="direction", data-command-val="left", v-if="direction[1]")
+				li.item.direction(:key="2", data-command-type="direction", data-command-val="left", v-if="dragItems.direction[1]")
 					p.text
 						span 左に
 						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="3", data-command-type="direction", data-command-val="top", v-if="direction[2]")
+				li.item.direction(:key="3", data-command-type="direction", data-command-val="top", v-if="dragItems.direction[2]")
 					p.text
 						span 上に
 						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="4", data-command-type="direction", data-command-val="bottom", v-if="direction[3]")
+				li.item.direction(:key="4", data-command-type="direction", data-command-val="bottom", v-if="dragItems.direction[3]")
 					p.text
 						span 下に
 						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="5", data-command-type="direction", data-command-val="forward", v-if="direction[3]")
+				li.item.direction(:key="5", data-command-type="direction", data-command-val="forward", v-if="dragItems.direction[4]")
 					p.text
 						span 前に
 						input.input.narrow(maxlength="1")
@@ -57,18 +57,18 @@
 					.icon.icon-close(@click="deleteItem($event)")
 		.item.calculation
 			p.head 計算
-			draggable.body(tag="ul", :group="{ name: $store.state.structure, pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree", v-if="calculation[0]")
+			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree", v-if="dragItems.calculation[0]")
 					p.text
 						input.input.wide(maxlength="4")
 						span 度
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.calculation(:key="2", data-command-type="calculation", data-command-val="time", v-if="calculation[1]")
+				li.item.calculation(:key="2", data-command-type="calculation", data-command-val="time", v-if="dragItems.calculation[1]")
 					p.text
 						input.input.narrow(maxlength="1")
 						span 秒
 					.icon.icon-close(@click="deleteItem($event)")
-				li.item.calculation(:key="3", data-command-type="calculation", data-command-val="multiply", v-if="calculation[2]")
+				li.item.calculation(:key="3", data-command-type="calculation", data-command-val="multiply", v-if="dragItems.calculation[2]")
 					p.text
 						span.operator ×
 						input.input.narrow(maxlength="1")
@@ -77,35 +77,9 @@
 </template>
 
 <script>
-import commandList from '~/assets/json/command_list.json'
-
 export default {
-	data() {
-		return {
-			motion: [],
-			direction: [],
-			calculation: []
-		}
-	},
-	mounted() {
-		this.setCommand()
-	},
-	watch: {
-		'$route' (to, from) {
-			this.setCommand()
-		}
-	},
+	props: ['dragItems'],
   methods: {
-  	setCommand() {
-  		let path = this.$route.path
-  		let structure = path.split('/')
-  		let level = structure[(structure.length - 2)]
-  		let no = structure[(structure.length - 1)]
-  		this.motion = commandList[level][no]['motion']
-  		this.direction = commandList[level][no]['direction']
-  		this.calculation = commandList[level][no]['calculation']
-  		this.$store.dispatch('structure', (level + no))
-  	},
   	onStart() {
   		this.$store.dispatch('isDummyHover', true)
   	},

@@ -19,8 +19,7 @@ export const state = () => ({
   rotateStep: 0,
   rotateDegree: [],
   startDegree: 0,
-  countSecond: 0,
-  structure: ''
+  countSecond: 0
 })
 
 export const mutations = {
@@ -62,9 +61,6 @@ export const mutations = {
   },
   setCountSecond(state, value) {
     state.countSecond = value
-  },
-  setStructure(state, value) {
-    state.structure = value
   }
 }
 
@@ -107,8 +103,5 @@ export const actions = {
   },
   countSecond(context, value) {
     context.commit('setCountSecond', value)
-  },
-  structure(context, value) {
-    context.commit('setStructure', value)
   }
 }

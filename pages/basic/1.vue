@@ -1,26 +1,29 @@
 <template lang="pug">
-  .practice
-    ul.step
-      li.item(@click="changeTask(1, $refs.task1)", :class="{ active: (taskNo == 1) }") STEP1
-      li.item(@click="changeTask(2, $refs.task2)", :class="{ active: (taskNo == 2) }") STEP2
-      li.item(@click="changeTask(3, $refs.task3)", :class="{ active: (taskNo == 3) }") STEP3
-      li.item(@click="changeTask(4, $refs.task4)", :class="{ active: (taskNo == 4) }") STEP4
-    .contents
-      .wrap
-        transition(:name="slideType")
-          Task1(v-show="taskNo == 1", ref="task1")
-        transition(:name="slideType")
-          Task2(v-show="taskNo == 2", ref="task2")
-        transition(:name="slideType")
-          Task3(v-show="taskNo == 3", ref="task3")
-        transition(:name="slideType")
-          Task4(v-show="taskNo == 4", ref="task4")
-    li.icon-list
-      ul.item.icon-answer A
-    img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
+  .main-block
+    .practice
+      ul.step
+        li.item(@click="changeTask(1, $refs.task1)", :class="{ active: (taskNo == 1) }") STEP1
+        li.item(@click="changeTask(2, $refs.task2)", :class="{ active: (taskNo == 2) }") STEP2
+        li.item(@click="changeTask(3, $refs.task3)", :class="{ active: (taskNo == 3) }") STEP3
+        li.item(@click="changeTask(4, $refs.task4)", :class="{ active: (taskNo == 4) }") STEP4
+      .contents
+        .wrap
+          transition(:name="slideType")
+            Task1(v-show="taskNo == 1", ref="task1")
+          transition(:name="slideType")
+            Task2(v-show="taskNo == 2", ref="task2")
+          transition(:name="slideType")
+            Task3(v-show="taskNo == 3", ref="task3")
+          transition(:name="slideType")
+            Task4(v-show="taskNo == 4", ref="task4")
+      li.icon-list
+        ul.item.icon-answer A
+      img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
+    palet(:dragItems="dragItems")
 </template>
 
 <script>
+import Palet from '~/components/section/Palet.vue'
 import Task1 from '~/components/partial/practice/no_1/Task1.vue'
 import Task2 from '~/components/partial/practice/no_1/Task2.vue'
 import Task3 from '~/components/partial/practice/no_1/Task3.vue'
@@ -28,6 +31,7 @@ import Task4 from '~/components/partial/practice/no_1/Task4.vue'
 
 export default {
 	components: {
+    Palet,
     Task1,
     Task2,
     Task3,
@@ -36,7 +40,12 @@ export default {
   data() {
   	return {
   		taskNo: 1,
-      slideType: 'next'
+      slideType: 'next',
+      dragItems: {
+        'motion': [ true, false, false, false, false ],
+        'direction': [ true, true, true, true, false ],
+        'calculation': [ false, false, false ]
+      }
   	}
   },
   mounted() {

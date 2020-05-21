@@ -7,7 +7,7 @@
 				.icon.icon-reset(@click="reset")
 				.icon.icon-clear(@click="clear")
 			.body
-				draggable.line(tag="ul", :group="{ name: $store.state.structure }", ref="elCommand", @end="onEnd")
+				draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
 					li.item.top(:key="1")
 				.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
 			.title.goal ゴール
