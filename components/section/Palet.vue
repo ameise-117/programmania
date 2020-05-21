@@ -2,7 +2,7 @@
 	.palet
 		.item.motion
 			p.head 動き
-			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+			draggable.body(tag="ul", :group="{ name: $store.state.structure, pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.motion(:key="1", data-command-type="motion", data-command-val="go", v-if="motion[0]")
 					p.text 進む
 					.icon.icon-close(@click="deleteItem($event)")
@@ -24,7 +24,7 @@
 					.icon.icon-close(@click="deleteItem($event)")
 		.item.direction
 			p.head 方向
-			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+			draggable.body(tag="ul", :group="{ name: $store.state.structure, pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.direction(:key="1", data-command-type="direction", data-command-val="right", v-if="direction[0]")
 					p.text
 						span 右に
@@ -57,7 +57,7 @@
 					.icon.icon-close(@click="deleteItem($event)")
 		.item.calculation
 			p.head 計算
-			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+			draggable.body(tag="ul", :group="{ name: $store.state.structure, pull: 'clone', put: false }", @start="onStart", @end="onEnd")
 				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree", v-if="calculation[0]")
 					p.text
 						input.input.wide(maxlength="4")
@@ -104,6 +104,7 @@ export default {
   		this.motion = commandList[level][no]['motion']
   		this.direction = commandList[level][no]['direction']
   		this.calculation = commandList[level][no]['calculation']
+  		this.$store.dispatch('structure', (level + no))
   	},
   	onStart() {
   		this.$store.dispatch('isDummyHover', true)
