@@ -49,6 +49,12 @@
 						input.input.narrow(maxlength="1")
 						span 歩
 					.icon.icon-close(@click="deleteItem($event)")
+				li.item.direction(:key="5", data-command-type="direction", data-command-val="forward", v-if="direction[3]")
+					p.text
+						span 前に
+						input.input.narrow(maxlength="1")
+						span 歩
+					.icon.icon-close(@click="deleteItem($event)")
 		.item.calculation
 			p.head 計算
 			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")

@@ -81,9 +81,10 @@ export default {
     	this.routeNum = 0
     	this.isRouteComplete = true
     	this.$store.dispatch('isComplete', false)
+    	this.$store.dispatch('countSecond', 0)
     	let tm = new TimelineMax()
       let target = this.$store.state.targetEl
-    	tm.to(target, this.translateTerm, {
+    	tm.to(target, 0.5, {
       	x: this.$store.state.startPointX,
       	y: this.$store.state.startPointY,
       	rotation: this.startDegree
@@ -105,6 +106,12 @@ export default {
     	let targetPositionLeft = Math.round(targetPosition.left * 10) / 10
     	let targetPositionTop = Math.round(targetPosition.top * 10) / 10
 
+    	// 回転のみチェックする場合
+  		if (this.$store.state.checkRotate) {
+  			// カウントアップ
+  			this.$store.dispatch('countSecond', ++this.$store.state.countSecond)
+  		}
+
     	// 最終位置確認
     	if (isComplete) {
     		let goalPosition = this.$store.state.goalEl.getBoundingClientRect()
@@ -119,13 +126,8 @@ export default {
 
 	    // チェックポイント通過確認
     	} else {
-    		// 回転のみチェックする場合
-    		if (this.$store.state.checkRotate) {
-    			// TODO
-    			this.$store.dispatch('countSecond', ++this.$store.state.countSecond)
-
     		// 通過ルートをチェックする場合
-    		} else {
+    		if (!this.$store.state.checkRotate) {
     			let routePosition = this.$store.state.routeEls[this.routeNum].getBoundingClientRect()
 	    		let routePositionLeft = Math.round(routePosition.left * 10) / 10
 	    		let routePositionTop = Math.round(routePosition.top * 10) / 10
@@ -142,13 +144,86 @@ export default {
     	let tm = new TimelineMax()
     	let commands = this.$refs.elCommand.$el.children
     	let target = this.$store.state.targetEl
+    	let isHorizontal = false
+    	let isVertical = false
+    	let isWait = false
+    	let isRotate = false
     	let stepNum = this.$store.state.rotateStep
-    	let isLastCommand = false
+    	let calcNum = 0
+    	let splitNum = this.$store.state.rotateStep
+    	let direction = 1
+    	let rotateCount = 0
+    	this.currentDegree = this.startDegree
 
-    	// 起点角度が90°の場合
-    	if (this.startDegree === 90) {
-    		// 下方向に進む
-    		this.moveVertical(tm, target, stepNum, 1, isLastCommand)
+    	for (var i = 1; i < commands.length; i++) {
+    		let command = commands[i]
+      	let commandType = command.dataset.commandType
+      	let commandVal = command.dataset.commandVal
+
+      	// 動き
+      	if (commandType == 'motion') {
+      		switch(commandVal) {
+      			case 'rolate':
+		      		if (isRotate) {
+		      			this.currentDegree = (this.currentDegree + calcNum)
+		      			this.rotate(tm, target, calcNum)
+		      		}
+		      		break
+		      	case 'wait':
+		      		if (isWait) {
+		      			// stepより大きい場合
+		      			if (stepNum < calcNum) {
+		      				break
+		      			} else {
+		      				// 待機時間分のstepを進める
+		      				splitNum = splitNum - calcNum
+
+						    	if (this.currentDegree === 90) {
+						    		// 下方向に進む
+						    		// ⭐️⭐️⭐️余弦計算？
+						    		this.moveVertical(tm, target, calcNum, 1, false)
+						    	}
+		      			}
+		      		}
+		      		break
+      		}
+      		continue
+      	}
+
+      	// 演算
+      	if (commandType == 'calculation') {
+      		calcNum = command.querySelector('.input').value
+
+      		if (calcNum) {
+      			switch(commandVal) {
+	      			case 'time':
+	      				isWait = true
+	      				break
+	      			case 'degree':
+	      				isRotate = true
+	      				// ⭐️⭐️⭐️
+	      				// 入力値が回答配列と正しいかチェック
+	      				if (this.$store.state.rotateDegree[rotateCount] != calcNum) {
+	      					this.isRouteComplete = false
+	      				}
+	      				rotateCount++
+	      				break
+	      		}
+	      		continue
+      		} else {
+      			break
+      		}
+      	}
+    	}
+
+    	// 最後のstep
+    	if (splitNum) {
+  			if (this.$store.state.rotateDegree.length !== rotateCount) {
+  				this.isRouteComplete = false // ⭐️⭐️⭐️
+    		}
+
+    		// ⭐️⭐️⭐️余弦計算？
+    		this.moveHorizontal(tm, target, splitNum, 1, true)
     	}
     },
     checkRoute() {
@@ -290,7 +365,8 @@ export default {
     	}
     },
     rotate(tm, target, calcNum) {
-    	tm.to(target, this.translateTerm, {
+    	let self = this
+    	tm.to(target, 0.5, {
     		rotation: calcNum,
     		transformOrigin: 'center'
 	    })
