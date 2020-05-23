@@ -1,43 +1,40 @@
 <template lang="pug">
 	.task
-		svg.svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="327.178" height="196.431" viewBox="0 0 327.178 196.431")
-			g(transform="translate(-1167.327 -1425.569)")
-				g(transform="translate(1106 1269)" fill="none")
-					path(d="M173,195H273a50,50,0,0,1-100,0Z" stroke="none")
-					path(d="M 174.0097045898438 196.0003051757812 C 174.1337890625 202.2622375488281 175.4241943359375 208.3373870849609 177.8500671386719 214.0727386474609 C 180.3179626464844 219.9074401855469 183.8511962890625 225.1477508544922 188.3515930175781 229.6481170654297 C 192.8520202636719 234.1484680175781 198.0924224853516 237.6816711425781 203.9272308349609 240.1495513916016 C 209.9676208496094 242.7043762207031 216.3846893310547 243.9998016357422 223.0001983642578 243.9998016357422 C 229.6154937744141 243.9998016357422 236.0323791503906 242.7043914794922 242.0726318359375 240.1495513916016 C 247.9073486328125 237.6816711425781 253.1476440429688 234.1484680175781 257.6480102539062 229.6481170654297 C 262.1483764648438 225.1477508544922 265.6815795898438 219.9074401855469 268.1494750976562 214.0727386474609 C 270.5753173828125 208.3373718261719 271.86572265625 202.2622375488281 271.9898071289062 196.0003051757812 L 174.0097045898438 196.0003051757812 M 172.9998168945312 195.0003051757812 L 272.9996948242188 195.0003051757812 C 272.9996948242188 222.6141052246094 250.614013671875 244.9998016357422 223.0001983642578 244.9998016357422 C 195.385498046875 244.9998016357422 172.9998168945312 222.6141052246094 172.9998168945312 195.0003051757812 Z" stroke="none" fill="#c1c1bd")
-				g(transform="translate(478.604 1630.743) rotate(-45)")
-					rect(width="190.29" height="8" transform="translate(529 483)" fill="#dcdcd9")
-				line(y2="17" transform="translate(1262.786 1524.677) rotate(-45)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
-				circle(cx="8" cy="8" r="8" transform="translate(1185.711 1601.045) rotate(-45)" fill="#707070")
-				text(transform="translate(1197 1621)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+		svg.svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="327.84" height="79.16" viewBox="0 0 327.84 79.16")
+			g(transform="translate(-1894 -1178.14)")
+				g(transform="translate(1814.5 1058.791)" fill="none")
+					path(d="M251,198.455H151a49.807,49.807,0,0,1,8.05-27.218l41.45,24.218,42.173-24.64A49.777,49.777,0,0,1,251,198.454Z" stroke="none")
+					path(d="M 249.9900665283203 197.4545135498047 C 249.8088531494141 188.4392852783203 247.1808776855469 179.7329864501953 242.3544311523438 172.1589965820312 L 201.0046844482422 196.3182373046875 L 200.5002136230469 196.6129760742188 L 199.9957427978516 196.3182373046875 L 159.3770904541016 172.5856781005859 C 154.72314453125 180.0575714111328 152.1882476806641 188.61572265625 152.0102691650391 197.4545135498047 L 249.9900665283203 197.4545135498047 M 251.0001068115234 198.4545135498047 L 151.0001983642578 198.4545135498047 C 151.0001983642578 188.7477264404297 153.7842559814453 179.3362731933594 159.0503997802734 171.2366027832031 L 200.5002136230469 195.4548034667969 L 242.6727142333984 170.8148651123047 C 248.1206665039062 179.0126800537109 250.999755859375 188.5698699951172 251.0001068115234 198.4535064697266 L 251.0001068115234 198.4545135498047 Z" stroke="none" fill="#c1c1bd")
+				line(x2="178.76" transform="translate(1926.74 1256.8)" fill="none" stroke="#c1c1bd" stroke-width="1")
+				g(transform="translate(1717.115 518.241) rotate(30)")
+					rect(width="96.309" height="8" transform="translate(529 483)" fill="#dcdcd9")
+				circle(cx="8" cy="8" r="8" transform="translate(1923.743 1196.495)" fill="#707070")
+				text(transform="translate(1918 1226)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
 					tspan(x="-24" y="0") スタート
-				text(transform="translate(1459 1621)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(2202 1226)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
 					tspan(x="-17.58" y="0") ゴール
-				g(transform="translate(1297.647 749.549) rotate(45)")
-					rect(width="188.24" height="8" transform="translate(529 483)" fill="#dcdcd9")
-				line(y2="17" transform="translate(1395.398 1525.415) rotate(45)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
-				g(transform="translate(1451.101 1592.897)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
+				path(d="M161.241,202.25h0l-2.222-1.283-2.889-5L244.4,145l4,6.928-87.16,50.322Z" transform="translate(1853.8 1054.951)" fill="#dcdcd9")
+				g(transform="translate(1569 717)")
+					rect(width="104" height="8" transform="translate(529 483)" fill="#dcdcd9")
+				g(transform="translate(2194 1196)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")
 					circle(cx="8" cy="8" r="7.25" fill="none")
-				line(x2="262" transform="translate(1197.5 1464.5)" fill="none" stroke="#c1c1bd" stroke-width="1")
-				text(transform="translate(1386 1490)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
-					tspan(x="-9.073" y="0") 45°
-				text(transform="translate(1271 1490)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
-					tspan(x="-9.073" y="0") 45°
-				text(transform="translate(1331 1526)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
-					tspan(x="-9.073" y="0") 90°
+				text(transform="translate(1957 1248)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+					tspan(x="-9.073" y="0") 30°
+				text(transform="translate(2076 1248)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+					tspan(x="-9.073" y="0") 30°
 				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
-				rect(ref="routeEl1" width="40" height="28.85" transform="translate(1233.681 1524.564) rotate(-45)" fill="none")
-				rect(ref="routeEl2" width="40" height="28.85" transform="translate(1304.392 1453.854) rotate(-45)" fill="none")
-				rect(ref="routeEl3" width="40" height="28.85" transform="translate(1395.511 1496.311) rotate(45)" fill="none")
-				rect(ref="goalEl" width="40" height="28.85" transform="matrix(0.70711,0.70711,-0.70711,0.70711,1466.22827,1566.97103)" fill="none")
+				rect(ref="goalEl" width="40" height="28.85" transform="matrix(1,0,0,1,2181.4411,1178.144)" fill="none")
 </template>
 
 <script>
 export default {
 	data() {
 		return {
-			checkPoint: 3
+			rotateStep: 3,
+			rotateDegree: [ 30, -60, 30 ],
+			startDegree: 0,
+			startDirection: 1
 		}
 	},
 	computed: {
@@ -52,15 +49,18 @@ export default {
 			// 動作対象を設定
 			this.$store.dispatch('targetEl', this.$refs.targetEl)
 			this.$store.dispatch('goalEl', this.$refs.goalEl)
-			this.$store.dispatch('startPointX', 1167.327)
-			this.$store.dispatch('startPointY', 1576.888)
+			this.$store.dispatch('startPointX', 1908.236)
+			this.$store.dispatch('startPointY', 1178.144)
 
 			// チェックポイントを格納
-			let routeEls = []
-			for (var i = 1; i <= this.checkPoint; i++) {
-				routeEls.push(this.$refs['routeEl' + i])
-			}
-			this.$store.dispatch('routeEls', routeEls)
+    	this.$store.dispatch('rotateStep', this.rotateStep)
+    	this.$store.dispatch('rotateDegree', this.rotateDegree)
+    	
+    	// 起点角度を設定
+    	this.$store.dispatch('startDegree', this.startDegree)
+
+    	// 起点方向を設定
+    	this.$store.dispatch('startDirection', this.startDirection)
 		}
 	}
 }
