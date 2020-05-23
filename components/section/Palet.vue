@@ -108,16 +108,36 @@ export default {
   border-radius: 3px;
   box-shadow: 1px 5px 10px rgba(49,100,160,.1), -1px 0 10px rgba(49,100,160,.1);
   z-index: 3;
-  min-width: 475px;
+  min-width: 485px;
   overflow: hidden;
 
   & .list {
   	display: flex;
   	flex: 1;
+  	padding: 20px 25px;
 
   	& > .item {
   		flex: 1;
 			position: relative;
+
+			& + .item {
+				padding-left: 20px;
+
+				&::before {
+					content: "";
+					background-size: 6px 12px;
+					background-image: linear-gradient(to bottom, #D4D4D4, #D4D4D4 6px, transparent 6px, transparent 12px);
+					background-repeat: repeat-y;
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					margin: auto;
+					left: -0.5px;
+					width: 1px;
+					height: 100%;
+					z-index: 2;
+				}
+			}
 
 			& .icon-close {
 				display: none;
@@ -131,16 +151,14 @@ export default {
 	background-color: #F7F7F4;
 	height: 100%;
 	writing-mode: vertical-lr;
-	margin-right: 20px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	padding-top: 20px;
 	letter-spacing: .25em;
 }
 
 .body {
 	height: 100%;
-	padding: 20px 20px 0 0;
 
 	& .item {
 		padding: 0 15px;
@@ -214,7 +232,7 @@ export default {
 }
 
 .operator {
-	font-size: 17px;
+	font-size: 15px;
 }
 
 .command-line {
