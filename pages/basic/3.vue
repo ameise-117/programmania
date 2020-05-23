@@ -75,6 +75,8 @@ export default {
 	  	this.taskNo = num
       // 完了フラグ初期状態設定
       this.$store.dispatch('isComplete', false)
+      // 秒数カウント初期状態設定
+      this.$store.dispatch('countSecond', 0)
 	  }
   }
 }

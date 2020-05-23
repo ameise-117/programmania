@@ -153,7 +153,7 @@ export default {
     	let stepNum = this.$store.state.rotateStep
     	let calcNum = 0
     	let splitNum = this.$store.state.rotateStep
-    	let direction = 1
+    	let direction = this.currentDirection
     	let rotateCount = 0
 
     	for (var i = 1; i < commands.length; i++) {
@@ -178,10 +178,8 @@ export default {
 		      				// 待機時間分のstepを進める
 		      				splitNum = splitNum - calcNum
 
-						    	if (this.currentDegree === 90) {
-						    		// 進行方向に進む
-						    		this.moveDiagonal(tm, target, calcNum, this.currentDegree, direction, false)
-						    	}
+						    	// 進行方向に進む
+					    		this.moveDiagonal(tm, target, calcNum, this.currentDegree, direction, false)
 		      			}
 		      		}
 		      		break
