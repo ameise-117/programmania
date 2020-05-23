@@ -12,13 +12,14 @@ export const state = () => ({
   routeEls: null,
   startPointX: 0,
   startPointY: 0,
+  startDegree: 0,
+  startDirection: 1,
   isDummyHover: false,
   isDragEnd: false,
   isComplete: false,
   checkRotate: false,
   rotateStep: 0,
   rotateDegree: [],
-  startDegree: 0,
   countSecond: 0
 })
 
@@ -38,6 +39,12 @@ export const mutations = {
   setStartPointY(state, value) {
     state.startPointY = value
   },
+  setStartDegree(state, value) {
+    state.startDegree = value
+  },
+  setStartDirection(state, value) {
+    state.startDirection = value
+  },
   setIsDummyHover(state, value) {
     state.isDummyHover = value
   },
@@ -55,9 +62,6 @@ export const mutations = {
   },
   setRotateDegree(state, value) {
     state.rotateDegree = value
-  },
-  setStartDegree(state, value) {
-    state.startDegree = value
   },
   setCountSecond(state, value) {
     state.countSecond = value
@@ -80,6 +84,12 @@ export const actions = {
   startPointY(context, value) {
     context.commit('setStartPointY', value)
   },
+  startDegree(context, value) {
+    context.commit('setStartDegree', value)
+  },
+  startDirection(context, value) {
+    context.commit('setStartDirection', value)
+  },
   isDummyHover(context, value) {
     context.commit('setIsDummyHover', value)
   },
@@ -97,9 +107,6 @@ export const actions = {
   },
   rotateDegree(context, value) {
     context.commit('setRotateDegree', value)
-  },
-  startDegree(context, value) {
-    context.commit('setStartDegree', value)
   },
   countSecond(context, value) {
     context.commit('setCountSecond', value)

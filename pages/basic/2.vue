@@ -39,7 +39,7 @@ export default {
       slideType: 'next',
       dragItems: {
         'motion': [ true, true, false, false, false ],
-        'direction': [ true, true, false, false, false ],
+        'direction': [ false, false, false, false, true ],
         'calculation': [ true, false, false ]
       }
   	}

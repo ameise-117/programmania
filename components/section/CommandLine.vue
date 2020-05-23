@@ -25,7 +25,8 @@ export default {
 			positionY: 0,
 			routeNum: 0,
 			isRouteComplete: true,
-			currentDegree: 0
+			currentDegree: 0,
+			currentDirection: 1
 		}
 	},
   mounted() {
@@ -41,9 +42,6 @@ export default {
     )
   },
   computed: {
-		startDegree() {
-      return (this.$store.state.checkRotate ? this.$store.state.startDegree : 0)
-		},
 		translateTerm() {
       return (this.$store.state.checkRotate ? 1 : 0.5)
 		}
@@ -78,6 +76,8 @@ export default {
     reset() {
     	this.positionX = this.$store.state.startPointX
     	this.positionY = this.$store.state.startPointY
+    	this.currentDegree = this.$store.state.startDegree
+    	this.currentDirection = this.$store.state.startDirection
     	this.routeNum = 0
     	this.isRouteComplete = true
     	this.$store.dispatch('isComplete', false)
@@ -87,7 +87,7 @@ export default {
     	tm.to(target, 0.5, {
       	x: this.$store.state.startPointX,
       	y: this.$store.state.startPointY,
-      	rotation: this.startDegree
+      	rotation: this.$store.state.startDegree
       })
     },
     clear() {
@@ -128,15 +128,17 @@ export default {
     	} else {
     		// 通過ルートをチェックする場合
     		if (!this.$store.state.checkRotate) {
-    			let routePosition = this.$store.state.routeEls[this.routeNum].getBoundingClientRect()
-	    		let routePositionLeft = Math.round(routePosition.left * 10) / 10
-	    		let routePositionTop = Math.round(routePosition.top * 10) / 10
-					
-					if (this.isRouteComplete && (routePositionLeft == targetPositionLeft) && (routePositionTop == targetPositionTop)) {
-		    		this.routeNum++
-		    	} else {
-		    		this.isRouteComplete = false
-		    	}
+    			if (this.routeNum < this.$store.state.routeEls.length) {
+    				let routePosition = this.$store.state.routeEls[this.routeNum].getBoundingClientRect()
+		    		let routePositionLeft = Math.round(routePosition.left * 10) / 10
+		    		let routePositionTop = Math.round(routePosition.top * 10) / 10
+						
+						if (this.isRouteComplete && (routePositionLeft == targetPositionLeft) && (routePositionTop == targetPositionTop)) {
+			    		this.routeNum++
+			    	} else {
+			    		this.isRouteComplete = false
+			    	}
+    			}
     		}
     	}
     },
@@ -153,7 +155,6 @@ export default {
     	let splitNum = this.$store.state.rotateStep
     	let direction = 1
     	let rotateCount = 0
-    	this.currentDegree = this.startDegree
 
     	for (var i = 1; i < commands.length; i++) {
     		let command = commands[i]
@@ -165,8 +166,7 @@ export default {
       		switch(commandVal) {
       			case 'rolate':
 		      		if (isRotate) {
-		      			this.currentDegree = (this.currentDegree + calcNum)
-		      			this.rotate(tm, target, calcNum)
+		      			this.rotate(tm, target, this.currentDegree)
 		      		}
 		      		break
 		      	case 'wait':
@@ -179,9 +179,8 @@ export default {
 		      				splitNum = splitNum - calcNum
 
 						    	if (this.currentDegree === 90) {
-						    		// 下方向に進む
-						    		// ⭐️⭐️⭐️余弦計算？
-						    		this.moveVertical(tm, target, calcNum, 1, false)
+						    		// 進行方向に進む
+						    		this.moveDiagonal(tm, target, calcNum, this.currentDegree, direction, false)
 						    	}
 		      			}
 		      		}
@@ -201,7 +200,7 @@ export default {
 	      				break
 	      			case 'degree':
 	      				isRotate = true
-	      				// ⭐️⭐️⭐️
+	      				this.currentDegree = (this.currentDegree + parseInt(calcNum, 10))
 	      				// 入力値が回答配列と正しいかチェック
 	      				if (this.$store.state.rotateDegree[rotateCount] != calcNum) {
 	      					this.isRouteComplete = false
@@ -216,14 +215,14 @@ export default {
       	}
     	}
 
-    	// 最後のstep
+    	// 最終step
     	if (splitNum) {
   			if (this.$store.state.rotateDegree.length !== rotateCount) {
-  				this.isRouteComplete = false // ⭐️⭐️⭐️
+  				this.isRouteComplete = false
     		}
 
-    		// ⭐️⭐️⭐️余弦計算？
-    		this.moveHorizontal(tm, target, splitNum, 1, true)
+    		// 進行方向に進む
+    		this.moveDiagonal(tm, target, splitNum, this.currentDegree, direction, true)
     	}
     },
     checkRoute() {
@@ -232,6 +231,7 @@ export default {
     	let target = this.$store.state.targetEl
     	let isHorizontal = false
     	let isVertical = false
+    	let isDiagonal = false
     	let isRotate = false
     	let stepNum = 0
     	let calcNum = 0
@@ -249,11 +249,9 @@ export default {
       		switch(commandVal) {
       			case 'go':
       				// 斜めに動く場合
-      				if (isRotate) {
-      					this.moveDiagonal(tm, target, stepNum, calcNum, direction, isLastCommand)
-      					isRotate = false
-      					isHorizontal = false
-      					isVertical = false
+      				if (isDiagonal) {
+      					this.moveDiagonal(tm, target, stepNum, this.currentDegree, direction, isLastCommand)
+      					isDiagonal = false
       				// 直線で動く場合
       				} else {
       					if (isHorizontal) {
@@ -267,7 +265,8 @@ export default {
 		      		break
 		      	case 'rolate':
 		      		if (isRotate) {
-		      			this.rotate(tm, target, calcNum)
+		      			this.rotate(tm, target, this.currentDegree)
+		      			isRotate = false
 		      		}
 		      		break
       		}
@@ -296,6 +295,10 @@ export default {
 	      				isVertical = true
 	      				direction = 1
 	      				break
+	      			case 'forward':
+	      				isDiagonal = true
+	      				direction = this.currentDirection
+	      				break
 	      		}
 	      		continue
       		} else {
@@ -311,6 +314,7 @@ export default {
       			switch(commandVal) {
 	      			case 'degree':
 	      				isRotate = true
+	      				this.currentDegree = (this.currentDegree + parseInt(calcNum, 10))
 	      				break
 	      		}
 	      		continue

@@ -28,7 +28,9 @@
 export default {
 	data() {
 		return {
-			checkPoint: 1
+			checkPoint: 1,
+			startDegree: 0,
+			startDirection: 1
 		}
 	},
 	computed: {
@@ -52,6 +54,12 @@ export default {
     		routeEls.push(this.$refs['routeEl' + i])
     	}
     	this.$store.dispatch('routeEls', routeEls)
+
+    	// 起点角度を設定
+    	this.$store.dispatch('startDegree', this.startDegree)
+
+    	// 起点方向を設定
+    	this.$store.dispatch('startDirection', this.startDirection)
 	  }
   }
 }

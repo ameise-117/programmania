@@ -29,8 +29,9 @@ export default {
 	data() {
 		return {
 			rotateStep: 3,
-			rotateDegree: [ 0 ],
-			startDegree: 90
+			rotateDegree: [ -90 ],
+			startDegree: 90,
+			startDirection: 1
 		}
 	},
 	computed: {
@@ -51,8 +52,12 @@ export default {
     	// チェックポイントを格納
     	this.$store.dispatch('rotateStep', this.rotateStep)
     	this.$store.dispatch('rotateDegree', this.rotateDegree)
+    	
     	// 起点角度を設定
     	this.$store.dispatch('startDegree', this.startDegree)
+
+    	// 起点方向を設定
+    	this.$store.dispatch('startDirection', this.startDirection)
 	  }
   }
 }
