@@ -1,79 +1,75 @@
 <template lang="pug">
 	.palet
-		.item.motion
-			p.head 動き
-			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.motion(:key="1", data-command-type="motion", data-command-val="go", v-if="dragItems.motion[0]")
-					p.text 進む
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="2", data-command-type="motion", data-command-val="rolate", v-if="dragItems.motion[1]")
-					p.text 回る
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="3", data-command-type="motion", data-command-val="wait", v-if="dragItems.motion[2]")
-					p.text 待つ
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="4", data-command-type="motion", data-command-val="roopStart", v-if="dragItems.motion[3]")
-					p.text
-						| 繰り返し&nbsp;
-						span.small.bold 開始
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.motion(:key="5", data-command-type="motion", data-command-val="roopEnd", v-if="dragItems.motion[4]")
-					p.text
-						| 繰り返し&nbsp;
-						span.small.bold 終了
-					.icon.icon-close(@click="deleteItem($event)")
-		.item.direction
-			p.head 方向
-			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.direction(:key="1", data-command-type="direction", data-command-val="right", v-if="dragItems.direction[0]")
-					p.text
-						span 右に
-						input.input.narrow(maxlength="1")
-						span 歩
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="2", data-command-type="direction", data-command-val="left", v-if="dragItems.direction[1]")
-					p.text
-						span 左に
-						input.input.narrow(maxlength="1")
-						span 歩
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="3", data-command-type="direction", data-command-val="top", v-if="dragItems.direction[2]")
-					p.text
-						span 上に
-						input.input.narrow(maxlength="1")
-						span 歩
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="4", data-command-type="direction", data-command-val="bottom", v-if="dragItems.direction[3]")
-					p.text
-						span 下に
-						input.input.narrow(maxlength="1")
-						span 歩
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.direction(:key="5", data-command-type="direction", data-command-val="forward", v-if="dragItems.direction[4]")
-					p.text
-						span 前に
-						input.input.narrow(maxlength="1")
-						span 歩
-					.icon.icon-close(@click="deleteItem($event)")
-		.item.calculation
-			p.head 計算
-			draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-				li.item.calculation(:key="1", data-command-type="calculation", data-command-val="degree", v-if="dragItems.calculation[0]")
-					p.text
-						input.input.wide(maxlength="4")
-						span 度
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.calculation(:key="2", data-command-type="calculation", data-command-val="time", v-if="dragItems.calculation[1]")
-					p.text
-						input.input.narrow(maxlength="1")
-						span 秒
-					.icon.icon-close(@click="deleteItem($event)")
-				li.item.calculation(:key="3", data-command-type="calculation", data-command-val="multiply", v-if="dragItems.calculation[2]")
-					p.text
-						span.operator ×
-						input.input.narrow(maxlength="1")
-						span 回
-					.icon.icon-close(@click="deleteItem($event)")
+		.title コマンド
+		.list
+			.item.blue
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+					li.item.blue(:key="1", data-command-type="motion", data-command-val="go", v-if="dragItems.motion[0]")
+						p.text 進む
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.blue(:key="2", data-command-type="motion", data-command-val="rolate", v-if="dragItems.motion[1]")
+						p.text 回る
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.blue(:key="3", data-command-type="motion", data-command-val="wait", v-if="dragItems.motion[2]")
+						p.text 待つ
+						.icon.icon-close(@click="deleteItem($event)")
+			.item.green
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+					li.item.green(:key="1", data-command-type="direction", data-command-val="right", v-if="dragItems.figures[0]")
+						p.text
+							span 右に
+							input.input.narrow(maxlength="1")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.green(:key="2", data-command-type="direction", data-command-val="left", v-if="dragItems.figures[1]")
+						p.text
+							span 左に
+							input.input.narrow(maxlength="1")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.green(:key="3", data-command-type="direction", data-command-val="top", v-if="dragItems.figures[2]")
+						p.text
+							span 上に
+							input.input.narrow(maxlength="1")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.green(:key="4", data-command-type="direction", data-command-val="bottom", v-if="dragItems.figures[3]")
+						p.text
+							span 下に
+							input.input.narrow(maxlength="1")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.green(:key="5", data-command-type="direction", data-command-val="forward", v-if="dragItems.figures[4]")
+						p.text
+							span 前に
+							input.input.narrow(maxlength="1")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.green(:key="1", data-command-type="calculation", data-command-val="degree", v-if="dragItems.figures[5]")
+						p.text
+							input.input.wide(maxlength="4")
+							span 度
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.green(:key="2", data-command-type="calculation", data-command-val="time", v-if="dragItems.figures[6]")
+						p.text
+							input.input.narrow(maxlength="1")
+							span 秒
+						.icon.icon-close(@click="deleteItem($event)")
+			.item.yellow
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
+					li.item.yellow(:key="4", data-command-type="other", data-command-val="roopStart", v-if="dragItems.other[0]")
+						p.text
+							| くり返し&nbsp;
+							span.small.bold 開始&nbsp;&nbsp;
+							span.operator ×
+							input.input.narrow(maxlength="1")
+							span 回
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.yellow(:key="5", data-command-type="other", data-command-val="roopEnd", v-if="dragItems.other[1]")
+						p.text
+							| くり返し&nbsp;
+							span.small.bold 終了
+						.icon.icon-close(@click="deleteItem($event)")
 </template>
 
 <script>
@@ -104,100 +100,63 @@ export default {
 <style scoped>
 .palet {
 	height: 230px;
-	display: grid;
-  grid-template-rows: auto;
-  grid-template-areas: 'item-1 item-2 item-3';
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+	display: flex;
   background-color: var(--color-bg-1);
   border: 1px solid #D4D4D4;
   margin: 0 10px 10px;
   border-radius: 3px;
   box-shadow: 1px 5px 10px rgba(49,100,160,.1), -1px 0 10px rgba(49,100,160,.1);
   z-index: 3;
+  overflow: hidden;
 
-	& > .item {
-		position: relative;
+  & .list {
+  	display: flex;
+  	flex: 1;
+  	padding: 20px 0;
+  	min-width: 480px;
 
-		&:nth-child(1) {
-			grid-area: item-1;
-		}
+  	& > .item {
+  		flex: 1;
+			position: relative;
+			padding: 0 20px;
 
-		&:nth-child(2) {
-			grid-area: item-2;
-		}
+			& + .item {
+				&::before {
+					content: "";
+					background-size: 6px 12px;
+					background-image: linear-gradient(to bottom, #D4D4D4, #D4D4D4 6px, transparent 6px, transparent 12px);
+					background-repeat: repeat-y;
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					margin: auto;
+					left: -0.5px;
+					width: 1px;
+					height: 100%;
+					z-index: 2;
+				}
+			}
 
-		&:nth-child(3) {
-			grid-area: item-3;
-		}
-
-		& + .item {
-			&::before {
-				content: "";
-				background-size: 6px 12px;
-				background-image: linear-gradient(to bottom, #D4D4D4, #D4D4D4 6px, transparent 6px, transparent 12px);
-				background-repeat: repeat-y;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				margin: auto;
-				left: -0.5px;
-				width: 1px;
-				height: 85%;
-				z-index: 2;
+			& .icon-close {
+				display: none;
 			}
 		}
-
-		& .icon-close {
-			display: none;
-		}
-	}
+  }
 }
 
-.head {
-	height: 24px;
-	position: absolute;
-	top: -5px;
-	left: 5px;
-	font-size: 1.2rem;
-	color: var(--color-text-2);
-	letter-spacing: .3em;
-	text-indent: .3em;
-	padding: 0 15px 0 30px;
+.title {
+	width: 35px;
+	background-color: #F7F7F4;
+	height: 100%;
+	writing-mode: vertical-lr;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	border-radius: 1px;
-
-	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 10px;
-		margin: auto;
-		background-color: var(--color-bg-1);
-		mask-size: cover;
-		display: inline-block;
-		mask-repeat: no-repeat;
-		width: 14px;
-		height: 14px;
-	}
-
-	&::after {
-		content: "";
-		position: absolute;
-		bottom: -10px;
-		left: 10px;
-		margin: auto;
-		border: 5px solid transparent;
-	}
+	padding-top: 20px;
+	letter-spacing: .25em;
 }
 
 .body {
 	height: 100%;
-	padding: 40px 20px;
-	min-width: 155px;
 
 	& .item {
 		padding: 0 15px;
@@ -253,67 +212,25 @@ export default {
 			margin-top: 10px;
 		}
 
-		&.motion {
+		&.blue {
 			background-color: var(--color-key-8);
 			color: var(--color-key-5);
 		}
 
-		&.direction {
-			background-color: var(--color-key-9);
-			color: var(--color-key-6);
-		}
-
-		&.calculation {
+		&.green {
 			background-color: var(--color-key-10);
 			color: var(--color-key-7);
 		}
-	}
-}
 
-.motion {
-	& .head {
-		background-color: var(--color-key-5);
-
-		&::before {
-			mask-image: url("../../assets/images/palet/icon_motion.svg");
-		}
-
-		&::after {
-			border-top: 5px solid var(--color-key-5);
-		}
-	}
-}
-
-.direction {
-	& .head {
-		background-color: var(--color-key-6);
-
-		&::before {
-			mask-image: url("../../assets/images/palet/icon_direction.svg");
-		}
-
-		&::after {
-			border-top: 5px solid var(--color-key-6);
-		}
-	}
-}
-
-.calculation {
-	& .head {
-		background-color: var(--color-key-7);
-
-		&::before {
-			mask-image: url("../../assets/images/palet/icon_calculation.svg");
-		}
-
-		&::after {
-			border-top: 5px solid var(--color-key-7);
+		&.yellow {
+			background-color: var(--color-key-12);
+			color: var(--color-key-11);
 		}
 	}
 }
 
 .operator {
-	font-size: 17px;
+	font-size: 15px;
 }
 
 .command-line {
@@ -364,21 +281,21 @@ export default {
 			}
 		}
 
-		&.motion {
+		&.blue {
 			&::after {
 			  border-color: transparent transparent var(--color-key-8) transparent;
 			}
 		}
 
-		&.direction {
+		&.green {
 			&::after {
-			  border-color: transparent transparent var(--color-key-9) transparent;
+			  border-color: transparent transparent var(--color-key-10) transparent;
 			}
 		}
 
-		&.calculation {
+		&.yellow {
 			&::after {
-			  border-color: transparent transparent var(--color-key-10) transparent;
+			  border-color: transparent transparent var(--color-key-12) transparent;
 			}
 		}
 	}

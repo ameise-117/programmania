@@ -42,9 +42,9 @@ export default {
   		taskNo: 1,
       slideType: 'next',
       dragItems: {
-        'motion': [ true, false, false, false, false ],
-        'direction': [ true, true, true, true, false ],
-        'calculation': [ false, false, false ]
+        'motion': [ true, false, false ],
+        'figures': [ true, true, true, true, false, false, false ],
+        'other': [ false, false ]
       }
   	}
   },
