@@ -3,61 +3,69 @@
 		.title コマンド
 		.list
 			.item.blue
-				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-					li.item.blue(:key="1", data-command-type="motion", data-command-val="go", v-if="dragItems.motion[0]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.motion[0]")
+					li.item.blue(:key="1", data-command-type="motion", data-command-val="go")
 						p.text 進む
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.blue(:key="2", data-command-type="motion", data-command-val="rolate", v-if="dragItems.motion[1]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.motion[1]")
+					li.item.blue(:key="2", data-command-type="motion", data-command-val="rolate")
 						p.text 回る
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.blue(:key="3", data-command-type="motion", data-command-val="wait", v-if="dragItems.motion[2]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.motion[2]")
+					li.item.blue(:key="3", data-command-type="motion", data-command-val="wait")
 						p.text 待つ
 						.icon.icon-close(@click="deleteItem($event)")
 			.item.green
-				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-					li.item.green(:key="1", data-command-type="direction", data-command-val="right", v-if="dragItems.figures[0]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[0]")
+					li.item.green(:key="1", data-command-type="direction", data-command-val="right")
 						p.text
 							span 右に
 							input.input.narrow(maxlength="1")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.green(:key="2", data-command-type="direction", data-command-val="left", v-if="dragItems.figures[1]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[1]")
+					li.item.green(:key="2", data-command-type="direction", data-command-val="left")
 						p.text
 							span 左に
 							input.input.narrow(maxlength="1")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.green(:key="3", data-command-type="direction", data-command-val="top", v-if="dragItems.figures[2]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[2]")
+					li.item.green(:key="3", data-command-type="direction", data-command-val="top")
 						p.text
 							span 上に
 							input.input.narrow(maxlength="1")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.green(:key="4", data-command-type="direction", data-command-val="bottom", v-if="dragItems.figures[3]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[3]")
+					li.item.green(:key="4", data-command-type="direction", data-command-val="bottom")
 						p.text
 							span 下に
 							input.input.narrow(maxlength="1")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.green(:key="5", data-command-type="direction", data-command-val="forward", v-if="dragItems.figures[4]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[4]")
+					li.item.green(:key="5", data-command-type="direction", data-command-val="forward")
 						p.text
 							span 前に
 							input.input.narrow(maxlength="1")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.green(:key="1", data-command-type="calculation", data-command-val="degree", v-if="dragItems.figures[5]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[5]")
+					li.item.green(:key="1", data-command-type="calculation", data-command-val="degree")
 						p.text
 							input.input.wide(maxlength="4")
 							span 度
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.green(:key="2", data-command-type="calculation", data-command-val="time", v-if="dragItems.figures[6]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[6]")
+					li.item.green(:key="2", data-command-type="calculation", data-command-val="time")
 						p.text
 							input.input.narrow(maxlength="1")
 							span 秒
 						.icon.icon-close(@click="deleteItem($event)")
 			.item.yellow
-				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd")
-					li.item.yellow(:key="4", data-command-type="other", data-command-val="roopStart", v-if="dragItems.other[0]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.other[0]")
+					li.item.yellow(:key="4", data-command-type="other", data-command-val="roopStart")
 						p.text
 							| くり返し&nbsp;
 							span.small.bold 開始&nbsp;&nbsp;
@@ -65,7 +73,8 @@
 							input.input.narrow(maxlength="1")
 							span 回
 						.icon.icon-close(@click="deleteItem($event)")
-					li.item.yellow(:key="5", data-command-type="other", data-command-val="roopEnd", v-if="dragItems.other[1]")
+				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.other[1]")
+					li.item.yellow(:key="5", data-command-type="other", data-command-val="roopEnd")
 						p.text
 							| くり返し&nbsp;
 							span.small.bold 終了
@@ -156,8 +165,10 @@ export default {
 }
 
 .body {
-	height: 100%;
-
+	& + .body {
+		margin-top: 10px;
+	}
+		
 	& .item {
 		padding: 0 15px;
 		border: 1px solid #c7c7c7;
