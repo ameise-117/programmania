@@ -26,7 +26,8 @@ export default {
 			routeNum: 0,
 			isRouteComplete: true,
 			currentDegree: 0,
-			currentDirection: 1
+			currentDirection: 1,
+			commandArray: []
 		}
 	},
   mounted() {
@@ -80,6 +81,7 @@ export default {
     	this.currentDirection = this.$store.state.startDirection
     	this.routeNum = 0
     	this.isRouteComplete = true
+    	this.commandArray = []
     	this.$store.dispatch('isComplete', false)
     	this.$store.dispatch('countSecond', 0)
     	let tm = new TimelineMax()
@@ -231,8 +233,10 @@ export default {
     	let isVertical = false
     	let isDiagonal = false
     	let isRotate = false
+    	let isRoop = false
     	let stepNum = 0
     	let calcNum = 0
+    	let roopNum = 0
     	let direction = 1
     	let isLastCommand = false
 
@@ -246,10 +250,17 @@ export default {
       	if (commandType == 'motion') {
       		switch(commandVal) {
       			case 'go':
+      				// 繰り返しを行う場合
+      				if (isRoop) {
+      					let roopCommand = { 'motion': 'go', 'step': stepNum, 'degree': this.currentDegree, 'direction': direction }
+      					let lastNum = (this.commandArray.length - 1)
+      					this.commandArray[lastNum]['command_set'].push(roopCommand)
+
       				// 斜めに動く場合
-      				if (isDiagonal) {
+      				} else if (isDiagonal) {
       					this.moveDiagonal(tm, target, stepNum, this.currentDegree, direction, isLastCommand)
       					isDiagonal = false
+
       				// 直線で動く場合
       				} else {
       					if (isHorizontal) {
@@ -262,7 +273,14 @@ export default {
       				}
 		      		break
 		      	case 'rolate':
-		      		if (isRotate) {
+		      		// 繰り返しを行う場合
+      				if (isRoop) {
+      					let roopCommand = { 'motion': 'rolate', 'degree': this.currentDegree }
+      					let lastNum = (this.commandArray.length - 1)
+      					this.commandArray[lastNum]['command_set'].push(roopCommand)
+
+      				// 回転する場合
+      				} else if (isRotate) {
 		      			this.rotate(tm, target, this.currentDegree)
 		      			isRotate = false
 		      		}
@@ -320,6 +338,37 @@ export default {
       			break
       		}
       	}
+
+      	// その他
+      	if (commandType == 'other') {
+      		switch(commandVal) {
+      			case 'roopStart':
+      				roopNum = command.querySelector('.input').value
+      				if (roopNum) {
+	      				isRoop = true
+	      				this.commandArray.push({ 'roop_num': roopNum, 'command_set': [] })
+	      			}
+      				break
+      			case 'roopEnd':
+      				if (isRoop) {
+      					isRoop = false
+      				}
+      				break
+      		}
+      	}
+    	}
+
+    	// コマンド再セット後にまとめて実行
+    	for (var i = 0; i < this.commandArray.length; i++) {
+    		let thisRoopItem = this.commandArray[i]
+    		let thisRoopNum = thisRoopItem['roop_num']
+    		for (var j = 0; j < thisRoopNum; j++) {
+    			let thisCommandSet = thisRoopItem['command_set']
+    			for (var k = 0; k < thisCommandSet.length; k++) {
+    				let thisCommand = thisCommandSet[k]
+    				console.log(thisCommand)
+    			}
+    		}
     	}
     },
     moveHorizontal(tm, target, stepNum, direction, isLastCommand) {
