@@ -389,8 +389,8 @@ export default {
 
     					// 回転する
     					case 'rolate':
-    						rolateDegree = thisCommand['degree']
-    						this.rotate(tm, target, thisCommand['degree'])
+    						rolateDegree += thisCommand['degree']
+    						this.rotate(tm, target, rolateDegree)
     						break
     				}
     			}
