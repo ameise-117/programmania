@@ -252,7 +252,7 @@ export default {
       			case 'go':
       				// 繰り返しを行う場合
       				if (isRoop) {
-      					let roopCommand = { 'motion': 'go', 'step': stepNum, 'degree': this.currentDegree, 'direction': direction }
+      					let roopCommand = { 'motion': 'go', 'step': stepNum, 'direction': direction }
       					let lastNum = (this.commandArray.length - 1)
       					this.commandArray[lastNum]['command_set'].push(roopCommand)
 
@@ -358,15 +358,41 @@ export default {
       	}
     	}
 
-    	// コマンド再セット後にまとめて実行
+    	// 繰り返しを行う場合、コマンド再セット後にまとめて実行
+    	if (this.commandArray && this.commandArray.length > 0) {
+    		this.execCommandArray(tm, target)
+    	}
+    },
+    execCommandArray(tm, target) {
+    	let isLastCommand = false
+    	let rolateDegree = 0
+
+    	// セットした全くり返しコマンド数roop
     	for (var i = 0; i < this.commandArray.length; i++) {
     		let thisRoopItem = this.commandArray[i]
     		let thisRoopNum = thisRoopItem['roop_num']
+
+    		// くり返し数コマンドに入力した数roop
     		for (var j = 0; j < thisRoopNum; j++) {
     			let thisCommandSet = thisRoopItem['command_set']
+
+    			// 1つのくり返しコマンド内の各動き分roop
     			for (var k = 0; k < thisCommandSet.length; k++) {
     				let thisCommand = thisCommandSet[k]
-    				console.log(thisCommand)
+    				isLastCommand = ((i === (this.commandArray.length - 1)) && (j === (thisRoopNum - 1)) && (k === (thisCommandSet.length - 1)))
+
+    				switch(thisCommand['motion']) {
+    					// 進む
+    					case 'go':
+    						this.moveDiagonal(tm, target, thisCommand['step'], rolateDegree, thisCommand['direction'], isLastCommand)
+    						break
+
+    					// 回転する
+    					case 'rolate':
+    						rolateDegree = thisCommand['degree']
+    						this.rotate(tm, target, thisCommand['degree'])
+    						break
+    				}
     			}
     		}
     	}
