@@ -1,6 +1,6 @@
 <template lang="pug">
 	.task
-		svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="264.479" height="274.87" viewBox="0 0 264.479 274.87")
+		svg.svg(xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="264.479" height="274.87" viewBox="0 0 264.479 274.87")
 			g(transform="translate(-1949.221 -265)")
 				g(transform="translate(1973 319)" fill="none")
 					path(d="M176,181V156h25v25Z" stroke="none")
