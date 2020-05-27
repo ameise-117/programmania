@@ -233,7 +233,8 @@ export default {
     	let isVertical = false
     	let isDiagonal = false
     	let isRotate = false
-    	let isRoop = false
+    	let isRoopStart = false
+    	let isRoopEnd = false
     	let stepNum = 0
     	let calcNum = 0
     	let roopNum = 0
@@ -251,11 +252,17 @@ export default {
       		switch(commandVal) {
       			case 'go':
       				// 繰り返しを行う場合
-      				if (isRoop) {
+      				if (isRoopStart) {
+      					let roopCommand = { 'motion': 'go', 'step': stepNum, 'direction': direction }
+
       					if (this.commandArray && this.commandArray.length > 0) {
-      						let roopCommand = { 'motion': 'go', 'step': stepNum, 'direction': direction }
-	      					let lastNum = (this.commandArray.length - 1)
-	      					this.commandArray[lastNum]['command_set'].push(roopCommand)
+	      					// くり返しが終了した場合
+	      					if (isRoopEnd) {
+		      					this.commandArray.push({ 'roop_num': 1, 'command_set': [ roopCommand ] })
+	      					} else {
+		      					let lastNum = (this.commandArray.length - 1)
+		      					this.commandArray[lastNum]['command_set'].push(roopCommand)
+	      					}
       					}
 
       				// 斜めに動く場合
@@ -276,11 +283,17 @@ export default {
 		      		break
 		      	case 'rolate':
 		      		// 繰り返しを行う場合
-      				if (isRoop) {
+      				if (isRoopStart) {
+      					let roopCommand = { 'motion': 'rolate', 'degree': this.currentDegree }
+
       					if (this.commandArray && this.commandArray.length > 0) {
-      						let roopCommand = { 'motion': 'rolate', 'degree': this.currentDegree }
-	      					let lastNum = (this.commandArray.length - 1)
-	      					this.commandArray[lastNum]['command_set'].push(roopCommand)
+      						// くり返しが終了した場合
+	      					if (isRoopEnd) {
+	      						this.commandArray.push({ 'roop_num': 1, 'command_set': [ roopCommand ] })
+	      					} else {
+	      						let lastNum = (this.commandArray.length - 1)
+		      					this.commandArray[lastNum]['command_set'].push(roopCommand)
+	      					}
       					}
 
       				// 回転する場合
@@ -347,15 +360,15 @@ export default {
       	if (commandType == 'other') {
       		switch(commandVal) {
       			case 'roopStart':
-      				isRoop = true
+      				isRoopStart = true
       				roopNum = command.querySelector('.input').value
       				if (roopNum) {
 	      				this.commandArray.push({ 'roop_num': roopNum, 'command_set': [] })
 	      			}
       				break
       			case 'roopEnd':
-      				if (isRoop) {
-      					isRoop = false
+      				if (isRoopStart) {
+      					isRoopEnd = true
       				}
       				break
       		}
@@ -363,7 +376,7 @@ export default {
     	}
 
     	// 繰り返しを行う場合、コマンド再セット後にまとめて実行
-    	if (this.commandArray && this.commandArray.length > 0 && !isRoop) {
+    	if (this.commandArray && this.commandArray.length > 0 && isRoopEnd) {
     		this.execCommandArray(tm, target)
     	}
     },
