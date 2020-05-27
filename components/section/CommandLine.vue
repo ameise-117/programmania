@@ -135,12 +135,13 @@ export default {
 		    		let routePositionLeft = Math.round(routePosition.left * 10) / 10
 		    		let routePositionTop = Math.round(routePosition.top * 10) / 10
 						
-						if (this.isRouteComplete && (routePositionLeft == targetPositionLeft) && (routePositionTop == targetPositionTop)) {
-			    		this.routeNum++
-			    	} else {
+						if (!this.isRouteComplete || !(routePositionLeft == targetPositionLeft) || !(routePositionTop == targetPositionTop)) {
 			    		this.isRouteComplete = false
 			    	}
+    			} else if (this.routeNum > this.$store.state.routeEls.length) {
+    				this.isRouteComplete = false
     			}
+    			this.routeNum++
     		}
     	}
     },
