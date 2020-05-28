@@ -120,6 +120,10 @@ export default {
     		let goalPositionLeft = Math.round(goalPosition.left * 10) / 10
     		let goalPositionTop = Math.round(goalPosition.top * 10) / 10
 
+    		if (this.routeNum < this.$store.state.routeEls.length) {
+    			return
+    		}
+
 	    	if (this.isRouteComplete && (goalPositionLeft == targetPositionLeft) && (goalPositionTop == targetPositionTop)) {
 	    		setTimeout(() => {
 	    			this.$store.dispatch('isComplete', true)

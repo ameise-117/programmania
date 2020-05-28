@@ -39,29 +39,29 @@
 				rect(ref="routeEl1" width="40" height="38.62" transform="translate(2649.068 443.247) rotate(60)" fill="none")
 				rect(ref="routeEl2" width="40" height="38.62" transform="translate(2599.068 356.645) rotate(60)" fill="none")
 				rect(ref="routeEl3" width="40" height="38.62" transform="matrix(0.5,-0.86603,0.86603,0.5,2515.62006,477.8857)" fill="none")
-				rect(ref="routeEl4" width="40" height="38.62" transform="translate(2465.741 564.995) rotate(-60)" fill="none")
-				rect(ref="routeEl5" width="40" height="38.62" transform="translate(2572.346 538.51)" fill="none")
-				rect(ref="routeEl6" width="40" height="38.62" transform="translate(2672.34 538.51)" fill="none")
+				rect(ref="routeEl4" width="40" height="38.62" transform="matrix(0.5,-0.86603,0.86603,0.5,2465.62006,564.4882)" fill="none")
+				rect(ref="routeEl5" width="40" height="38.62" transform="matrix(-1,0,0,-1,2612.34353,576.13335)" fill="none")
+				rect(ref="routeEl6" width="40" height="38.62" transform="matrix(-1,0,0,-1,2712.34353,576.13335)" fill="none")
 				rect(ref="routeEl7" width="40" height="38.62" transform="translate(2649.068 443.247) rotate(60)" fill="none")
 				rect(ref="routeEl8" width="40" height="38.62" transform="translate(2599.068 356.645) rotate(60)" fill="none")
 				rect(ref="routeEl9" width="40" height="38.62" transform="matrix(0.5,-0.86603,0.86603,0.5,2515.62006,477.8857)" fill="none")
-				rect(ref="routeEl10" width="40" height="38.62" transform="translate(2465.741 564.995) rotate(-60)" fill="none")
-				rect(ref="routeEl11" width="40" height="38.62" transform="translate(2572.346 538.51)" fill="none")
-				rect(ref="routeEl12" width="40" height="38.62" transform="translate(2672.34 538.51)" fill="none")
+				rect(ref="routeEl10" width="40" height="38.62" transform="matrix(0.5,-0.86603,0.86603,0.5,2465.62006,564.4882)" fill="none")
+				rect(ref="routeEl11" width="40" height="38.62" transform="matrix(-1,0,0,-1,2612.34353,576.13335)" fill="none")
+				rect(ref="routeEl12" width="40" height="38.62" transform="matrix(-1,0,0,-1,2712.34353,576.13335)" fill="none")
 				rect(ref="routeEl13" width="40" height="38.62" transform="translate(2649.068 443.247) rotate(60)" fill="none")
 				rect(ref="routeEl14" width="40" height="38.62" transform="translate(2599.068 356.645) rotate(60)" fill="none")
 				rect(ref="routeEl15" width="40" height="38.62" transform="matrix(0.5,-0.86603,0.86603,0.5,2515.62006,477.8857)" fill="none")
-				rect(ref="routeEl16" width="40" height="38.62" transform="translate(2465.741 564.995) rotate(-60)" fill="none")
-				rect(ref="routeEl17" width="40" height="38.62" transform="translate(2572.346 538.51)" fill="none")
-				rect(ref="routeEl18" width="40" height="38.62" transform="translate(2672.34 538.51)" fill="none")
-				rect(ref="goalEl" width="40" height="38.62" transform="translate(2772.34 538.51)" fill="none")
+				rect(ref="routeEl16" width="40" height="38.62" transform="matrix(0.5,-0.86603,0.86603,0.5,2465.62006,564.4882)" fill="none")
+				rect(ref="routeEl17" width="40" height="38.62" transform="matrix(-1,0,0,-1,2612.34353,576.13335)" fill="none")
+				rect(ref="routeEl18" width="40" height="38.62" transform="matrix(-1,0,0,-1,2712.34353,576.13335)" fill="none")
+				rect(ref="goalEl" width="40" height="38.62" transform="matrix(-1,0,0,-1,2812.34353,576.13335)" fill="none")
 </template>
 
 <script>
 export default {
 	data() {
 		return {
-			checkPoint: 15,
+			checkPoint: 18,
 			startDegree: 60,
 			startDirection: -1
 		}
