@@ -19,6 +19,7 @@ import { TweenMax, TimelineMax } from 'gsap'
 export default {
 	data() {
 		return {
+      tm: new TimelineMax(),
 			commandLineOffsetTop: 10,
 			stepWidth: 100,
 			positionX: 0,
@@ -27,7 +28,8 @@ export default {
 			isRouteComplete: true,
 			currentDegree: 0,
 			currentDirection: 1,
-			commandArray: []
+			commandArray: [],
+      isMoving: false
 		}
 	},
   mounted() {
@@ -50,6 +52,7 @@ export default {
   watch: {
 		'$route' (to, from) {
 			this.clear()
+      this.reset()
 		}
 	},
   methods: {
@@ -64,6 +67,7 @@ export default {
     play() {
     	// リセット
     	this.reset()
+      this.isMoving = true
 
     	// 回転のみチェックする場合
       if (this.$store.state.checkRotate) {
@@ -75,6 +79,9 @@ export default {
       }
     },
     reset() {
+      let target = this.$store.state.targetEl
+      let duration =  (this.isMoving ? 0.5 : 0)
+      this.isMoving = false
     	this.positionX = this.$store.state.startPointX
     	this.positionY = this.$store.state.startPointY
     	this.currentDegree = this.$store.state.startDegree
@@ -84,9 +91,9 @@ export default {
     	this.commandArray = []
     	this.$store.dispatch('isComplete', false)
     	this.$store.dispatch('countSecond', 0)
-    	let tm = new TimelineMax()
-      let target = this.$store.state.targetEl
-    	tm.to(target, 0.5, {
+      this.tm.clear()
+    	this.tm = new TimelineMax()
+    	this.tm.to(target, duration, {
       	x: this.$store.state.startPointX,
       	y: this.$store.state.startPointY,
       	rotation: this.$store.state.startDegree
@@ -120,7 +127,7 @@ export default {
     		let goalPositionLeft = Math.round(goalPosition.left * 10) / 10
     		let goalPositionTop = Math.round(goalPosition.top * 10) / 10
 
-    		if (this.routeNum < this.$store.state.routeEls.length) {
+    		if (!this.$store.state.checkRotate && this.routeNum < this.$store.state.routeEls.length) {
     			return
     		}
 
@@ -150,7 +157,6 @@ export default {
     	}
     },
     checkRotate() {
-    	let tm = new TimelineMax()
     	let commands = this.$refs.elCommand.$el.children
     	let target = this.$store.state.targetEl
     	let isHorizontal = false
@@ -173,7 +179,7 @@ export default {
       		switch(commandVal) {
       			case 'rolate':
 		      		if (isRotate) {
-		      			this.rotate(tm, target, this.currentDegree, false)
+		      			this.rotate(target, this.currentDegree, false)
 		      		}
 		      		break
 		      	case 'wait':
@@ -186,7 +192,7 @@ export default {
 		      				splitNum = splitNum - calcNum
 
 						    	// 進行方向に進む
-					    		this.moveDiagonal(tm, target, calcNum, this.currentDegree, direction, false)
+					    		this.moveDiagonal(target, calcNum, this.currentDegree, direction, false)
 		      			}
 		      		}
 		      		break
@@ -227,11 +233,10 @@ export default {
     		}
 
     		// 進行方向に進む
-    		this.moveDiagonal(tm, target, splitNum, this.currentDegree, direction, true)
+    		this.moveDiagonal(target, splitNum, this.currentDegree, direction, true)
     	}
     },
     checkRoute() {
-    	let tm = new TimelineMax()
     	let commands = this.$refs.elCommand.$el.children
     	let target = this.$store.state.targetEl
     	let isHorizontal = false
@@ -272,16 +277,16 @@ export default {
 
       				// 斜めに動く場合
       				} else if (isDiagonal) {
-      					this.moveDiagonal(tm, target, stepNum, this.currentDegree, direction, isLastCommand)
+      					this.moveDiagonal(target, stepNum, this.currentDegree, direction, isLastCommand)
       					isDiagonal = false
 
       				// 直線で動く場合
       				} else {
       					if (isHorizontal) {
-			      			this.moveHorizontal(tm, target, stepNum, direction, isLastCommand)
+			      			this.moveHorizontal(target, stepNum, direction, isLastCommand)
 			      			isHorizontal = false
 			      		} else if (isVertical) {
-			      			this.moveVertical(tm, target, stepNum, direction, isLastCommand)
+			      			this.moveVertical(target, stepNum, direction, isLastCommand)
 			      			isVertical = false
 			      		}
       				}
@@ -303,7 +308,7 @@ export default {
 
       				// 回転する場合
       				} else if (isRotate) {
-		      			this.rotate(tm, target, this.currentDegree, false)
+		      			this.rotate(target, this.currentDegree, false)
 		      			isRotate = false
 		      		}
 		      		break
@@ -382,10 +387,10 @@ export default {
 
     	// 繰り返しを行う場合、コマンド再セット後にまとめて実行
     	if (this.commandArray && this.commandArray.length > 0 && isRoopEnd) {
-    		this.execCommandArray(tm, target)
+    		this.execCommandArray(target)
     	}
     },
-    execCommandArray(tm, target) {
+    execCommandArray(target) {
       let isLastCommand = false
       let rolateDegree = this.$store.state.startDegree
 
@@ -406,26 +411,26 @@ export default {
     				switch(thisCommand['motion']) {
     					// 進む
     					case 'go':
-    						this.moveDiagonal(tm, target, thisCommand['step'], rolateDegree, thisCommand['direction'], isLastCommand)
+    						this.moveDiagonal(target, thisCommand['step'], rolateDegree, thisCommand['direction'], isLastCommand)
     						break
 
     					// 回転する
     					case 'rolate':
     						rolateDegree += thisCommand['degree']
-    						this.rotate(tm, target, rolateDegree, isLastCommand)
+    						this.rotate(target, rolateDegree, isLastCommand)
     						break
     				}
     			}
     		}
     	}
     },
-    moveHorizontal(tm, target, stepNum, direction, isLastCommand) {
+    moveHorizontal(target, stepNum, direction, isLastCommand) {
     	for (var i = 0; i < stepNum; i++) {
     		this.positionX += (this.stepWidth * direction)
     		let isComplete = isLastCommand && (i === (stepNum - 1))
 
     		let self = this
-    		tm.to(target, this.translateTerm, {
+    		this.tm.to(target, this.translateTerm, {
 	      	x: this.positionX,
 	      	onComplete: function() {
 	      		self.checkPosition(isComplete)
@@ -433,13 +438,13 @@ export default {
 	      })
     	}
     },
-    moveVertical(tm, target, stepNum, direction, isLastCommand) {
+    moveVertical(target, stepNum, direction, isLastCommand) {
     	for (var i = 0; i < stepNum; i++) {
     		this.positionY += (this.stepWidth * direction)
     		let isComplete = isLastCommand && (i === (stepNum - 1))
 
     		let self = this
-    		tm.to(target, this.translateTerm, {
+    		this.tm.to(target, this.translateTerm, {
 	      	y: this.positionY,
 	      	onComplete: function() {
 	      		self.checkPosition(isComplete)
@@ -447,14 +452,14 @@ export default {
 	      })
     	}
     },
-    moveDiagonal(tm, target, stepNum, calcNum, direction, isLastCommand) {
+    moveDiagonal(target, stepNum, calcNum, direction, isLastCommand) {
     	for (var i = 0; i < stepNum; i++) {
     		this.positionX += (Math.cos(calcNum * (Math.PI / 180)) * this.stepWidth * direction)
     		this.positionY += (Math.sin(calcNum * (Math.PI / 180)) * this.stepWidth * direction)
     		let isComplete = isLastCommand && (i === (stepNum - 1))
 
     		let self = this
-    		tm.to(target, this.translateTerm, {
+    		this.tm.to(target, this.translateTerm, {
     			x: this.positionX,
 	      	y: this.positionY,
 	      	onComplete: function() {
@@ -463,9 +468,9 @@ export default {
 	      })
     	}
     },
-    rotate(tm, target, calcNum, isLastCommand) {
+    rotate(target, calcNum, isLastCommand) {
     	let self = this
-    	tm.to(target, 0.5, {
+    	this.tm.to(target, 0.5, {
     		rotation: calcNum,
     		transformOrigin: 'center',
     		onComplete: function() {
