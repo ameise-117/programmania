@@ -382,8 +382,9 @@ export default {
     	}
     },
     execCommandArray(tm, target) {
-    	let isLastCommand = false
-    	let rolateDegree = 0
+      let isLastCommand = false
+      let startDegree = this.$store.state.startDegree
+      let rolateDegree = startDegree
 
     	// セットした全くり返しコマンド数roop
     	for (var i = 0; i < this.commandArray.length; i++) {
@@ -407,7 +408,7 @@ export default {
 
     					// 回転する
     					case 'rolate':
-    						rolateDegree += thisCommand['degree']
+    						rolateDegree += (thisCommand['degree'] - startDegree)
     						this.rotate(tm, target, rolateDegree, isLastCommand)
     						break
     				}
