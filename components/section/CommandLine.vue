@@ -285,7 +285,7 @@ export default {
 		      	case 'rolate':
 		      		// 繰り返しを行う場合
       				if (isRoopStart) {
-      					let roopCommand = { 'motion': 'rolate', 'degree': this.currentDegree }
+      					let roopCommand = { 'motion': 'rolate', 'degree': parseInt(calcNum, 10) }
 
       					if (this.commandArray && this.commandArray.length > 0) {
       						// くり返しが終了した場合
@@ -383,8 +383,7 @@ export default {
     },
     execCommandArray(tm, target) {
       let isLastCommand = false
-      let startDegree = this.$store.state.startDegree
-      let rolateDegree = startDegree
+      let rolateDegree = this.$store.state.startDegree
 
     	// セットした全くり返しコマンド数roop
     	for (var i = 0; i < this.commandArray.length; i++) {
@@ -408,7 +407,7 @@ export default {
 
     					// 回転する
     					case 'rolate':
-    						rolateDegree += (thisCommand['degree'] - startDegree)
+    						rolateDegree += thisCommand['degree']
     						this.rotate(tm, target, rolateDegree, isLastCommand)
     						break
     				}
