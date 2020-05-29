@@ -24,7 +24,8 @@ export const state = () => ({
   checkRotate: false,
   rotateStep: 0,
   rotateDegree: [],
-  countSecond: 0
+  countSecond: 0,
+  commandLimit: 0
 })
 
 export const mutations = {
@@ -69,6 +70,9 @@ export const mutations = {
   },
   setCountSecond(state, value) {
     state.countSecond = value
+  },
+  setCommandLimit(state, value) {
+    state.commandLimit = value
   }
 }
 
@@ -114,6 +118,9 @@ export const actions = {
   },
   countSecond(context, value) {
     context.commit('setCountSecond', value)
+  },
+  commandLimit(context, value) {
+    context.commit('setCommandLimit', value)
   },
   inputNum(context, inputText) {
     // 半角数字の場合

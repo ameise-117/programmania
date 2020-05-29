@@ -9,7 +9,9 @@
 			.body(@change="inputVal($event)")
 				draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
 					li.item.top(:key="1")
-				.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
+				.dummy(:class="{ hover: $store.state.isDummyHover, limit: isCommandLimit }", ref="elDummy") ここに配置
+				.endline(:class="{ limit: isCommandLimit }", ref="elEndline")
+					p.text リミット
 			.title.goal ゴール
 </template>
 
@@ -29,7 +31,8 @@ export default {
 			currentDegree: 0,
 			currentDirection: 1,
 			commandArray: [],
-      isMoving: false
+      isMoving: false,
+      isCommandLimit: false
 		}
 	},
   mounted() {
@@ -39,7 +42,7 @@ export default {
       (newVal, oldVal) => {
         if (newVal) {
           this.$store.dispatch('isDragEnd', false)
-          this.setDummyPosition()
+          this.updateCommandNum()
         }
       }
     )
@@ -68,10 +71,17 @@ export default {
         }
       }
     },
-  	setDummyPosition() {
+  	updateCommandNum() {
   		let commandNum = (this.$refs.elCommand.$el.children.length - 1)
   		let dummyOffset = (this.commandLineOffsetTop + commandNum * 30 + (commandNum * 10))
   		this.$refs.elDummy.style.top = dummyOffset + 'px'
+      this.$refs.elEndline.style.top = dummyOffset + 'px'
+
+      if (commandNum < this.$store.state.commandLimit) {
+        this.isCommandLimit = false
+      } else {
+        this.isCommandLimit = true
+      }
   	},
   	onEnd() {
       this.$store.dispatch('isDragEnd', true)
@@ -684,5 +694,57 @@ export default {
 		box-shadow: 0 0 10px rgba(49,100,160,.1) inset;
 		color: transparent;
 	}
+
+  &.limit {
+    display: none;
+  }
+}
+
+.endline {
+  display: none;
+  height: 30px;
+  left: 30px;
+  width: calc(100% - 40px);
+  position: absolute;
+  top: 10px;
+  align-items: center;
+  color: var(--color-key-4);
+
+  &.limit {
+    display: flex;
+  }
+
+  & .text {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+    font-weight: bold;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(50% - 0.5px);
+      height: 1px;
+      width: 100%;
+      background-size: 5px 3px;
+      background-image: linear-gradient(to right, #D57D7D, #D57D7D 3px, transparent 3px, transparent 2px);
+      background-repeat: repeat-x;
+      z-index: -2;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: calc(50% - 40px);
+      top: calc(50% - 15px);
+      width: 80px;
+      height: 30px;
+      background-color: #ececeb;
+      z-index: -1;
+    }
+  }
 }
 </style>
