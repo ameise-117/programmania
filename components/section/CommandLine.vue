@@ -6,7 +6,7 @@
 				.icon.icon-play(@click="play")
 				.icon.icon-reset(@click="reset")
 				.icon.icon-clear(@click="clear")
-			.body
+			.body(@change="inputVal($event)")
 				draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
 					li.item.top(:key="1")
 				.dummy(:class="{ hover: $store.state.isDummyHover }", ref="elDummy") ここに配置
@@ -56,6 +56,18 @@ export default {
 		}
 	},
   methods: {
+    async inputVal(event) {
+      let target = event.target
+      let inputText = event.target.value
+      
+      if (inputText) {
+        if (target.dataset.inputType == 'num') {
+          event.target.value = await this.$store.dispatch('inputNum', inputText)
+        } else if (target.dataset.inputType == 'degree') {
+          event.target.value = await this.$store.dispatch('inputDegree', inputText)
+        }
+      }
+    },
   	setDummyPosition() {
   		let commandNum = (this.$refs.elCommand.$el.children.length - 1)
   		let dummyOffset = (this.commandLineOffsetTop + commandNum * 30 + (commandNum * 10))
