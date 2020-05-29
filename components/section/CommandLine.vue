@@ -7,7 +7,7 @@
 				.icon.icon-reset(@click="reset")
 				.icon.icon-clear(@click="clear")
 			.body(@change="inputVal($event)")
-				draggable.line(tag="ul", :group="{ name: 'items' }", ref="elCommand", @end="onEnd")
+				draggable.line(tag="ul", :group="{ name: groupName }", ref="elCommand", @end="onEnd")
 					li.item.top(:key="1")
 				.dummy(:class="{ hover: $store.state.isDummyHover, limit: isCommandLimit }", ref="elDummy") ここに配置
 				.endline(:class="{ limit: isCommandLimit }", ref="elEndline")
@@ -46,10 +46,23 @@ export default {
 				}
 			}
 		)
+
+		// 選択タブを監視
+		this.$store.watch(
+			(state, getters) => state.activeTab,
+			(newVal, oldVal) => {
+				if (newVal !== oldVal) {
+					this.checkCommandNum()
+				}
+			}
+		)
 	},
 	computed: {
 		translateTerm() {
 			return (this.$store.state.checkRotate ? 1 : 0.5)
+		},
+		groupName() {
+			return (this.isCommandLimit ? 'limit' : 'items')
 		}
 	},
 	watch: {
@@ -82,6 +95,27 @@ export default {
 			} else {
 				this.isCommandLimit = true
 			}
+		},
+		checkCommandNum() {
+			let commandNum = (this.$refs.elCommand.$el.children.length - 1)
+
+			if (commandNum < this.$store.state.commandLimit) {
+				this.isCommandLimit = false
+			} else {
+				this.isCommandLimit = true
+				if (commandNum > this.$store.state.commandLimit) {
+					let roopNum = (commandNum - this.$store.state.commandLimit)
+					while (roopNum > 0) {
+						this.$refs.elCommand.$el.children[commandNum].remove()
+						roopNum--
+						commandNum--
+					}
+				}
+			}
+
+			let dummyOffset = (this.commandLineOffsetTop + commandNum * 30 + (commandNum * 10))
+			this.$refs.elDummy.style.top = dummyOffset + 'px'
+			this.$refs.elEndline.style.top = dummyOffset + 'px'
 		},
 		onEnd() {
 			this.$store.dispatch('isDragEnd', true)

@@ -63,6 +63,7 @@ export default {
       task.setTargetEl()
       // タスクNo設定
 	  	this.taskNo = num
+      this.$store.dispatch('activeTab', num)
       // 完了フラグ初期状態設定
       this.$store.dispatch('isComplete', false)
 	  }

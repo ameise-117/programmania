@@ -25,7 +25,8 @@ export default {
 	data() {
 		return {
 			checkPoint: 2,
-			startDegree: 0
+			startDegree: 0,
+			commandLimit: 2
 		}
 	},
 	computed: {
@@ -52,6 +53,9 @@ export default {
 
     	// 起点角度を設定
     	this.$store.dispatch('startDegree', this.startDegree)
+
+    	// コマンド上限を設定
+    	this.$store.dispatch('commandLimit', this.commandLimit)
 	  }
   }
 }

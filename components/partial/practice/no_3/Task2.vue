@@ -30,7 +30,8 @@ export default {
 			rotateStep: 4,
 			rotateDegree: [ 45, -90 ],
 			startDegree: 0,
-			startDirection: -1
+			startDirection: -1,
+			commandLimit: 6
 		}
 	},
 	computed: {
@@ -57,6 +58,9 @@ export default {
 
     	// 起点方向を設定
     	this.$store.dispatch('startDirection', this.startDirection)
+
+    	// コマンド上限を設定
+    	this.$store.dispatch('commandLimit', this.commandLimit)
 		}
 	}
 }
