@@ -5,6 +5,10 @@ Vue.component('draggable', draggable)
 Vue.component('slide-up-down', SlideUpDown)
 
 export const strict = false
+export const patternHalfNum = /^[1-9]+$/
+export const patternFullfNum = /^[１-９]+$/
+export const patternHalfDegree = /^[-|‐|－|―|ー|−]?([1-9]+(0)*)+$/
+export const patternFullDegree = /^[-|‐|－|―|ー|−]?([１-９]+(０)*)+$/
 
 export const state = () => ({
   targetEl: null,
@@ -110,5 +114,45 @@ export const actions = {
   },
   countSecond(context, value) {
     context.commit('setCountSecond', value)
+  },
+  inputNum(context, inputText) {
+    // 半角数字の場合
+    if (inputText.match(patternHalfNum)) {
+      return inputText
+    }
+
+    // 全角数字の場合
+    if (inputText.match(patternFullfNum)) {
+      return inputText.replace(/[１-９]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+      })
+
+    // その他の文字列の場合
+    } else {
+      return ''
+    }
+  },
+  inputDegree(context, inputText) {
+    // 角度の場合
+    if (inputText.match(patternHalfDegree) || inputText.match(patternFullDegree)) {
+      inputText = inputText.replace(/[０-９]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+      }).replace(/[‐－―ー−]/g, '-')
+
+      // ハイフンのみの場合
+      if (inputText === '-') {
+        inputText = ''
+
+      // 4桁の数字の場合
+      } else if (inputText.indexOf('-') === -1 && inputText.length > 3) {
+        inputText = inputText.slice(0, -1)
+      }
+
+      return inputText
+
+    // その他の文字列の場合
+    } else {
+      return ''
+    }
   }
 }

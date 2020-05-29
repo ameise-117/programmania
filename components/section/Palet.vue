@@ -15,62 +15,62 @@
 					li.item.blue(:key="3", data-command-type="motion", data-command-val="wait")
 						p.text 待つ
 						.icon.icon-close(@click="deleteItem($event)")
-			.item.green
+			.item.green(@change="inputVal($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[0]")
 					li.item.green(:key="1", data-command-type="direction", data-command-val="right")
 						p.text
 							span 右に
-							input.input.narrow(type="text", maxlength="1", @change="inputNum($event)")
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[1]")
 					li.item.green(:key="2", data-command-type="direction", data-command-val="left")
 						p.text
 							span 左に
-							input.input.narrow(type="text", maxlength="1", @change="inputNum($event)")
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[2]")
 					li.item.green(:key="3", data-command-type="direction", data-command-val="top")
 						p.text
 							span 上に
-							input.input.narrow(type="text", maxlength="1", @change="inputNum($event)")
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[3]")
 					li.item.green(:key="4", data-command-type="direction", data-command-val="bottom")
 						p.text
 							span 下に
-							input.input.narrow(type="text", maxlength="1", @change="inputNum($event)")
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[4]")
 					li.item.green(:key="5", data-command-type="direction", data-command-val="forward")
 						p.text
 							span 前に
-							input.input.narrow(type="text", maxlength="1", @change="inputNum($event)")
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[5]")
 					li.item.green(:key="1", data-command-type="calculation", data-command-val="degree")
 						p.text
-							input.input.wide(type="text", maxlength="4", @change="inputDegree($event)")
+							input.input.wide(type="text", maxlength="4", data-input-type="degree")
 							span 度
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[6]")
 					li.item.green(:key="2", data-command-type="calculation", data-command-val="time")
 						p.text
-							input.input.narrow(type="text", maxlength="1", @change="inputNum($event)")
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 秒
 						.icon.icon-close(@click="deleteItem($event)")
-			.item.yellow
+			.item.yellow(@change="inputVal($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.other[0]")
 					li.item.yellow(:key="4", data-command-type="other", data-command-val="roopStart")
 						p.text
 							| くり返し&nbsp;
 							span.small.bold 開始&nbsp;&nbsp;
 							span.operator ×
-							input.input.narrow(type="text", maxlength="1", @change="inputNum($event)")
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 回
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.other[1]")
@@ -84,14 +84,6 @@
 <script>
 export default {
 	props: ['dragItems'],
-	data() {
-		return {
-			patternHalfNum: /^[1-9]+$/,
-			patternFullfNum: /^[１-９]+$/,
-			patternHalfDegree: /^[-|‐|－|―|ー|−]?([1-9]+(0)*)+$/,
-			patternFullDegree: /^[-|‐|－|―|ー|−]?([１-９]+(０)*)+$/
-		}
-	},
   methods: {
   	onStart() {
   		this.$store.dispatch('isDummyHover', true)
@@ -110,51 +102,15 @@ export default {
     	event.currentTarget.parentNode.remove()
     	this.$store.dispatch('isDragEnd', true)
     },
-    inputNum(e) {
-    	let inputText = e.target.value
+    async inputVal(event) {
+    	let target = event.target
+    	let inputText = event.target.value
     	
     	if (inputText) {
-    		// 半角数字の場合
-    		if (inputText.match(this.patternHalfNum)) {
-    			return
-    		}
-
-    		// 全角数字の場合
-    		if (inputText.match(this.patternFullfNum)) {
-					e.target.value = inputText.replace(/[１-９]/g, function(s) {
-						return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
-					})
-
-    		// その他の文字列の場合
-    		} else {
-    			e.target.value = ''
-    		}
-    	}
-    },
-    inputDegree(e) {
-    	let inputText = e.target.value
-    	
-    	if (inputText) {
-    		// 角度の場合
-    		if (inputText.match(this.patternHalfDegree) || inputText.match(this.patternFullDegree)) {
-					inputText = inputText.replace(/[０-９]/g, function(s) {
-						return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
-					}).replace(/[‐－―ー−]/g, '-')
-
-					// ハイフンのみの場合
-					if (inputText === '-') {
-						inputText = ''
-
-					// 4桁の数字の場合
-					} else if (inputText.indexOf('-') === -1 && inputText.length > 3) {
-						inputText = inputText.slice(0, -1)
-					}
-
-					e.target.value = inputText
-
-    		// その他の文字列の場合
-    		} else {
-    			e.target.value = ''
+    		if (target.dataset.inputType == 'num') {
+    			event.target.value = await this.$store.dispatch('inputNum', inputText)
+    		} else if (target.dataset.inputType == 'degree') {
+    			event.target.value = await this.$store.dispatch('inputDegree', inputText)
     		}
     	}
     }
