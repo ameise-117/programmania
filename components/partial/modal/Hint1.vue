@@ -6,7 +6,6 @@
 				.header 角度の設定方法
 				.body
 					img.img(src="~/assets/images/modal/hint1.svg", alt="角度の設定方法")
-				.icon.icon-close(@click="$emit('close-modal')")
 </template>
 
 <style scoped>

@@ -12,7 +12,7 @@
 				slide-up-down(:active="isG1Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link(to="/basic/1", :class="{ hover: $route.path == '/basic/1' }") 直線を引く
+							nuxt-link.link(to="/basic/1", :class="{ hover: $route.path == '/basic/1' }") 直進する
 						li.item
 							nuxt-link.link(to="/basic/2", :class="{ hover: $route.path == '/basic/2' }") 回転する
 						li.item
