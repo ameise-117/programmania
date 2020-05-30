@@ -14,14 +14,17 @@
           transition(:name="slideType")
             Task3(v-show="taskNo == 3", ref="task3")
       li.icon-list
-        ul.item.icon-hint ?
+        ul.item.icon-hint(@click="openModal") ?
         ul.item.icon-answer A
       img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
     palet(:dragItems="dragItems")
+    transition(name="modal")
+      hint(v-show="isShowModal", v-on:close-modal="closeModal")
 </template>
 
 <script>
 import Palet from '~/components/section/Palet.vue'
+import Hint from '~/components/partial/modal/Hint1.vue'
 import Task1 from '~/components/partial/practice/no_2/Task1.vue'
 import Task2 from '~/components/partial/practice/no_2/Task2.vue'
 import Task3 from '~/components/partial/practice/no_2/Task3.vue'
@@ -29,6 +32,7 @@ import Task3 from '~/components/partial/practice/no_2/Task3.vue'
 export default {
 	components: {
     Palet,
+    Hint,
     Task1,
     Task2,
     Task3
@@ -41,7 +45,8 @@ export default {
         'motion': [ true, true, false ],
         'figures': [ false, false, false, false, true, true, false ],
         'other': [ false, false ]
-      }
+      },
+      isShowModal: false
   	}
   },
   mounted() {
@@ -66,7 +71,13 @@ export default {
       this.$store.dispatch('activeTab', num)
       // 完了フラグ初期状態設定
       this.$store.dispatch('isComplete', false)
-	  }
+	  },
+    openModal() {
+      this.isShowModal = true
+    },
+    closeModal() {
+      this.isShowModal = false
+    }
   }
 }
 </script>

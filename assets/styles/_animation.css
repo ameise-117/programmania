@@ -28,3 +28,16 @@
 .prev-leave-to {
   transform: translateX(80vw);
 }
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  transform: scale(1.1);
+}
