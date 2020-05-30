@@ -269,7 +269,17 @@ export default {
 								isRotate = true
 								this.currentDegree = (this.currentDegree + parseInt(calcNum, 10))
 								// 入力値が回答配列と正しいかチェック
-								if (this.$store.state.rotateDegree[rotateCount] != calcNum) {
+								let checkNum = parseInt(calcNum, 10)
+								if (calcNum > 360) {
+									while (checkNum > 360) {
+										checkNum -= 360
+									}
+								} else if (calcNum < -360) {
+									while (checkNum < -360) {
+										checkNum += 360
+									}
+								}
+								if (this.$store.state.rotateDegree[rotateCount] != checkNum) {
 									this.isRouteComplete = false
 								}
 								rotateCount++
