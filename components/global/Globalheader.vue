@@ -5,10 +5,35 @@
       p.title
         span.sub プログラミング的思考力
         span.text 育成道場
-    .instruction
+    .instruction(@click="openModal")
       img.icon(src="~/assets/images/header/icon_book.svg")
       p.text 使い方
+    transition(name="modal")
+      tutorial(v-show="isShowModal", v-on:close-modal="closeModal")
 </template>
+
+<script>
+import Tutorial from '~/components/partial/modal/Tutorial.vue'
+
+export default {
+  components: {
+    Tutorial
+  },
+  data() {
+    return {
+      isShowModal: false
+    }
+  },
+  methods: {
+    openModal() {
+      this.isShowModal = true
+    },
+    closeModal() {
+      this.isShowModal = false
+    }
+  }
+}
+</script>
 
 <style scoped>
 .globalheader {

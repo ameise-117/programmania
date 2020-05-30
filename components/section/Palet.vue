@@ -127,7 +127,7 @@ export default {
   margin: 0 10px 10px;
   border-radius: 3px;
   box-shadow: 1px 5px 10px rgba(49,100,160,.1), -1px 0 10px rgba(49,100,160,.1);
-  z-index: 3;
+  z-index: 2;
   overflow: hidden;
 
   & .list {

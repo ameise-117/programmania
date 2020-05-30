@@ -23,7 +23,6 @@
 
 	& .wrap {
 	  width: 90%;
-	  max-width: 500px;
 	  margin: 0px auto;
 	  padding: 25px 0 30px;
 	  background-color: var(--color-bg-1);
@@ -67,6 +66,8 @@
 
 	&.hint {
 		& .wrap {
+			max-width: 500px;
+			
 			&::before {
 				content: "?";
 				width: 90px;
@@ -77,6 +78,12 @@
 				font-size: 200px;
 				color: rgba(0, 0, 0, 0.05);
 			}
+		}
+	}
+
+	&.tutorial {
+		& .wrap {
+			max-width: 900px;
 		}
 	}
 }
