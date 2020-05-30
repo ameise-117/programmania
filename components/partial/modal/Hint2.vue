@@ -3,14 +3,14 @@
 		.overlay(@click="$emit('close-modal')")
 		.container
 			.wrap
-				.header 角度の設定方法
+				.header 実行時間の確認方法
 				.body
-					img.img(src="~/assets/images/modal/hint1.svg", alt="角度の設定方法")
+					img.img(src="~/assets/images/modal/hint2.svg", alt="実行時間の確認方法")
 				.icon.icon-close(@click="$emit('close-modal')")
 </template>
 
 <style scoped>
 .img {
-  width: 300px;
+  width: 400px;
 }
 </style>

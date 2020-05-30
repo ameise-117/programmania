@@ -19,14 +19,17 @@
             li.item {{ countSecond }}
           p.unit 秒
       li.icon-list
-        ul.item.icon-hint ?
+        ul.item.icon-hint(@click="openModal") ?
         ul.item.icon-answer A
       img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
     palet(:dragItems="dragItems")
+    transition(name="modal")
+      hint(v-show="isShowModal", v-on:close-modal="closeModal")
 </template>
 
 <script>
 import Palet from '~/components/section/Palet.vue'
+import Hint from '~/components/partial/modal/Hint2.vue'
 import Task1 from '~/components/partial/practice/no_3/Task1.vue'
 import Task2 from '~/components/partial/practice/no_3/Task2.vue'
 import Task3 from '~/components/partial/practice/no_3/Task3.vue'
@@ -34,6 +37,7 @@ import Task3 from '~/components/partial/practice/no_3/Task3.vue'
 export default {
 	components: {
     Palet,
+    Hint,
     Task1,
     Task2,
     Task3
@@ -46,7 +50,8 @@ export default {
         'motion': [ false, true, true ],
         'figures': [ false, false, false, false, false, true, true ],
         'other': [ false, false ]
-      }
+      },
+      isShowModal: false
   	}
   },
   mounted() {
@@ -78,7 +83,13 @@ export default {
       this.$store.dispatch('isComplete', false)
       // 秒数カウント初期状態設定
       this.$store.dispatch('countSecond', 0)
-	  }
+	  },
+    openModal() {
+      this.isShowModal = true
+    },
+    closeModal() {
+      this.isShowModal = false
+    }
   }
 }
 </script>
