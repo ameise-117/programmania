@@ -12,6 +12,69 @@
 				.dummy(:class="{ hover: $store.state.isDummyHover, limit: isCommandLimit }", ref="elDummy") ここに配置
 				.endline(:class="{ limit: isCommandLimit }", ref="elEndline")
 					p.text リミット
+				ul.answer-wrap
+					li.item.answer.blue(ref="elMotGo", data-command-type="motion", data-command-val="go")
+						p.text 進む
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.blue(ref="elMotRolate", data-command-type="motion", data-command-val="rolate")
+						p.text 回る
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.blue(ref="elMotWait", data-command-type="motion", data-command-val="wait")
+						p.text 待つ
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.green(ref="elDirRight", data-command-type="direction", data-command-val="right")
+						p.text
+							span 右に
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.green(ref="elDirLeft", data-command-type="direction", data-command-val="left")
+						p.text
+							span 左に
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.green(ref="elDirTop", data-command-type="direction", data-command-val="top")
+						p.text
+							span 上に
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.green(ref="elDirBottom", data-command-type="direction", data-command-val="bottom")
+						p.text
+							span 下に
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.green(ref="elDirRorward", data-command-type="direction", data-command-val="forward")
+						p.text
+							span 前に
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
+							span 歩
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.green(ref="elCalcDegree", data-command-type="calculation", data-command-val="degree")
+						p.text
+							input.input.wide(type="text", maxlength="4", data-input-type="degree")
+							span 度
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.green(ref="elCalcTime", data-command-type="calculation", data-command-val="time")
+						p.text
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
+							span 秒
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.yellow(ref="elRoopStart", data-command-type="other", data-command-val="roopStart")
+						p.text
+							| くり返し&nbsp;
+							span.small.bold 開始&nbsp;&nbsp;
+							span.operator ×
+							input.input.narrow(type="text", maxlength="1", data-input-type="num")
+							span 回
+						.icon.icon-close(@click="deleteItem($event)")
+					li.item.answer.yellow(ref="elRoopEnd", data-command-type="other", data-command-val="roopEnd")
+						p.text
+							| くり返し&nbsp;
+							span.small.bold 終了
+						.icon.icon-close(@click="deleteItem($event)")
 			.title.goal ゴール
 </template>
 
@@ -53,6 +116,16 @@ export default {
 			(newVal, oldVal) => {
 				if (newVal !== oldVal) {
 					this.checkCommandNum()
+				}
+			}
+		)
+
+		// 解答設定フラグを監視
+		this.$store.watch(
+			(state, getters) => state.isSetAnswer,
+			(newVal, oldVal) => {
+				if (newVal) {
+					this.setAnswer()
 				}
 			}
 		)
@@ -117,6 +190,24 @@ export default {
 			this.$refs.elDummy.style.top = dummyOffset + 'px'
 			this.$refs.elEndline.style.top = dummyOffset + 'px'
 		},
+		setAnswer() {
+			this.clear()
+			let answer = this.$store.state.answer
+			let elParent = this.$refs.elCommand.$el
+
+			for (var i = 0; i < answer.length; i++) {
+				let name = answer[i].el
+				let elClone = this.$refs[name].cloneNode(true)
+				// TODO:値をセット
+				// TODO:削除イベント追加
+				elParent.appendChild(elClone)
+			}
+			this.$store.dispatch('isSetAnswer', false)
+		},
+		deleteItem(event) {
+    	event.currentTarget.parentNode.remove()
+    	this.$store.dispatch('isDragEnd', true)
+    },
 		onEnd() {
 			this.$store.dispatch('isDragEnd', true)
 		},
@@ -709,6 +800,90 @@ export default {
 		top: 0;
 		left: 10px;
 	}
+
+	& .item {
+		& + .item {
+			margin-top: 10px;
+		}
+		
+		&.answer {
+			padding: 0 15px;
+			border: 1px solid #c7c7c7;
+			cursor: pointer;
+			transition: var(--transition-link);
+			border-radius: 5px;
+			height: 30px;
+			width: fit-content;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			box-shadow: 0 2px 2px rgba(49,100,160,.1);
+			width: max-content;
+
+			& .text {
+				display: flex;
+				align-items: center;
+
+				& .small {
+					font-size: 11px;
+				}
+
+				& .bold {
+					font-weight: bold;
+				}
+			}
+
+			& .input {
+				background-color: var(--color-bg-1);
+				outline: none;
+				margin: 0 5px;
+				padding: 0 5px;
+				text-align: right;
+				color: var(--color-text-1);
+
+				&.narrow {
+					width: 30px;
+				}
+
+				&.wide {
+					width: 40px;
+				}
+			}
+
+			&.blue {
+				background-color: var(--color-key-8);
+				color: var(--color-key-5);
+			}
+
+			&.green {
+				background-color: var(--color-key-10);
+				color: var(--color-key-7);
+			}
+
+			&.yellow {
+				background-color: var(--color-key-12);
+				color: var(--color-key-11);
+			}
+
+			& .icon-close {
+				display: block;
+				position: absolute;
+				width: 15px;
+				height: 15px;
+				right: -7px;
+				top: -7px;
+				cursor: pointer;
+				background-image: url("../../assets/images/palet/icon_close.png");
+				background-size: contain;
+				transition: var(--transition-link);
+
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+		}
+	}
 }
 
 .line {
@@ -790,5 +965,9 @@ export default {
 			z-index: -1;
 		}
 	}
+}
+
+.answer-wrap {
+	display: none;
 }
 </style>

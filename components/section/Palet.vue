@@ -52,20 +52,20 @@
 							span 歩
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[5]")
-					li.item.green(:key="1", data-command-type="calculation", data-command-val="degree")
+					li.item.green(:key="6", data-command-type="calculation", data-command-val="degree")
 						p.text
 							input.input.wide(type="text", maxlength="4", data-input-type="degree")
 							span 度
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.figures[6]")
-					li.item.green(:key="2", data-command-type="calculation", data-command-val="time")
+					li.item.green(:key="7", data-command-type="calculation", data-command-val="time")
 						p.text
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 秒
 						.icon.icon-close(@click="deleteItem($event)")
 			.item.yellow(@change="inputVal($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.other[0]")
-					li.item.yellow(:key="4", data-command-type="other", data-command-val="roopStart")
+					li.item.yellow(:key="1", data-command-type="other", data-command-val="roopStart")
 						p.text
 							| くり返し&nbsp;
 							span.small.bold 開始&nbsp;&nbsp;
@@ -74,7 +74,7 @@
 							span 回
 						.icon.icon-close(@click="deleteItem($event)")
 				draggable.body(tag="ul", :group="{ name: 'items', pull: 'clone', put: false }", @start="onStart", @end="onEnd", v-if="dragItems.other[1]")
-					li.item.yellow(:key="5", data-command-type="other", data-command-val="roopEnd")
+					li.item.yellow(:key="2", data-command-type="other", data-command-val="roopEnd")
 						p.text
 							| くり返し&nbsp;
 							span.small.bold 終了

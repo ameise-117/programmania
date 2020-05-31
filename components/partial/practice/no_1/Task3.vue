@@ -31,7 +31,13 @@ export default {
 		return {
 			checkPoint: 4,
 			startDegree: 0,
-			commandLimit: 4
+			commandLimit: 4,
+			answer: [
+				{ 'el': 'elDirLeft', 'val': 3 },
+				{ 'el': 'elMotGo' },
+				{ 'el': 'elDirBottom', 'val': 2 },
+				{ 'el': 'elMotGo' }
+			]
 		}
 	},
 	computed: {
@@ -61,6 +67,9 @@ export default {
 
     	// コマンド上限を設定
     	this.$store.dispatch('commandLimit', this.commandLimit)
+
+    	// 解答を設定
+    	this.$store.dispatch('answer', this.answer)
 	  }
   }
 }

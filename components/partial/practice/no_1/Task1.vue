@@ -26,7 +26,11 @@ export default {
 		return {
 			checkPoint: 2,
 			startDegree: 0,
-			commandLimit: 2
+			commandLimit: 2,
+			answer: [
+				{ 'el': 'elDirRight', 'val': 3 },
+				{ 'el': 'elMotGo' }
+			]
 		}
 	},
 	computed: {
@@ -56,6 +60,9 @@ export default {
 
     	// コマンド上限を設定
     	this.$store.dispatch('commandLimit', this.commandLimit)
+
+    	// 解答を設定
+    	this.$store.dispatch('answer', this.answer)
 	  }
   }
 }

@@ -26,7 +26,9 @@ export const state = () => ({
   rotateDegree: [],
   countSecond: 0,
   commandLimit: 0,
-  activeTab: 1
+  activeTab: 1,
+  answer: [],
+  isSetAnswer: false
 })
 
 export const mutations = {
@@ -77,6 +79,12 @@ export const mutations = {
   },
   setActiveTab(state, value) {
     state.activeTab = value
+  },
+  setAnswer(state, value) {
+    state.answer = value
+  },
+  setIsSetAnswer(state, value) {
+    state.isSetAnswer = value
   }
 }
 
@@ -128,6 +136,12 @@ export const actions = {
   },
   activeTab(context, value) {
     context.commit('setActiveTab', value)
+  },
+  answer(context, value) {
+    context.commit('setAnswer', value)
+  },
+  isSetAnswer(context, value) {
+    context.commit('setIsSetAnswer', value)
   },
   inputNum(context, inputText) {
     // 半角数字の場合
