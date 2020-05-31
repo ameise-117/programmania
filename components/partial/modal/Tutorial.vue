@@ -3,13 +3,118 @@
 		.overlay(@click="$emit('close-modal')")
 		.container
 			.wrap
-				.header 画面の見方
-				.body
-					img.img(src="~/assets/images/modal/tutorial1.png", alt="画面の見方")
+				transition(:name="slideType")
+					.page(v-show="pageNo == 1")
+						.header 画面の見方
+						.body
+							img.img(src="~/assets/images/modal/tutorial1.png", alt="画面の見方")
+				transition(:name="slideType")
+					.page(v-show="pageNo == 2")
+						.header 操作方法
+						.body
+							img.img(src="~/assets/images/modal/tutorial2.png", alt="操作方法")
+				transition(:name="slideType")
+					.page(v-show="pageNo == 3")
+						.header コマンド設定方法
+						.body
+							img.img(src="~/assets/images/modal/tutorial3.png", alt="コマンド設定方法")
+				.navigation
+					.prev(:class="{ hide: pageNo == 1 }", @click="slidePage('prev')")
+						img.img(src="~/assets/images/modal/arrow_l.svg", alt="左矢印")
+					.next(:class="{ hide: pageNo == 3 }", @click="slidePage('next')")
+						img.img(src="~/assets/images/modal/arrow_r.svg", alt="右矢印")
+				ul.indicator
+					li.item(:class="{ active: pageNo == 1 }", @click="pageNo = 1")
+					li.item(:class="{ active: pageNo == 2 }", @click="pageNo = 2")
+					li.item(:class="{ active: pageNo == 3 }", @click="pageNo = 3")
 </template>
 
+<script>
+export default {
+	data() {
+		return {
+			pageNo: 1,
+      slideType: 'next'
+		}
+	},
+	methods: {
+  	slidePage(slideType) {
+  		this.slideType = slideType
+
+      // ページNo設定
+      if (slideType === 'prev') {
+        this.pageNo -= 1
+      } else if (slideType === 'next') {
+        this.pageNo += 1
+      }
+
+      console.log(this.pageNo)
+	  }
+  }
+}
+</script>
+
 <style scoped>
-.img {
-  width: 800px;
+.navigation {
+	& .prev,
+	& .next {
+		position: absolute;
+		color: red;
+		cursor: pointer;
+		transition: var(--transition-link);
+
+		&:hover {
+			opacity: var(--opacity);
+		}
+	}
+
+	& .prev {
+		left: 0;
+		margin-left: 15px;
+	}
+
+	& .next {
+		right: 0;
+		margin-right: 15px;
+	}
+
+	& .hide {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+.indicator {
+	position: absolute;
+	bottom: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	& .item {
+		width: 14px;
+		height: 14px;
+		margin: 0 6px;
+		background-color: var(--color-bg-base);
+		border-radius: 7px;
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		opacity: var(--opacity);
+		transition: var(--transition-link);
+		cursor: pointer;
+
+		&:hover,
+		&.active {
+			background-color: #879D54;
+			opacity: 1;
+		}
+
+		& + .item {
+			margin-left: 5px;
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
 }
 </style>

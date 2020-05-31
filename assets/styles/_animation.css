@@ -1,6 +1,6 @@
 .next-enter-active, .next-leave-active,
 .prev-enter-active, .prev-leave-active {
-  transition: all .5s cubic-bezier(0, 0, 1, 1) 0s;
+  transition: all .3s cubic-bezier(0.42, 0, 1, 1) 0s;
 }
 
 .next-enter {
