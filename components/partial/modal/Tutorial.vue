@@ -19,14 +19,14 @@
 						.body
 							img.img(src="~/assets/images/modal/tutorial3.png", alt="コマンド設定方法")
 				.navigation
-					.prev(:class="{ hide: pageNo == 1 }", @click="slidePage('prev')")
+					.prev(:class="{ hide: pageNo == 1 }", @click="slidePage('', 'prev')")
 						img.img(src="~/assets/images/modal/arrow_l.svg", alt="左矢印")
-					.next(:class="{ hide: pageNo == 3 }", @click="slidePage('next')")
+					.next(:class="{ hide: pageNo == 3 }", @click="slidePage('', 'next')")
 						img.img(src="~/assets/images/modal/arrow_r.svg", alt="右矢印")
 				ul.indicator
-					li.item(:class="{ active: pageNo == 1 }", @click="pageNo = 1")
-					li.item(:class="{ active: pageNo == 2 }", @click="pageNo = 2")
-					li.item(:class="{ active: pageNo == 3 }", @click="pageNo = 3")
+					li.item(:class="{ active: pageNo == 1 }", @click="slidePage(1, '')")
+					li.item(:class="{ active: pageNo == 2 }", @click="slidePage(2, '')")
+					li.item(:class="{ active: pageNo == 3 }", @click="slidePage(3, '')")
 </template>
 
 <script>
@@ -38,17 +38,23 @@ export default {
 		}
 	},
 	methods: {
-  	slidePage(slideType) {
-  		this.slideType = slideType
+  	slidePage(num, slideType) {
+  		if (num) {
+  			if (this.pageNo < num) {
+  				this.slideType = 'next'
+  			} else if (this.pageNo > num) {
+  				this.slideType = 'prev'
+  			}
+  			this.pageNo = num
 
-      // ページNo設定
-      if (slideType === 'prev') {
-        this.pageNo -= 1
-      } else if (slideType === 'next') {
-        this.pageNo += 1
-      }
-
-      console.log(this.pageNo)
+  		} else if (slideType) {
+	      if (slideType === 'prev') {
+	        this.pageNo -= 1
+	      } else if (slideType === 'next') {
+	        this.pageNo += 1
+	      }
+	      this.slideType = slideType
+  		}
 	  }
   }
 }
