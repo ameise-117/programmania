@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    globalheader
+    globalheader(:isShowTutorial="true")
     main.main
       navigation
       nuxt

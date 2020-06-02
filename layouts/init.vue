@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    globalheader
+    globalheader(:isShowTutorial="false")
     main.main
       mainvisual
 </template>

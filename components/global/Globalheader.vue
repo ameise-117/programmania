@@ -5,7 +5,7 @@
       p.title
         span.sub プログラミング的思考力
         span.text 育成道場
-    .instruction(@click="openModal")
+    .instruction(v-if="isShowTutorial", @click="openModal")
       img.icon(src="~/assets/images/header/icon_book.svg")
       p.text 使い方
     transition(name="modal")
@@ -19,6 +19,7 @@ export default {
   components: {
     Tutorial
   },
+  props: ['isShowTutorial'],
   data() {
     return {
       isShowModal: false

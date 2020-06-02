@@ -101,9 +101,9 @@ export default {
 		width: 14px;
 		height: 14px;
 		margin: 0 6px;
-		background-color: var(--color-bg-base);
+		background-color: #f3f3f3;
 		border-radius: 7px;
-		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 		opacity: var(--opacity);
 		transition: var(--transition-link);
 		cursor: pointer;

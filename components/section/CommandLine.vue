@@ -942,6 +942,7 @@ export default {
 
 	&.limit {
 		display: flex;
+		z-index: 1;
 	}
 
 	& .text {
