@@ -6,6 +6,10 @@
         li.item(@click="changeTask(2, $refs.task2)", :class="{ active: (taskNo == 2) }") STEP2
         li.item(@click="changeTask(3, $refs.task3)", :class="{ active: (taskNo == 3) }") STEP3
       .contents
+        p.note
+          | 実行ボタンをクリックするとハリネズミが動き出します
+          br.br
+          | 何秒後に回転するとゴールまでたどり着くでしょう？
         .wrap
           transition(:name="slideType")
             Task1(v-show="taskNo == 1", ref="task1")

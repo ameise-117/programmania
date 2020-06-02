@@ -11,7 +11,7 @@
 	& .step {
 		width: 100%;
 		display: flex;
-		padding: 10px 10px 20px;
+		padding: 10px;
 
 		& .item {
 			width: 90px;
@@ -43,14 +43,23 @@
 		flex: 1;
 		overflow: hidden;
 		position: relative;
+		display: flex;
+		flex-direction: column;
+
+		& .note {
+			font-size: 12px;
+			padding-left: 15px;
+			padding-top: 5px;
+		}
 
     & .wrap {
     	max-width: 400px;
     	height: 100%;
-    	margin: auto;
+    	margin: 0 auto;
     	display: flex;
 	    align-items: center;
 	    justify-content: space-between;
+	    flex: 1;
     }
 
     & .countdown {
