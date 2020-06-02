@@ -198,14 +198,23 @@ export default {
 			for (var i = 0; i < answer.length; i++) {
 				let name = answer[i].el
 				let elClone = this.$refs[name].cloneNode(true)
-				// TODO:値をセット
+
+				// 値を設定
+				let val = answer[i].val
+				if (val) {
+					elClone.querySelector('.input').value = val
+				}
+
 				// 削除イベントを登録
 				let iconClose = elClone.querySelector('.icon-close')
-				let self = this
-				iconClose.addEventListener('click', function(event) {
-					event.currentTarget.parentNode.remove()
-					self.checkCommandNum()
-				})
+				if (iconClose) {
+					let self = this
+					iconClose.addEventListener('click', function(event) {
+						event.currentTarget.parentNode.remove()
+						self.checkCommandNum()
+					})
+				}
+
 				elParent.appendChild(elClone)
 			}
 			this.$store.dispatch('isSetAnswer', false)
