@@ -64,7 +64,19 @@ export default {
 			checkPoint: 18,
 			startDegree: 60,
 			startDirection: -1,
-			commandLimit: 10
+			commandLimit: 10,
+			answer: [
+				{ 'el': 'elRoopStart', 'val': 9 },
+				{ 'el': 'elDirForward', 'val': 2 },
+				{ 'el': 'elMotGo' },
+				{ 'el': 'elCalcDegree', 'val': -120 },
+				{ 'el': 'elMotRolate' },
+				{ 'el': 'elRoopEnd' },
+				{ 'el': 'elCalcDegree', 'val': 120 },
+				{ 'el': 'elMotRolate' },
+				{ 'el': 'elDirForward', 'val': 1 },
+				{ 'el': 'elMotGo' }
+			]
 		}
 	},
 	computed: {
@@ -97,6 +109,9 @@ export default {
 
 			// コマンド上限を設定
     	this.$store.dispatch('commandLimit', this.commandLimit)
+
+    	// 解答を設定
+    	this.$store.dispatch('answer', this.answer)
 		}
 	}
 }

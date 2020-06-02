@@ -14,7 +14,7 @@
           transition(:name="slideType")
             Task3(v-show="taskNo == 3", ref="task3")
       li.icon-list
-        ul.item.icon-answer(@click="isSetAnswer()") A
+        ul.item.icon-answer(@click="setAnswer()") A
       img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
     palet(:dragItems="dragItems")
 </template>
@@ -66,7 +66,7 @@ export default {
       // 完了フラグ初期状態設定
       this.$store.dispatch('isComplete', false)
 	  },
-    isSetAnswer() {
+    setAnswer() {
       this.$store.dispatch('isSetAnswer', true)
     }
   }

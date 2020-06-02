@@ -32,7 +32,13 @@ export default {
 			rotateDegree: [ -90 ],
 			startDegree: 90,
 			startDirection: 1,
-			commandLimit: 4
+			commandLimit: 4,
+			answer: [
+				{ 'el': 'elCalcTime', 'val': 2 },
+				{ 'el': 'elMotWait' },
+				{ 'el': 'elCalcDegree', 'val': -90 },
+				{ 'el': 'elMotRolate' }
+			]
 		}
 	},
 	computed: {
@@ -62,6 +68,9 @@ export default {
 
     	// コマンド上限を設定
     	this.$store.dispatch('commandLimit', this.commandLimit)
+
+    	// 解答を設定
+    	this.$store.dispatch('answer', this.answer)
 	  }
   }
 }

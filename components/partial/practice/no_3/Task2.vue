@@ -31,7 +31,15 @@ export default {
 			rotateDegree: [ 45, -90 ],
 			startDegree: 0,
 			startDirection: -1,
-			commandLimit: 6
+			commandLimit: 6,
+			answer: [
+				{ 'el': 'elCalcDegree', 'val': 45 },
+				{ 'el': 'elMotRolate' },
+				{ 'el': 'elCalcTime', 'val': 2 },
+				{ 'el': 'elMotWait' },
+				{ 'el': 'elCalcDegree', 'val': -90 },
+				{ 'el': 'elMotRolate' }
+			]
 		}
 	},
 	computed: {
@@ -61,6 +69,9 @@ export default {
 
     	// コマンド上限を設定
     	this.$store.dispatch('commandLimit', this.commandLimit)
+
+    	// 解答を設定
+    	this.$store.dispatch('answer', this.answer)
 		}
 	}
 }

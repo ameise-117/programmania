@@ -15,7 +15,7 @@
             Task3(v-show="taskNo == 3", ref="task3")
       li.icon-list
         ul.item.icon-hint(@click="openModal") ?
-        ul.item.icon-answer A
+        ul.item.icon-answer(@click="setAnswer()") A
       img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
     palet(:dragItems="dragItems")
     transition(name="modal")
@@ -77,6 +77,9 @@ export default {
     },
     closeModal() {
       this.isShowModal = false
+    },
+    setAnswer() {
+      this.$store.dispatch('isSetAnswer', true)
     }
   }
 }

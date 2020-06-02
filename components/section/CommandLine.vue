@@ -46,7 +46,7 @@
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
 						.icon.icon-close
-					li.item.answer.green(ref="elDirRorward", data-command-type="direction", data-command-val="forward")
+					li.item.answer.green(ref="elDirForward", data-command-type="direction", data-command-val="forward")
 						p.text
 							span 前に
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
