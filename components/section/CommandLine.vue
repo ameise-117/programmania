@@ -658,6 +658,12 @@ export default {
 	height: 100%;
 	padding: 10px 10px 10px 0;
 
+	@media (--tablet) {
+		width: 250px;
+		padding: 0;
+		flex: 1;
+	}
+
 	& .wrap {
 		width: 100%;
 		height: 100%;

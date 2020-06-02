@@ -11,6 +11,8 @@ export const patternHalfDegree = /^[-|‐|－|―|ー|−]?([1-9]+(0)*)+$/
 export const patternFullDegree = /^[-|‐|－|―|ー|−]?([１-９]+(０)*)+$/
 
 export const state = () => ({
+  windowWidth: 'desktop',
+  isTouchDevice: false,
   targetEl: null,
   goalEl: null,
   routeEls: null,
@@ -32,6 +34,12 @@ export const state = () => ({
 })
 
 export const mutations = {
+  setWindowWidth(state, value) {
+    state.windowWidth = value
+  },
+  setIsTouchDevice(state, value) {
+    state.isTouchDevice = value
+  },
   setTargetEl(state, value) {
     state.targetEl = value
   },
@@ -89,6 +97,12 @@ export const mutations = {
 }
 
 export const actions = {
+  windowWidth(context, value) {
+    context.commit('setWindowWidth', value)
+  },
+  isTouchDevice(context, value) {
+    context.commit('setIsTouchDevice', value)
+  },
   targetEl(context, value) {
     context.commit('setTargetEl', value)
   },

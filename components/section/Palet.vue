@@ -130,18 +130,38 @@ export default {
   z-index: 2;
   overflow: hidden;
 
+  @media (--tablet) {
+  	flex: 1;
+  	height: 100%;
+  	margin-bottom: 0;
+  	margin-left: 0;
+  }
+
   & .list {
   	display: flex;
   	flex: 1;
   	padding: 20px 0;
   	min-width: 480px;
 
+  	@media (--tablet) {
+  		flex-direction: column;
+  		min-width: 230px;
+  	}
+
   	& > .item {
   		flex: 1;
 			position: relative;
 			padding: 0 20px;
 
+			@media (--tablet) {
+				flex: initial;
+			}
+
 			& + .item {
+				@media (--tablet) {
+					margin-top: 40px;
+				}
+
 				&::before {
 					content: "";
 					background-size: 6px 12px;
@@ -155,6 +175,17 @@ export default {
 					width: 1px;
 					height: 100%;
 					z-index: 2;
+
+					@media (--tablet) {
+						background-size: 12px 6px;
+						background-image: linear-gradient(to right, #D4D4D4, #D4D4D4 6px, transparent 6px, transparent 12px);
+						background-repeat: repeat-x;
+						width: calc(100% - 40px);
+						height: 1px;
+						top: -20px;
+						left: 20px;
+						margin: 0;
+					}
 				}
 			}
 
@@ -174,6 +205,10 @@ export default {
 	align-items: center;
 	padding-top: 20px;
 	letter-spacing: .25em;
+
+	@media (--tablet) {
+		height: auto;
+	}
 }
 
 .body {

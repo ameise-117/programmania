@@ -91,5 +91,5 @@
  * Media Queries
  *
 ------------------------------------------- */
-@custom-media --tablet (max-width: 1000px);
+@custom-media --tablet (max-width: 830px);
 @custom-media --mobile (max-width: 660px);

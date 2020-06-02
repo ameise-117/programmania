@@ -1,11 +1,15 @@
 <template lang="pug">
-  div 初期表示
+	main.main
+		mainvisual
 </template>
 
 <script>
-import Task1 from '~/components/partial/practice/no_1/Task1.vue'
+import Mainvisual from '~/components/section/Mainvisual.vue'
 
 export default {
-	layout: 'init'
+	layout: 'init',
+	components: {
+    Mainvisual
+  }
 }
 </script>

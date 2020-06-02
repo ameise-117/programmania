@@ -8,6 +8,11 @@
   box-shadow: 1px 5px 10px rgba(49,100,160,.1), -1px 0 10px rgba(49,100,160,.1);
   position: relative;
 
+  @media (--tablet) {
+  	height: 400px;
+  	flex: initial;
+  }
+
 	& .step {
 		width: 100%;
 		display: flex;
