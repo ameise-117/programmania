@@ -838,6 +838,28 @@ export default {
 			box-shadow: 0 2px 2px rgba(49,100,160,.1);
 			width: max-content;
 
+			&::before,
+			&::after {
+				content: "";
+				position: absolute;
+				border: 1px solid;
+			}
+
+			&::before {
+				bottom: -1px;
+				left: -14px;
+			  border-style: solid;
+			  border-width: 0 0 7px 14px;
+			  border-color: transparent transparent #c7c7c7 transparent;
+			}
+
+			&::after {
+				bottom: 0;
+				left: -10px;
+			  border-style: solid;
+			  border-width: 0 0 7px 14px;
+			}
+
 			& .text {
 				display: flex;
 				align-items: center;
@@ -871,16 +893,28 @@ export default {
 			&.blue {
 				background-color: var(--color-key-8);
 				color: var(--color-key-5);
+
+				&::after {
+				  border-color: transparent transparent var(--color-key-8) transparent;
+				}
 			}
 
 			&.green {
 				background-color: var(--color-key-10);
 				color: var(--color-key-7);
+
+				&::after {
+				  border-color: transparent transparent var(--color-key-10) transparent;
+				}
 			}
 
 			&.yellow {
 				background-color: var(--color-key-12);
 				color: var(--color-key-11);
+
+				&::after {
+				  border-color: transparent transparent var(--color-key-12) transparent;
+				}
 			}
 
 			& .icon-close {
