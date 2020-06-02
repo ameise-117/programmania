@@ -15,53 +15,53 @@
 				ul.answer-wrap
 					li.item.answer.blue(ref="elMotGo", data-command-type="motion", data-command-val="go")
 						p.text 進む
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.blue(ref="elMotRolate", data-command-type="motion", data-command-val="rolate")
 						p.text 回る
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.blue(ref="elMotWait", data-command-type="motion", data-command-val="wait")
 						p.text 待つ
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.green(ref="elDirRight", data-command-type="direction", data-command-val="right")
 						p.text
 							span 右に
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.green(ref="elDirLeft", data-command-type="direction", data-command-val="left")
 						p.text
 							span 左に
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.green(ref="elDirTop", data-command-type="direction", data-command-val="top")
 						p.text
 							span 上に
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.green(ref="elDirBottom", data-command-type="direction", data-command-val="bottom")
 						p.text
 							span 下に
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.green(ref="elDirRorward", data-command-type="direction", data-command-val="forward")
 						p.text
 							span 前に
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 歩
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.green(ref="elCalcDegree", data-command-type="calculation", data-command-val="degree")
 						p.text
 							input.input.wide(type="text", maxlength="4", data-input-type="degree")
 							span 度
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.green(ref="elCalcTime", data-command-type="calculation", data-command-val="time")
 						p.text
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 秒
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.yellow(ref="elRoopStart", data-command-type="other", data-command-val="roopStart")
 						p.text
 							| くり返し&nbsp;
@@ -69,12 +69,12 @@
 							span.operator ×
 							input.input.narrow(type="text", maxlength="1", data-input-type="num")
 							span 回
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 					li.item.answer.yellow(ref="elRoopEnd", data-command-type="other", data-command-val="roopEnd")
 						p.text
 							| くり返し&nbsp;
 							span.small.bold 終了
-						.icon.icon-close(@click="deleteItem($event)")
+						.icon.icon-close
 			.title.goal ゴール
 </template>
 
@@ -199,15 +199,17 @@ export default {
 				let name = answer[i].el
 				let elClone = this.$refs[name].cloneNode(true)
 				// TODO:値をセット
-				// TODO:削除イベント追加
+				// 削除イベントを登録
+				let iconClose = elClone.querySelector('.icon-close')
+				let self = this
+				iconClose.addEventListener('click', function(event) {
+					event.currentTarget.parentNode.remove()
+					self.checkCommandNum()
+				})
 				elParent.appendChild(elClone)
 			}
 			this.$store.dispatch('isSetAnswer', false)
 		},
-		deleteItem(event) {
-    	event.currentTarget.parentNode.remove()
-    	this.$store.dispatch('isDragEnd', true)
-    },
 		onEnd() {
 			this.$store.dispatch('isDragEnd', true)
 		},
