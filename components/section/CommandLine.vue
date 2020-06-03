@@ -654,14 +654,18 @@ export default {
 
 <style scoped>
 .command-line {
-	width: 350px;
+	min-width: 300px;
+	max-width: 350px;
+	width: 50%;
 	height: 100%;
 	padding: 10px 10px 10px 0;
 
 	@media (--tablet) {
-		width: 250px;
-		padding: 0;
-		flex: 1;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		height: calc(100% - 410px);
+		padding-left: 10px;
 	}
 
 	& .wrap {

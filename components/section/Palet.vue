@@ -133,8 +133,7 @@ export default {
   @media (--tablet) {
   	flex: 1;
   	height: 100%;
-  	margin-bottom: 0;
-  	margin-left: 0;
+  	width: 50%;
   }
 
   & .list {

@@ -64,6 +64,11 @@ export default {
 	box-shadow: 3px 3px 5px rgba(49,100,160,.1), -3px 0 5px rgba(49,100,160,.1);
 	z-index: 1;
 	transition: all .3s;
+
+	@media (--tablet) {
+		position: fixed;
+		z-index: 3;
+	}
 }
 
 .title {

@@ -3,8 +3,9 @@
     globalheader(:isShowTutorial="true")
     main.main
       navigation
-      nuxt
-      command-line
+      .wrap
+        nuxt
+        command-line
 </template>
 
 <script>

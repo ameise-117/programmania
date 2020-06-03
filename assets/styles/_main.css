@@ -5,6 +5,17 @@
 	align-items: flex-start;
 	height: 100vh;
 	background-color: #F7F7F4;
+
+	& > .wrap {
+		display: flex;
+		height: 100%;
+		flex: 1;
+		position: relative;
+
+		@media (--tablet) {
+			padding-left: 50px;
+		}
+	}
 }
 
 .main-block {
