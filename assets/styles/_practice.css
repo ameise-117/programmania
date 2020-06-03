@@ -160,7 +160,7 @@
 				}
 			}
 
-			&:hover {
+			&.hover {
 				&::before {
 					display: flex;
 				}

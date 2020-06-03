@@ -3,9 +3,12 @@
 		.wrap
 			.title.start スタート
 			.buttons
-				.icon.icon-play(@click="play")
-				.icon.icon-reset(@click="reset")
-				.icon.icon-clear(@click="clear")
+				.icon.icon-play(v-if="$store.state.isTouchDevice", @click="play", :class="{ 'hover': isPlayHover }", v-on:touchstart="isPlayHover = true", v-on:touchend="isPlayHover = false")
+				.icon.icon-play(v-else, @click="play", :class="{ 'hover': isPlayHover }", v-on:mouseover="isPlayHover = true", v-on:mouseleave="isPlayHover = false")
+				.icon.icon-reset(v-if="$store.state.isTouchDevice", @click="reset", :class="{ 'hover': isResetHover }", v-on:touchstart="isResetHover = true", v-on:touchend="isResetHover = false")
+				.icon.icon-reset(v-else, @click="reset", :class="{ 'hover': isResetHover }", v-on:mouseover="isResetHover = true", v-on:mouseleave="isResetHover = false")
+				.icon.icon-clear(v-if="$store.state.isTouchDevice", @click="clear", :class="{ 'hover': isClearHover }", v-on:touchstart="isClearHover = true", v-on:touchend="isClearHover = false")
+				.icon.icon-clear(v-else, @click="clear", :class="{ 'hover': isClearHover }", v-on:mouseover="isClearHover = true", v-on:mouseleave="isClearHover = false")
 			.body(@change="inputVal($event)")
 				draggable.line(tag="ul", :group="{ name: groupName }", ref="elCommand", @end="onEnd")
 					li.item.top(:key="1")
@@ -95,7 +98,10 @@ export default {
 			currentDirection: 1,
 			commandArray: [],
 			isMoving: false,
-			isCommandLimit: false
+			isCommandLimit: false,
+			isPlayHover: false,
+			isResetHover: false,
+			isClearHover: false
 		}
 	},
 	mounted() {
@@ -745,7 +751,7 @@ export default {
 			transition: var(--transition-link);
 		}
 
-		&:hover {
+		&.hover {
 			background-color: var(--color-bg-1);
 
 			&::before {

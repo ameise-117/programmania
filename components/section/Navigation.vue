@@ -1,6 +1,12 @@
 <template lang="pug">
 	.navigation(:class="{ close: !isMenuActive }")
-		.title(@click="toggleMenu")
+		.title(v-if="$store.state.isTouchDevice", @click="toggleMenu", :class="{ 'hover': isMenuHover }", v-on:touchstart="isMenuHover = true", v-on:touchend="isMenuHover = false")
+			.menu-trigger
+				span.line
+				span.line
+				span.line
+			p.text(v-if="isMenuActive") Menu
+		.title(v-else, @click="toggleMenu", :class="{ 'hover': isMenuHover }", v-on:mouseover="isMenuHover = true", v-on:mouseleave="isMenuHover = false")
 			.menu-trigger
 				span.line
 				span.line
@@ -46,7 +52,8 @@ export default {
 		return {
 			isMenuActive: true,
 			isG1Active: true,
-			isG2Active: true
+			isG2Active: true,
+			isMenuHover: false
 		}
 	},
 	mounted() {
@@ -105,7 +112,7 @@ export default {
 		margin-left: 8px;
 	}
 
-	&:hover {
+	&.hover {
 		& .menu-trigger {
 			& .line {
 				&:nth-of-type(1) {
@@ -272,7 +279,7 @@ export default {
 		background-color: var(--color-key-1);
 
 		& .title {
-			&:hover {
+			&.hover {
 				& .menu-trigger {
 					& .line {
 						&:nth-of-type(1) {

@@ -23,8 +23,10 @@
             li.item {{ countSecond }}
           p.unit 秒
       li.icon-list
-        ul.item.icon-hint(@click="openModal") ?
-        ul.item.icon-answer(@click="setAnswer()") A
+        ul.item.icon-hint(v-if="$store.state.isTouchDevice", @click="openModal()", :class="{ 'hover': isHintHover }", v-on:touchstart="isHintHover = true", v-on:touchend="isHintHover = false") ?
+        ul.item.icon-hint(v-else, @click="openModal()", :class="{ 'hover': isHintHover }", v-on:mouseover="isHintHover = true", v-on:mouseleave="isHintHover = false") ?
+        ul.item.icon-answer(v-if="$store.state.isTouchDevice", @click="setAnswer()", :class="{ 'hover': isAnswerHover }", v-on:touchstart="isAnswerHover = true", v-on:touchend="isAnswerHover = false") A
+        ul.item.icon-answer(v-else, @click="setAnswer()", :class="{ 'hover': isAnswerHover }", v-on:mouseover="isAnswerHover = true", v-on:mouseleave="isAnswerHover = false") A
       img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
     palet(:dragItems="dragItems")
     transition(name="modal")
@@ -49,6 +51,8 @@ export default {
   data() {
   	return {
   		taskNo: 1,
+      isHintHover: false,
+      isAnswerHover: false,
       slideType: 'next',
       dragItems: {
         'motion': [ false, true, true ],
