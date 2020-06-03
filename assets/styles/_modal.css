@@ -1,6 +1,6 @@
 .modal {
 	position: fixed;
-  z-index: 99;
+  z-index: 101;
   top: 0;
   left: 0;
   width: 100%;
@@ -86,10 +86,15 @@
 		color: var(--color-text-1);
 		
 		& .wrap {
-			width: 800px;
+			width: 90%;
+			max-width: 800px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+
+			@media (--tablet) {
+				height: 500px;
+			}
 		}
 
 		& .body {
@@ -97,6 +102,11 @@
 
 			& > .img {
 				width: 700px;
+
+				@media (--tablet) {
+					width: 100%;
+					padding: 0 30px;
+				}
 			}
 		}
 	}

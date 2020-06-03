@@ -154,6 +154,10 @@
 				font-weight: initial;
 				color: var(--color-text-2);
 				z-index: 3;
+
+				@media (--tablet) {
+					right: 30px;
+				}
 			}
 
 			&:hover {

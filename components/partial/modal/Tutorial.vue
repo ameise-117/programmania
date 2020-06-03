@@ -65,12 +65,17 @@ export default {
 	& .prev,
 	& .next {
 		position: absolute;
-		color: red;
 		cursor: pointer;
 		transition: var(--transition-link);
 
 		&:hover {
 			opacity: var(--opacity);
+		}
+
+		& > .img {
+			@media (--tablet) {
+				width: 25px;
+			}
 		}
 	}
 
