@@ -6,7 +6,7 @@
 				span.line
 				span.line
 			p.text(v-if="isMenuActive") Menu
-		ul.list(v-if="isMenuActive")
+		ul.list(v-show="isMenuActive")
 			li.item
 				p.head(@click="isG1Active = !isG1Active", :class="{ close: !isG1Active }") 基礎編
 				slide-up-down(:active="isG1Active", :duration="300")
@@ -37,6 +37,7 @@
 						//- 	nuxt-link.link(to="/practice/advance/4") 料理を作る
 						//- li.item
 						//- 	nuxt-link.link(to="/practice/advance/5") 迷路に挑戦
+		p.label(v-show="!isMenuActive") Menu
 </template>
 
 <script>
@@ -48,9 +49,23 @@ export default {
 			isG2Active: true
 		}
 	},
+	mounted() {
+		// 画面幅を監視
+		this.$store.watch(
+			(state, getters) => state.windowWidth,
+			(newVal, oldVal) => {
+				this.judgeDispMenu(newVal)
+			}
+		)
+	},
   methods: {
   	toggleMenu() {
   		this.isMenuActive = !this.isMenuActive
+  	},
+  	judgeDispMenu(val) {
+  		if (val !== 'desktop') {
+				this.isMenuActive = false
+			}
   	}
   }
 }
@@ -58,12 +73,16 @@ export default {
 
 <style scoped>
 .navigation {
-	width: 250px;
+	min-width: 180px;
+	max-width: 250px;
+	width: 30%;
 	height: 100%;
 	background-color: #FBFBFA;
 	box-shadow: 3px 3px 5px rgba(49,100,160,.1), -3px 0 5px rgba(49,100,160,.1);
 	z-index: 1;
 	transition: all .3s;
+	word-break: keep-all;
+	overflow: hidden;
 
 	@media (--tablet) {
 		position: fixed;
@@ -104,6 +123,8 @@ export default {
 }
 
 .list {
+	transition: all .3s;
+
 	& > .item {
 		padding-bottom: 1px;
 	}
@@ -235,9 +256,19 @@ export default {
 	}
 }
 
+.label {
+	color: var(--color-text-2);
+	font-size: 2rem;
+	font-weight: bold;
+	margin: 5px auto 0;
+	writing-mode: vertical-lr;
+	transition: all .3s;
+}
+
 .close {
 	&.navigation {
 		width: 50px;
+		min-width: 50px;
 		background-color: var(--color-key-1);
 
 		& .title {
