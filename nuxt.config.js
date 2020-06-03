@@ -44,21 +44,19 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'テスト',
+    title: 'プログラミング的思考力育成道場',
     meta: [
       { charset: 'UTF-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'keywords', content: 'テスト' },
+      { name: 'keywords', content: 'プログラミング,学習,練習問題' },
       {
         name: 'description',
-        content:
-          'テスト'
+        content: 'プログラミング的思考力を育てる学習サイト'
       },
-      { hid: 'ogtitle', property: 'og:title', content: 'テスト' },
+      { hid: 'ogtitle', property: 'og:title', content: 'プログラミング的思考力育成道場' },
       {
         property: 'og:description',
-        content:
-          'テスト'
+        content: 'プログラミング的思考力を育てる学習サイト'
       }
     ],
     link: [
