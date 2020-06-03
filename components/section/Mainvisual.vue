@@ -11,7 +11,43 @@
 				| ハリネズミを動かそう！
 			img.img(src="~/assets/images/practice/target_center.png")
 		a.button(href="/basic/1") スタート
+		guide(v-if="$store.state.windowWidth === 'mobile' || browser === 'other'")
 </template>
+
+<script>
+import Guide from '~/components/partial/modal/Guide.vue'
+
+export default {
+  components: {
+    Guide
+  },
+  data() {
+		return {
+			browser: ''
+		}
+	},
+  mounted() {
+  	// ユーザーエージェント判定
+  	this.getUserAgent()
+  },
+  methods: {
+  	getUserAgent() {
+  		let ua = window.navigator.userAgent.toLowerCase()
+  		if (ua.indexOf('edge') != -1) {
+  			this.browser = 'edge'
+  		} else if (ua.indexOf('chrome') != -1) {
+  			this.browser = 'chrome'
+  		} else if (ua.indexOf('safari') != -1) {
+  			this.browser = 'safari'
+  		} else if (ua.indexOf('firefox') != -1) {
+  			this.browser = 'firefox'
+  		} else {
+  			this.browser = 'other'
+  		}
+  	}
+  }
+}
+</script>
 
 <style scoped>
 .mainvisual {
