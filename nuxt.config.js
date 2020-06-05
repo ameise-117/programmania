@@ -107,7 +107,7 @@ export default {
     }
   },
   generate: {
-    dir: 'dist/',
+    dir: 'docs/',
     subFolders: true,
     fallback: false
   }
