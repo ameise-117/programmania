@@ -256,8 +256,7 @@ export default {
 			this.$store.dispatch('isComplete', false)
 			this.$store.dispatch('countSecond', 0)
 			this.tm.clear()
-			this.tm = new TimelineMax()
-			this.tm.to(target, duration, {
+			TweenMax.to(target, duration, {
 				x: this.$store.state.startPointX,
 				y: this.$store.state.startPointY,
 				rotation: this.$store.state.startDegree
