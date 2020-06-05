@@ -18,13 +18,13 @@
 				slide-up-down(:active="isG1Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link(to="/basic/1", :class="{ hover: $route.path == '/basic/1' }") 直進する
+							nuxt-link.link(to="/basic/1", :class="{ hover: $route.path.indexOf('/basic/1') !== -1 }") 直進する
 						li.item
-							nuxt-link.link(to="/basic/2", :class="{ hover: $route.path == '/basic/2' }") 回転する
+							nuxt-link.link(to="/basic/2", :class="{ hover: $route.path.indexOf('/basic/2') !== -1 }") 回転する
 						li.item
-							nuxt-link.link(to="/basic/3", :class="{ hover: $route.path == '/basic/3' }") 時間を設定する
+							nuxt-link.link(to="/basic/3", :class="{ hover: $route.path.indexOf('/basic/3') !== -1 }") 時間を設定する
 						li.item
-							nuxt-link.link(to="/basic/4", :class="{ hover: $route.path == '/basic/4' }") くり返しを行う
+							nuxt-link.link(to="/basic/4", :class="{ hover: $route.path.indexOf('/basic/4') !== -1 }") くり返しを行う
 			li.item
 				p.head(@click="isG2Active = !isG2Active", :class="{ close: !isG2Active }") 発展編
 				slide-up-down(:active="isG2Active", :duration="300")
