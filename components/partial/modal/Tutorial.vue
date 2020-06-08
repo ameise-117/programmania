@@ -3,19 +3,36 @@
 		.overlay(@click="$emit('close-modal')")
 		.container
 			.wrap
+				.label.top
+				.label.bottom
 				transition(:name="slideType")
 					.page(v-show="pageNo == 1")
-						.header 画面の見方
+						.header-wrap
+							.header
+								span.num
+									span.em 1
+									| /3&nbsp;&nbsp;
+								span.title 画面の見方
 						.body
 							img.img(src="~/assets/images/modal/tutorial1.png", alt="画面の見方")
 				transition(:name="slideType")
 					.page(v-show="pageNo == 2")
-						.header 操作方法
+						.header-wrap
+							.header
+								span.num
+									span.em 2
+									| /3&nbsp;&nbsp;
+								span.title 操作方法
 						.body
 							img.img(src="~/assets/images/modal/tutorial2.png", alt="操作方法")
 				transition(:name="slideType")
 					.page(v-show="pageNo == 3")
-						.header コマンド設定方法
+						.header-wrap
+							.header
+								span.num
+									span.em 3
+									| /3&nbsp;&nbsp;
+								span.title コマンド設定方法
 						.body
 							img.img(src="~/assets/images/modal/tutorial3.png", alt="コマンド設定方法")
 				.navigation
@@ -127,5 +144,73 @@ export default {
 	&:focus {
 		outline: none;
 	}
+}
+
+.page {
+	width: 100%;
+}
+
+.header-wrap {
+	color: var(--color-key-1);
+	margin-bottom: 40px;
+	width: 100%;
+	position: relative;
+
+	&::before {
+		position: absolute;
+		content: "";
+		width: 50%;
+		right: 0;
+		bottom: -5px;
+		height: 1px;
+		background-color: var(--color-key-1);
+	}
+}
+
+.header {
+	font-size: 26px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	margin: 0 auto;
+
+	&::before {
+		position: absolute;
+		content: "";
+		width: 100%;
+		left: -5px;
+		bottom: -5px;
+		height: 1px;
+		background-color: var(--color-key-1);
+	}
+}
+
+.em {
+	font-size: 34px;
+}
+
+.label {
+	position: absolute;
+
+	&.top {
+		top: 0;
+		left: 0;
+		border-bottom: 200px solid transparent;
+		border-left: 200px solid rgba(239, 245, 212, 0.5);
+	}
+
+	&.bottom {
+		bottom: 0;
+		right: 0;
+		border-top: 200px solid transparent;
+		border-right: 200px solid rgba(239, 245, 212, 0.5);
+	}
+}
+
+.img {
+	position: relative;
+	z-index: 3;
 }
 </style>
