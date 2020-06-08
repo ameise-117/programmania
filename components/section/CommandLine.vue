@@ -812,7 +812,7 @@ export default {
 
 .body {
 	position: relative;
-	height: 100%;
+	flex: 1;
 	border-left: 1px solid #D4D4D4;
 	border-right: 1px solid #D4D4D4;
 	background-color: #ececeb;

@@ -111,6 +111,7 @@ export default {
 
   & .text {
     margin-left: 5px;
+    word-break: keep-all;
   }
 }
 </style>

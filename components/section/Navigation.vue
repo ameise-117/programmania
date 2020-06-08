@@ -277,6 +277,8 @@ export default {
 		width: 50px;
 		min-width: 50px;
 		background-color: var(--color-key-1);
+		display: flex;
+		flex-direction: column;
 
 		& .title {
 			&.hover {
