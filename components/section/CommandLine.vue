@@ -817,6 +817,7 @@ export default {
 	border-right: 1px solid #D4D4D4;
 	background-color: #ececeb;
 	display: flex;
+	flex-direction: column;
 
 	&::before {
 		content: "";
