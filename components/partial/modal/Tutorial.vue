@@ -3,19 +3,42 @@
 		.overlay(@click="$emit('close-modal')")
 		.container
 			.wrap
+				.label.top
+				.label.bottom
 				transition(:name="slideType")
 					.page(v-show="pageNo == 1")
-						.header 画面の見方
+						.header-wrap
+							.header
+								span.num
+									span.em 1
+									| /3&nbsp;&nbsp;
+								span.title 画面の見方
 						.body
-							img.img(src="~/assets/images/modal/tutorial1.png", alt="画面の見方")
+							picture
+								source.img(media="(min-width: 830px)", srcset="~/assets/images/modal/tutorial1_pc.png")
+								source.img(media="(max-width: 829px)", srcset="~/assets/images/modal/tutorial1_tb.png")
+								img.img(src="~/assets/images/modal/tutorial1_pc.png", alt="画面の見方")
 				transition(:name="slideType")
 					.page(v-show="pageNo == 2")
-						.header 操作方法
+						.header-wrap
+							.header
+								span.num
+									span.em 2
+									| /3&nbsp;&nbsp;
+								span.title 操作方法
 						.body
-							img.img(src="~/assets/images/modal/tutorial2.png", alt="操作方法")
+							picture
+								source.img(media="(min-width: 830px)", srcset="~/assets/images/modal/tutorial2_pc.png")
+								source.img(media="(max-width: 829px)", srcset="~/assets/images/modal/tutorial2_tb.png")
+								img.img(src="~/assets/images/modal/tutorial2_pc.png", alt="操作方法")
 				transition(:name="slideType")
 					.page(v-show="pageNo == 3")
-						.header コマンド設定方法
+						.header-wrap
+							.header
+								span.num
+									span.em 3
+									| /3&nbsp;&nbsp;
+								span.title コマンド設定方法
 						.body
 							img.img(src="~/assets/images/modal/tutorial3.png", alt="コマンド設定方法")
 				.navigation
@@ -126,6 +149,112 @@ export default {
 
 	&:focus {
 		outline: none;
+	}
+}
+
+.page {
+	width: 100%;
+
+	@media (--tablet) {
+		height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.header-wrap {
+	color: var(--color-key-1);
+	margin-bottom: 40px;
+	width: 100%;
+	position: relative;
+
+	&::before {
+		position: absolute;
+		content: "";
+		width: 50%;
+		right: 0;
+		bottom: -5px;
+		height: 1px;
+		background-color: var(--color-key-1);
+	}
+}
+
+.header {
+	font-size: 26px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	margin: 0 auto;
+
+	&::before {
+		position: absolute;
+		content: "";
+		width: 100%;
+		left: -5px;
+		bottom: -5px;
+		height: 1px;
+		background-color: var(--color-key-1);
+	}
+}
+
+.em {
+	font-size: 34px;
+}
+
+.label {
+	position: absolute;
+
+	&.top {
+		top: 0;
+		left: 0;
+		border-bottom: 200px solid transparent;
+		border-left: 200px solid rgba(239, 245, 212, 0.5);
+	}
+
+	&.bottom {
+		bottom: 0;
+		right: 0;
+		border-top: 200px solid transparent;
+		border-right: 200px solid rgba(239, 245, 212, 0.5);
+	}
+}
+
+.img {
+	position: relative;
+	z-index: 3;
+}
+
+.wrap {
+	width: 90%;
+	max-width: 800px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@media (--tablet) {
+		height: 80vh;
+	}
+}
+
+.body {
+	margin-bottom: 20px;
+
+	@media (--tablet) {
+		flex: 1;
+	}
+
+	& .img {
+		width: 700px;
+		pointer-events: none;
+
+		@media (--tablet) {
+			max-height: 65vh;
+			max-width: 100%;
+			width: auto;
+		}
 	}
 }
 </style>

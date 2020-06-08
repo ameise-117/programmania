@@ -61,6 +61,9 @@ export default {
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese' },
+      { rel: 'canonical', href: 'http://shuchutrain.com/' },
+      { rel: 'shortcut icon', type: 'image/x-icon', href: '/_nuxt/assets/images/common/favicon.ico' },
+      { rel: 'apple-touch-icon', type: 'image/png', href: '/_nuxt/assets/images/common/apple_touch_icon.png' }
     ]
   },
   /*
