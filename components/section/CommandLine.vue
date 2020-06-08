@@ -669,7 +669,7 @@ export default {
 		position: absolute;
 		right: 0;
 		bottom: 0;
-		height: calc(100% - 410px);
+		height: calc(100% - 370px);
 		padding-left: 10px;
 	}
 
@@ -816,6 +816,7 @@ export default {
 	border-left: 1px solid #D4D4D4;
 	border-right: 1px solid #D4D4D4;
 	background-color: #ececeb;
+	display: flex;
 
 	&::before {
 		content: "";

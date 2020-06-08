@@ -3,7 +3,7 @@
 		.container
 			.wrap
 				p.text.bold(v-if="$store.state.windowWidth === 'mobile'") 画面が小さいためプレイできません
-				p.text.bold(v-else) 利用環境ではプレイできません
+				p.text.bold(v-else) 現在の環境ではプレイできません
 				.note
 					p.text 利用できる環境は以下です
 					ul.list
@@ -26,7 +26,7 @@
 						li.item
 							| ＜画面幅＞
 							br
-							| ・830px以上
+							| ・660px以上
 				.body
 					img.img(src="~/assets/images/modal/char_cry.png")
 </template>
@@ -43,7 +43,7 @@
 		width: 100%;
 		height: 80%;
 		margin: 0 auto;
-		background: radial-gradient(#ffffff 40%, transparent);
+		background: radial-gradient(#ffffff 40%, rgba(255, 255, 255, 0));
 		box-shadow: none;
 		display: flex;
     align-items: center;
@@ -57,7 +57,7 @@
 
 	& .note {
 		text-align: left;
-		margin-top: 10px;
+		margin-top: 30px;
 	}
 
 	& .text {
@@ -65,10 +65,10 @@
 	}
 
 	& .list {
-		margin-top: 5px;
+		margin-top: 15px;
 
 		& .item {
-			margin-top: 7px;
+			margin-top: 10px;
 		}
 	}
 }
