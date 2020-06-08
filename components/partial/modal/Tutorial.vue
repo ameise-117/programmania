@@ -14,7 +14,10 @@
 									| /3&nbsp;&nbsp;
 								span.title 画面の見方
 						.body
-							img.img(src="~/assets/images/modal/tutorial1.png", alt="画面の見方")
+							picture
+								source.img(media="(min-width: 830px)", srcset="~/assets/images/modal/tutorial1_pc.png")
+								source.img(media="(max-width: 829px)", srcset="~/assets/images/modal/tutorial1_tb.png")
+								img.img(src="~/assets/images/modal/tutorial1_pc.png", alt="画面の見方")
 				transition(:name="slideType")
 					.page(v-show="pageNo == 2")
 						.header-wrap
@@ -24,7 +27,10 @@
 									| /3&nbsp;&nbsp;
 								span.title 操作方法
 						.body
-							img.img(src="~/assets/images/modal/tutorial2.png", alt="操作方法")
+							picture
+								source.img(media="(min-width: 830px)", srcset="~/assets/images/modal/tutorial2_pc.png")
+								source.img(media="(max-width: 829px)", srcset="~/assets/images/modal/tutorial2_tb.png")
+								img.img(src="~/assets/images/modal/tutorial2_pc.png", alt="操作方法")
 				transition(:name="slideType")
 					.page(v-show="pageNo == 3")
 						.header-wrap
@@ -148,6 +154,13 @@ export default {
 
 .page {
 	width: 100%;
+
+	@media (--tablet) {
+		height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .header-wrap {
@@ -212,5 +225,36 @@ export default {
 .img {
 	position: relative;
 	z-index: 3;
+}
+
+.wrap {
+	width: 90%;
+	max-width: 800px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@media (--tablet) {
+		height: 80vh;
+	}
+}
+
+.body {
+	margin-bottom: 20px;
+
+	@media (--tablet) {
+		flex: 1;
+	}
+
+	& .img {
+		width: 700px;
+		pointer-events: none;
+
+		@media (--tablet) {
+			max-height: 65vh;
+			max-width: 100%;
+			width: auto;
+		}
+	}
 }
 </style>

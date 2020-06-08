@@ -81,33 +81,4 @@
 			}
 		}
 	}
-
-	&.tutorial {
-		color: var(--color-text-1);
-		
-		& .wrap {
-			width: 90%;
-			max-width: 800px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			@media (--tablet) {
-				height: 500px;
-			}
-		}
-
-		& .body {
-			margin-bottom: 20px;
-
-			& > .img {
-				width: 700px;
-
-				@media (--tablet) {
-					width: 100%;
-					padding: 0 30px;
-				}
-			}
-		}
-	}
 }
