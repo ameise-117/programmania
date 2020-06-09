@@ -52,7 +52,9 @@ export default {
       this.updateFirst()
     },
     updateFirst() {
-      this.isFirst = false
+      setTimeout(() => {
+        this.isFirst = false
+      }, 300)
     }
   }
 }

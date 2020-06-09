@@ -3,13 +3,17 @@
 		.overlay(@click="$emit('close-modal')")
 		.container
 			.wrap
-				.label.top
-				.label.bottom
+				.label.top(:class="{ over: isFirst }")
+				.label.bottom(:class="{ over: isFirst }")
 				.page.first(v-show="isFirst")
-					.header 育成道場へようこそ！
-					ul.buttons
-						li.item.view(@click="viewTutorial()") 使い方を見る
-						li.item.start(@click="startPray()") 始める
+					.header
+						span.small プログラミング的思考力
+						br.br
+						| 育成道場へようこそ！
+					.buttons
+						img.src(src="~/assets/images/modal/char_comment.png", alt="コメント")
+						.item.view(@click="viewTutorial()") 使い方を見る
+						.item.start(@click="startPray()") 始める
 				transition(:name="slideType")
 					.page(v-show="pageNo == 1")
 						.header-wrap
@@ -186,9 +190,12 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease-in;
 
     & .header {
     	color: var(--color-key-1);
+    	flex-direction: column;
+    	line-height: 0.7;
 
     	&::before {
     		content: none;
@@ -196,27 +203,61 @@ export default {
     }
 
     & .buttons {
-    	margin-top: 100px;
+    	margin-top: 130px;
     	display: flex;
     	align-items: center;
     	justify-content: center;
+    	position: relative;
     }
 
     & .item {
-    	background-color: var(--color-key-4);
-    	color: var(--color-text-2);
     	width: 180px;
     	height: 50px;
     	border-radius: 25px;
-    	border: 2px solid transparent;
     	display: flex;
     	align-items: center;
     	justify-content: center;
     	font-size: 1.6rem;
+    	cursor: pointer;
+    	font-weight: bold;
+    	letter-spacing: 0.05em;
+    	transition: var(--transition-link);
 
     	& + .item {
     		margin-left: 20px;
     	}
+
+    	&.view {
+    		background-color: var(--color-key-4);
+    		color: var(--color-text-2);
+    		border: 2px solid transparent;
+
+    		&:hover {
+    			background-color: var(--color-bg-1);
+	    		color: var(--color-key-4);
+	    		border: 2px solid var(--color-key-4);
+    		}
+    	}
+
+    	&.start {
+    		background-color: var(--color-bg-1);
+    		color: var(--color-key-4);
+    		border: 2px solid var(--color-key-4);
+
+    		&:hover {
+    			background-color: var(--color-key-4);
+	    		color: var(--color-text-2);
+	    		border: 2px solid transparent;
+    		}
+    	}
+    }
+
+    & .src {
+    	position: absolute;
+    	left: -50px;
+    	top: -92px;
+    	height: 90px;
+    	width: auto;
     }
   }
 }
@@ -262,6 +303,11 @@ export default {
 	font-size: 34px;
 }
 
+.small {
+	font-size: 1.6rem;
+	font-weight: initial;
+}
+
 .label {
 	position: absolute;
 
@@ -277,6 +323,10 @@ export default {
 		right: 0;
 		border-top: 200px solid transparent;
 		border-right: 200px solid rgba(239, 245, 212, 0.5);
+	}
+
+	&.over {
+		z-index: 5;
 	}
 }
 
