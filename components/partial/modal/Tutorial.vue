@@ -5,6 +5,11 @@
 			.wrap
 				.label.top
 				.label.bottom
+				.page.first(v-show="isFirst")
+					.header 育成道場へようこそ！
+					ul.buttons
+						li.item.view(@click="viewTutorial()") 使い方を見る
+						li.item.start(@click="startPray()") 始める
 				transition(:name="slideType")
 					.page(v-show="pageNo == 1")
 						.header-wrap
@@ -54,6 +59,7 @@
 
 <script>
 export default {
+	props: ['isFirst'],
 	data() {
 		return {
 			pageNo: 1,
@@ -61,6 +67,12 @@ export default {
 		}
 	},
 	methods: {
+		viewTutorial() {
+			this.$emit('update-first')
+		},
+		startPray() {
+			this.$emit('close-modal')
+		},
   	slidePage(num, slideType) {
   		if (num) {
   			if (this.pageNo < num) {
@@ -160,6 +172,52 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &.first {
+  	position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & .header {
+    	color: var(--color-key-1);
+
+    	&::before {
+    		content: none;
+    	}
+    }
+
+    & .buttons {
+    	margin-top: 100px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    }
+
+    & .item {
+    	background-color: var(--color-key-4);
+    	color: var(--color-text-2);
+    	width: 180px;
+    	height: 50px;
+    	border-radius: 25px;
+    	border: 2px solid transparent;
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	font-size: 1.6rem;
+
+    	& + .item {
+    		margin-left: 20px;
+    	}
+    }
   }
 }
 
