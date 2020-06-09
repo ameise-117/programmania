@@ -54,6 +54,7 @@ export default {
         content: 'プログラミング的思考力を育てる学習サイト'
       },
       { hid: 'ogtitle', property: 'og:title', content: 'プログラミング的思考力育成道場' },
+      { hid: 'og:image', property: 'og:image', content: '/_nuxt/assets/images/common/ogp.png' },
       {
         property: 'og:description',
         content: 'プログラミング的思考力を育てる学習サイト'

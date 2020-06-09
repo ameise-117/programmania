@@ -9,10 +9,11 @@
       img.icon(src="~/assets/images/header/icon_book.svg")
       p.text 使い方
     transition(name="modal")
-      tutorial(v-show="isShowModal", v-on:close-modal="closeModal")
+      tutorial(v-show="isShowModal", :isFirst="isFirst", v-on:close-modal="closeModal", v-on:update-first="updateFirst")
 </template>
 
 <script>
+import cookies from 'js-cookie'
 import Tutorial from '~/components/partial/modal/Tutorial.vue'
 
 export default {
@@ -22,15 +23,38 @@ export default {
   props: ['isShowTutorial'],
   data() {
     return {
-      isShowModal: false
+      isShowModal: false,
+      isFirst: false
+    }
+  },
+  mounted() {
+    // 訪問回数確認
+    if (this.isShowTutorial) {
+      this.checkCookie()
     }
   },
   methods: {
+    checkCookie() {
+      let counts = cookies.get('counts')
+      if (counts) {
+        cookies.set('counts', (parseInt(counts, 10) + 1), { expires: 365 })
+      } else {
+        this.isFirst = true
+        this.openModal()
+        cookies.set('counts', 1, { expires: 365 })
+      }
+    },
     openModal() {
       this.isShowModal = true
     },
     closeModal() {
       this.isShowModal = false
+      this.updateFirst()
+    },
+    updateFirst() {
+      setTimeout(() => {
+        this.isFirst = false
+      }, 300)
     }
   }
 }

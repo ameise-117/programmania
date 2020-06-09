@@ -3,8 +3,17 @@
 		.overlay(@click="$emit('close-modal')")
 		.container
 			.wrap
-				.label.top
-				.label.bottom
+				.label.top(:class="{ over: isFirst }")
+				.label.bottom(:class="{ over: isFirst }")
+				.page.first(v-show="isFirst")
+					.header
+						span.small プログラミング的思考力
+						br.br
+						| 育成道場へようこそ！
+					.buttons
+						img.src(src="~/assets/images/modal/char_comment.png", alt="コメント")
+						.item.view(@click="viewTutorial()") 使い方を見る
+						.item.start(@click="startPray()") 始める
 				transition(:name="slideType")
 					.page(v-show="pageNo == 1")
 						.header-wrap
@@ -54,6 +63,7 @@
 
 <script>
 export default {
+	props: ['isFirst'],
 	data() {
 		return {
 			pageNo: 1,
@@ -61,6 +71,12 @@ export default {
 		}
 	},
 	methods: {
+		viewTutorial() {
+			this.$emit('update-first')
+		},
+		startPray() {
+			this.$emit('close-modal')
+		},
   	slidePage(num, slideType) {
   		if (num) {
   			if (this.pageNo < num) {
@@ -161,6 +177,89 @@ export default {
     flex-direction: column;
     justify-content: space-between;
   }
+
+  &.first {
+  	position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in;
+
+    & .header {
+    	color: var(--color-key-1);
+    	flex-direction: column;
+    	line-height: 0.7;
+
+    	&::before {
+    		content: none;
+    	}
+    }
+
+    & .buttons {
+    	margin-top: 130px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	position: relative;
+    }
+
+    & .item {
+    	width: 180px;
+    	height: 50px;
+    	border-radius: 25px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	font-size: 1.6rem;
+    	cursor: pointer;
+    	font-weight: bold;
+    	letter-spacing: 0.05em;
+    	transition: var(--transition-link);
+
+    	& + .item {
+    		margin-left: 20px;
+    	}
+
+    	&.view {
+    		background-color: var(--color-key-4);
+    		color: var(--color-text-2);
+    		border: 2px solid transparent;
+
+    		&:hover {
+    			background-color: var(--color-bg-1);
+	    		color: var(--color-key-4);
+	    		border: 2px solid var(--color-key-4);
+    		}
+    	}
+
+    	&.start {
+    		background-color: var(--color-bg-1);
+    		color: var(--color-key-4);
+    		border: 2px solid var(--color-key-4);
+
+    		&:hover {
+    			background-color: var(--color-key-4);
+	    		color: var(--color-text-2);
+	    		border: 2px solid transparent;
+    		}
+    	}
+    }
+
+    & .src {
+    	position: absolute;
+    	left: -50px;
+    	top: -92px;
+    	height: 90px;
+    	width: auto;
+    }
+  }
 }
 
 .header-wrap {
@@ -204,6 +303,11 @@ export default {
 	font-size: 34px;
 }
 
+.small {
+	font-size: 1.6rem;
+	font-weight: initial;
+}
+
 .label {
 	position: absolute;
 
@@ -219,6 +323,10 @@ export default {
 		right: 0;
 		border-top: 200px solid transparent;
 		border-right: 200px solid rgba(239, 245, 212, 0.5);
+	}
+
+	&.over {
+		z-index: 5;
 	}
 }
 
