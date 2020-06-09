@@ -13,7 +13,7 @@
 					.buttons
 						img.src(src="~/assets/images/modal/char_comment.png", alt="コメント")
 						.item.view(@click="viewTutorial()") 使い方を見る
-						.item.start(@click="startPray()") 始める
+						.item.start(@click="startPray()") はじめる
 				transition(:name="slideType")
 					.page(v-show="pageNo == 1")
 						.header-wrap

@@ -9,9 +9,9 @@
 				g(transform="translate(1717.115 799.241) rotate(30)")
 					rect(width="96.309" height="8" transform="translate(529 483)" fill="#dcdcd9")
 				circle(cx="8" cy="8" r="8" transform="translate(1923.743 1477.495)" fill="#707070")
-				text(transform="translate(1918 1507)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(1918 1507)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
-				text(transform="translate(2290 1456.26)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(2290 1456.26)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
 				path(d="M161.242,202.25h0l-2.222-1.283-2.889-5L332.258,94.276l4,6.928L161.242,202.25Z" transform="translate(1853.8 1335.951)" fill="#dcdcd9")
 				g(transform="translate(1657 947.26)")
@@ -19,9 +19,9 @@
 				g(transform="translate(2282 1426.26)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")
 					circle(cx="8" cy="8" r="7.25" fill="none")
-				text(transform="translate(1957 1529)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(1957 1529)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 30°
-				text(transform="translate(2076 1529)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(2076 1529)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 30°
 				line(y2="17" transform="translate(2099.099 1476.4) rotate(-30)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")

@@ -13,9 +13,9 @@
 				g(transform="translate(1471 905)" fill="#707070" stroke="#707070" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")
 					circle(cx="8" cy="8" r="7.25" fill="none")
-				text(transform="translate(1444 918)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(1444 918)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
-				text(transform="translate(1594 1135)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(1594 1135)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
 				g(transform="translate(1586 1105)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")

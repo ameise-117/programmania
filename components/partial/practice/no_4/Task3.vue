@@ -15,9 +15,9 @@
 					path(d="M 92 15.8985595703125 L 13.91561889648438 150 L 170.0843811035156 150 L 92 15.8985595703125 M 92 0 L 184 158 L 0 158 L 92 0 Z" stroke="none" fill="#dcdcd9")
 				line(y2="17" transform="translate(2639.222 473.5) rotate(60)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				circle(cx="8" cy="8" r="8" transform="translate(2679.652 542.558) rotate(60)" fill="#707070")
-				text(transform="translate(2640 547)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(2640 547)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
-				text(transform="translate(2792 576)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(2792 576)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
 				g(transform="translate(2783.98 545.496)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")
@@ -25,16 +25,16 @@
 				line(y2="17" transform="translate(2545.864 473.793) rotate(-60)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				path(d="M0,0H40V38.62H0Z" transform="translate(2515.741 478.393) rotate(-60)" fill="none")
 				line(y2="17" transform="translate(2592.623 546.4)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
-				text(transform="translate(2553 538)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(2553 538)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 60°
-				text(transform="translate(2595 458)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(2595 458)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 60°
 				path(d="M2610.772,685.785,2483.323,467.854,2324.713,739.292l317.174-.034-13.735-23.8" transform="translate(109 -149)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(x2="10" transform="matrix(-0.259, 0.966, -0.966, -0.259, 2736.588, 565.4)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(x2="10" transform="matrix(0.966, 0.259, -0.259, 0.966, 2736.526, 565.436)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
-				text(transform="translate(2631 337)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(2631 337)" fill="#c1c1bd" font-size="12")
 					tspan(x="-18.674" y="0") 3
-					tspan(y="0" font-family="HiraginoSans-W3, Hiragino Sans") 周
+					tspan(y="0") 周
 				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/practice/target_left.png")
 				rect(ref="routeEl1" width="40" height="38.62" transform="translate(2649.068 443.247) rotate(60)" fill="none")
 				rect(ref="routeEl2" width="40" height="38.62" transform="translate(2599.068 356.645) rotate(60)" fill="none")

@@ -12,16 +12,16 @@
 				g(transform="translate(1800 538)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")
 					circle(cx="8" cy="8" r="7.25" fill="none")
-				text(transform="translate(1508 576)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(1508 576)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
-				text(transform="translate(1808 576)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(1808 576)" fill="#707070" font-size="12")
 					tspan(x="-17.46" y="0") ターン
 				rect(width="40" height="28.85" transform="translate(1588 531)" fill="none")
 				rect(width="40" height="28.85" transform="translate(1688 531)" fill="none")
 				rect(width="40" height="28.85" transform="translate(1788 531)" fill="none")
-				text(transform="translate(1658 606)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(1658 606)" fill="#c1c1bd" font-size="12")
 					tspan(x="-15.337" y="0") 1
-					tspan(y="0" font-family="HiraginoSans-W3, Hiragino Sans") 往復
+					tspan(y="0") 往復
 				line(x2="120" transform="translate(1508.5 602)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(x2="10" transform="translate(1508.5 602) rotate(45)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(x2="10" transform="translate(1508.5 602.071) rotate(-45)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")

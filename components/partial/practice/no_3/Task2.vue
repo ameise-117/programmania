@@ -9,9 +9,9 @@
 					rect(width="190.53" height="8" transform="translate(529 483)" fill="#dcdcd9")
 				line(y2="17" transform="translate(2468.452 1030.381) rotate(45)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				circle(cx="8" cy="8" r="8" transform="translate(2533.506 1095.435) rotate(45)" fill="#707070")
-				text(transform="translate(2534 1129)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(2534 1129)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
-				text(transform="translate(2270 1129)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(2270 1129)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
 				g(transform="translate(1551.56 1136.193) rotate(-45)")
 					rect(width="187.958" height="8" transform="translate(529 483)" fill="#dcdcd9")

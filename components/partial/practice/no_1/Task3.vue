@@ -7,14 +7,14 @@
 				line(y2="17" transform="translate(895.5 410.5)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				line(y2="17" transform="translate(995.5 410.5)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				circle(cx="8" cy="8" r="8" transform="translate(1087 410)" fill="#707070")
-				text(transform="translate(1095 440)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(1095 440)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
 				g(transform="translate(1282 -115) rotate(90)")
 					rect(width="204" height="8" transform="translate(529 483)" fill="#dcdcd9")
 				g(transform="translate(787 614)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")
 					circle(cx="8" cy="8" r="7.25" fill="none")
-				text(transform="translate(826 627)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(826 627)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
 				line(y2="17" transform="translate(803 522) rotate(90)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/practice/target_left.png")
