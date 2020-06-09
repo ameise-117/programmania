@@ -5,15 +5,15 @@
 				g(transform="translate(337.573 1474)" fill="none")
 					path(d="M177.427,195a49.763,49.763,0,0,1,8.478-27.864l41.521,23.972V195Z" stroke="none")
 					path(d="M 226.4264068603516 193.9994049072266 L 226.4264068603516 191.6848754882812 L 186.2213287353516 168.4724578857422 C 181.2989044189453 176.1009216308594 178.6196746826172 184.8872222900391 178.4369354248047 193.9994049072266 L 226.4264068603516 193.9994049072266 M 227.4264068603516 194.9994049072266 L 177.4269104003906 194.9994049072266 C 177.4269104003906 184.6829986572266 180.5506744384766 175.097412109375 185.9049224853516 167.1350860595703 L 227.4264068603516 191.1075286865234 L 227.4264068603516 194.9994049072266 Z" stroke="none" fill="#c1c1bd")
-				text(transform="translate(763 1687)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(763 1687)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
 				g(transform="translate(34 1178)")
 					rect(width="200" height="8" transform="translate(529 483)" fill="#dcdcd9")
 				line(y2="17" transform="translate(663.5 1657.5)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				circle(cx="8" cy="8" r="8" transform="translate(755 1657)" fill="#707070")
-				text(transform="translate(441 1615)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(441 1615)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
-				text(transform="translate(507 1658)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(507 1658)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 30°
 				line(x2="94" transform="translate(469.5 1668.5)" fill="none" stroke="#c1c1bd" stroke-width="1")
 				g(transform="translate(257.675 924.682) rotate(30)")

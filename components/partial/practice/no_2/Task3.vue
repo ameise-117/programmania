@@ -9,9 +9,9 @@
 					rect(width="190.29" height="8" transform="translate(529 483)" fill="#dcdcd9")
 				line(y2="17" transform="translate(1262.786 1524.677) rotate(-45)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				circle(cx="8" cy="8" r="8" transform="translate(1185.711 1601.045) rotate(-45)" fill="#707070")
-				text(transform="translate(1197 1621)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(1197 1621)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
-				text(transform="translate(1459 1621)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(1459 1621)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
 				g(transform="translate(1297.647 749.549) rotate(45)")
 					rect(width="188.24" height="8" transform="translate(529 483)" fill="#dcdcd9")
@@ -20,11 +20,11 @@
 					circle(cx="8" cy="8" r="8" stroke="none")
 					circle(cx="8" cy="8" r="7.25" fill="none")
 				line(x2="262" transform="translate(1197.5 1464.5)" fill="none" stroke="#c1c1bd" stroke-width="1")
-				text(transform="translate(1386 1490)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(1386 1490)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 45°
-				text(transform="translate(1271 1490)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(1271 1490)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 45°
-				text(transform="translate(1331 1526)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(1331 1526)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 90°
 				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
 				rect(ref="routeEl1" width="40" height="28.85" transform="matrix(0.70711,-0.70711,0.70711,0.70711,1233.69473,1524.54473)" fill="none")

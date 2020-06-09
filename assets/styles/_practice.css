@@ -53,8 +53,9 @@
 
 		& .note {
 			font-size: 12px;
-			padding-left: 15px;
-			padding-top: 5px;
+			padding: 5px 10px 0 15px;
+			display: flex;
+			justify-content: space-between;
 		}
 
     & .wrap {
@@ -68,11 +69,6 @@
     }
 
     & .countdown {
-    	position: absolute;
-    	right: 0;
-    	top: 0;
-    	padding-right: 10px;
-
     	& .flip {
     		border-radius: 3px;
     		background-color: #4E4E4E;

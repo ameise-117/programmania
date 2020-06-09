@@ -6,10 +6,16 @@
         li.item(@click="changeTask(2, $refs.task2)", :class="{ active: (taskNo == 2) }") STEP2
         li.item(@click="changeTask(3, $refs.task3)", :class="{ active: (taskNo == 3) }") STEP3
       .contents
-        p.note
-          | 実行ボタンをクリックするとハリネズミが動き出します
-          br.br
-          | 何秒後に回転するとゴールまでたどり着くでしょう？
+        .note
+          p.text
+            | 実行ボタンをクリックするとハリネズミが動き出します
+            br.br
+            | 何秒後に回転するとゴールまでたどり着くでしょう？
+          .countdown
+            ul.flip
+              li.item 0
+              li.item {{ countSecond }}
+            p.unit 秒
         .wrap
           transition(:name="slideType")
             Task1(v-show="taskNo == 1", ref="task1")
@@ -17,11 +23,6 @@
             Task2(v-show="taskNo == 2", ref="task2")
           transition(:name="slideType")
             Task3(v-show="taskNo == 3", ref="task3")
-        .countdown
-          ul.flip
-            li.item 0
-            li.item {{ countSecond }}
-          p.unit 秒
       li.icon-list
         ul.item.icon-hint(v-if="$store.state.isTouchDevice", @click="openModal()", :class="{ 'hover': isHintHover }", v-on:touchstart="isHintHover = true", v-on:touchend="isHintHover = false") ?
         ul.item.icon-hint(v-else, @click="openModal()", :class="{ 'hover': isHintHover }", v-on:mouseover="isHintHover = true", v-on:mouseleave="isHintHover = false") ?

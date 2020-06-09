@@ -15,15 +15,15 @@
 					rect(width="186" height="8" transform="translate(529 483)" fill="#dcdcd9")
 				line(y2="17" transform="translate(2085.5 315.5)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				circle(cx="8" cy="8" r="8" transform="translate(1988 315)" fill="#707070")
-				text(transform="translate(2028 342)" fill="#707070" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans")
+				text(transform="translate(2028 342)" fill="#707070" font-size="12")
 					tspan(x="-24" y="0") スタート
 				line(x1="216.5" transform="translate(1996.5 283.071)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(y1="257.3" transform="translate(2213.2 282.57)" fill="none" stroke="#c1c1bd" stroke-width="1")
 				line(y1="216" transform="translate(1957 323.5)" fill="none" stroke="#c1c1bd" stroke-width="1")
 				line(x1="257" transform="translate(1956.5 539.37)" fill="none" stroke="#c1c1bd" stroke-width="1")
-				text(transform="translate(2213 276)" fill="#c1c1bd" font-size="12" font-family="Helvetica")
+				text(transform="translate(2213 276)" fill="#c1c1bd" font-size="12")
 					tspan(x="-18.674" y="0") 2
-					tspan(y="0" font-family="HiraginoSans-W3, Hiragino Sans") 周
+					tspan(y="0") 周
 				line(x2="10" transform="translate(1956.999 323.497) rotate(135)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(x2="10" transform="translate(1956.928 323.497) rotate(45)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(y2="17" transform="translate(2085.5 492.5)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
