@@ -8,8 +8,7 @@
 				.page.first(v-show="isFirst")
 					.header
 						span.small プログラミング的思考力
-						br.br
-						| 育成道場へようこそ！
+						span 育成道場へようこそ！
 					.buttons
 						img.src(src="~/assets/images/modal/char_comment.png", alt="コメント")
 						.item.view(@click="viewTutorial()") 使い方を見る
@@ -195,7 +194,7 @@ export default {
     & .header {
     	color: var(--color-key-1);
     	flex-direction: column;
-    	line-height: 0.7;
+    	line-height: 1.6;
 
     	&::before {
     		content: none;
