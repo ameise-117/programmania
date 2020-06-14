@@ -30,19 +30,13 @@
 				slide-up-down(:active="isG2Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link.disabled(to="/advance/1", :class="{ hover: $route.path == '/advance/1' }") 準備中...
+							nuxt-link.link(to="/advance/1", :class="{ hover: $route.path.indexOf('/advance/1') !== -1 }") 正多角形を描く
+						li.item
+							nuxt-link.link(to="/advance/2", :class="{ hover: $route.path.indexOf('/advance/2') !== -1 }") 星座を見つける
 						//- li.item
-						//- 	nuxt-link.link(to="/practice/advance/1") 正多角形を描く
+						//- 	nuxt-link.link(to="/advance/3") アイテムをキャッチする
 						//- li.item
-						//- 	nuxt-link.link(to="/practice/advance/1") UFOキャッチャー
-						//- li.item
-						//- 	nuxt-link.link(to="/practice/advance/2") 星座を見つける
-						//- li.item
-						//- 	nuxt-link.link(to="/practice/advance/3") かけっこする
-						//- li.item
-						//- 	nuxt-link.link(to="/practice/advance/4") 料理を作る
-						//- li.item
-						//- 	nuxt-link.link(to="/practice/advance/5") 迷路に挑戦
+						//- 	nuxt-link.link(to="/advance/4") 迷路に挑戦
 		p.label(v-show="!isMenuActive") Menu
 </template>
 

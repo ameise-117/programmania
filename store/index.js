@@ -30,7 +30,8 @@ export const state = () => ({
   commandLimit: 0,
   activeTab: 1,
   answer: [],
-  isSetAnswer: false
+  isSetAnswer: false,
+  tracks: []
 })
 
 export const mutations = {
@@ -93,6 +94,9 @@ export const mutations = {
   },
   setIsSetAnswer(state, value) {
     state.isSetAnswer = value
+  },
+  setTracks(state, value) {
+    state.tracks = value
   }
 }
 
@@ -156,6 +160,9 @@ export const actions = {
   },
   isSetAnswer(context, value) {
     context.commit('setIsSetAnswer', value)
+  },
+  tracks(context, value) {
+    context.commit('setTracks', value)
   },
   inputNum(context, inputText) {
     // 半角数字の場合
