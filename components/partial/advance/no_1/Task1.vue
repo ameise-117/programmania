@@ -19,11 +19,22 @@
 				rect(ref="routeEl2" width="40" height="28.85" transform="translate(325 282)" fill="none")
 				rect(ref="goalEl" width="40" height="28.85" transform="translate(425 282)" fill="none")
 				g(id="trackEl")
-					line.track( v-for="item in $store.state.tracks" :x1="item.startx" :x2="item.startx" :y1="item.starty" :y2="item.starty" stroke="#2D7066" stroke-width="2" stroke-linecap="round")
+					line.track(v-for="item in $store.state.tracks" :x1="item.startx" :x2="item.startx" :y1="item.starty" :y2="item.starty" stroke="#2D7066" stroke-width="2" stroke-linecap="round")
 </template>
 
 <script>
 export default {
+	data() {
+		return {
+			checkPoint: 2,
+			startDegree: 0,
+			commandLimit: 2,
+			answer: [
+				{ 'el': 'elDirRight', 'val': 3 },
+				{ 'el': 'elMotGo' }
+			]
+		}
+	},
 	computed: {
 		startPosition() {
 			const x = this.$store.state.startPointX
