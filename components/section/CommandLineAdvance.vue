@@ -234,31 +234,7 @@ export default {
 			this.isMoving = true
 
 			// TODO:最終シャイプのみ確認？
-			// this.checkRoute()
-			
-
-			let tracks = [
-				{
-					startx: 125,
-					starty: 282
-				},
-				{
-					startx: 130,
-					starty: 230
-				}
-			]
-			this.$store.dispatch('tracks', tracks)
-
-
-			setTimeout(() => {
-				let track = document.getElementById('trackEl').childNodes[0]
-				TweenMax.to(track, this.translateTerm, {
-					attr: {
-						x2: 125,
-						y2: 230
-					}
-				})
-			}, 0)
+			this.checkRoute()
 		},
 		reset() {
 			let target = this.$store.state.targetEl
@@ -482,7 +458,13 @@ export default {
 				}
 			}
 		},
-		moveHorizontal(target, stepNum, direction, isLastCommand) {
+		async moveHorizontal(target, stepNum, direction, isLastCommand) {
+			let trackG = document.getElementById('trackEl')
+			let startX = 145
+			let startY = 310
+			let tracks = []
+			let tl = new TimelineMax()
+
 			for (var i = 0; i < stepNum; i++) {
 				this.positionX += (this.stepWidth * direction)
 				let isComplete = isLastCommand && (i === (stepNum - 1))
@@ -492,6 +474,27 @@ export default {
 					x: this.positionX,
 					onComplete: function() {
 						self.checkPosition(isComplete)
+					}
+				})
+
+				tracks.push({
+					startx: startX,
+					starty: startY
+				})
+				this.$store.dispatch('tracks', tracks)
+
+				await this.$nextTick()
+
+				trackG = document.getElementById('trackEl')
+				let trackLine = trackG.childNodes[0]
+
+				tl.to(trackLine, self.translateTerm, {
+					attr: {
+						x2: self.positionX
+					},
+					onComplete: function() {
+						startY = self.positionX
+						startY = startY
 					}
 				})
 			}
