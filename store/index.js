@@ -31,7 +31,7 @@ export const state = () => ({
   activeTab: 1,
   answer: [],
   isSetAnswer: false,
-  tracks: []
+  tracks: 'default'
 })
 
 export const mutations = {
