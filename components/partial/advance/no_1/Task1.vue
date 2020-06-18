@@ -19,7 +19,7 @@
 				rect(ref="routeEl2" width="40" height="28.85" transform="translate(325 282)" fill="none")
 				rect(ref="goalEl" width="40" height="28.85" transform="translate(425 282)" fill="none")
 				g(id="trackEl")
-					line.track(v-for="item in $store.state.tracks" :x1="item.startx" :x2="item.startx" :y1="item.starty" :y2="item.starty" stroke="#2D7066" stroke-width="2" stroke-linecap="round")
+					line.track(v-for="item in $store.state.tracks" :x1="item.startx" :x2="item.startx" :y1="item.starty" :y2="item.starty" :stroke="item.stroke" stroke-width="2" stroke-linecap="round")
 </template>
 
 <script>
@@ -75,16 +75,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.track {
-	animation: dash 5s linear forwards;
-	color: white;
-}
-
-@keyframes dash {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-<style>

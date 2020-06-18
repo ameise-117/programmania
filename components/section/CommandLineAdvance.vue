@@ -256,7 +256,7 @@ export default {
 			this.tracks = []
 			this.$store.dispatch('isComplete', false)
 			this.$store.dispatch('countSecond', 0)
-			this.$store.dispatch('tracks', null)
+			this.$store.dispatch('tracks', 'default')
 			this.tm = new TimelineMax({
 				paused: true
 			})
@@ -280,8 +280,11 @@ export default {
 				this.$store.dispatch('isDragEnd', true)
 			}
 		},
-		checkPosition(isComplete) {
-			
+		async checkPosition(isComplete) {
+			this.$store.dispatch('tracks', this.tracks)
+			await this.$nextTick()
+			this.tm.play()
+			this.tl.play()
 		},
 		checkRoute() {
 			let commands = this.$refs.elCommand.$el.children
@@ -443,7 +446,7 @@ export default {
 				}
 			}
 		},
-		async moveDiagonal(target, stepNum, calcNum, direction, isLastCommand) {
+		moveDiagonal(target, stepNum, calcNum, direction, isLastCommand) {
 			let trackG = document.getElementById('trackEl')
 
 			for (var i = 0; i < stepNum; i++) {
@@ -460,7 +463,8 @@ export default {
 				// 移動線を引く
 				this.tracks.push({
 					startx: this.startX,
-					starty: this.startY
+					starty: this.startY,
+					stroke: "none"
 				})
 				let num = (this.tracks.length - 1)
 				let trackLine = trackG.childNodes[num]
@@ -468,7 +472,8 @@ export default {
 				this.tl.to(trackLine, this.translateTerm, {
 					attr: {
 						x2: this.positionX,
-						y2: this.positionY
+						y2: this.positionY,
+						stroke: "#2D7066"
 					}
 				})
 
@@ -477,10 +482,9 @@ export default {
 				this.startY = this.positionY
 			}
 
-			this.$store.dispatch('tracks', this.tracks)
-			await this.$nextTick()
-			this.tm.play()
-			this.tl.play()
+			if (isLastCommand) {
+				this.checkPosition()
+			}
 		},
 		rotate(target, calcNum, isLastCommand) {
 			this.tm.to(target, 0.5, {
