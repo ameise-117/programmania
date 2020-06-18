@@ -257,8 +257,12 @@ export default {
 			this.$store.dispatch('isComplete', false)
 			this.$store.dispatch('countSecond', 0)
 			this.$store.dispatch('tracks', null)
-			this.tm.clear()
-			this.tl.clear()
+			this.tm = new TimelineMax({
+				paused: true
+			})
+			this.tl = new TimelineMax({
+				paused: true
+			})
 			TweenMax.to(target, duration, {
 				x: this.$store.state.startPointX,
 				y: this.$store.state.startPointY,
@@ -447,14 +451,10 @@ export default {
 				this.positionY += (Math.sin(calcNum * (Math.PI / 180)) * this.stepWidth * direction)
 				let isComplete = isLastCommand && (i === (stepNum - 1))
 
-				let self = this
 				// 対象を移動する
 				this.tm.to(target, this.translateTerm, {
 					x: this.positionX,
-					y: this.positionY,
-					onComplete: function() {
-						self.checkPosition(isComplete)
-					}
+					y: this.positionY
 				})
 
 				// 移動線を引く
@@ -462,16 +462,8 @@ export default {
 					startx: this.startX,
 					starty: this.startY
 				})
-				this.$store.dispatch('tracks', this.tracks)
-				// DOM更新
-				await this.$nextTick()
-				let num = (trackG.childNodes.length - 1)
+				let num = (this.tracks.length - 1)
 				let trackLine = trackG.childNodes[num]
-				// 次ループ値設定
-				this.startX = this.positionX
-				this.startY = this.positionY
-
-				console.log('**move**')
 
 				this.tl.to(trackLine, this.translateTerm, {
 					attr: {
@@ -479,30 +471,26 @@ export default {
 						y2: this.positionY
 					}
 				})
+
+				// 次ループ値設定
+				this.startX = this.positionX
+				this.startY = this.positionY
 			}
+
+			this.$store.dispatch('tracks', this.tracks)
+			await this.$nextTick()
+			this.tm.play()
+			this.tl.play()
 		},
 		rotate(target, calcNum, isLastCommand) {
-			let self = this
-			this.tl.pause()
-			console.log('**rotate**')
 			this.tm.to(target, 0.5, {
 				rotation: calcNum,
-				transformOrigin: 'center',
-				onComplete: function() {
-					self.tl.resume(2)
-					if (isLastCommand) {
-						self.checkPosition(true)
-					}
-				}
+				transformOrigin: 'center'
 			})
 
 			this.tl.to(target, 0.5, {
 				attr: {}
 			})
-
-			
-			// this.tl.pause(0.5)
-			// this.tl.resume(0.5)
 		}
 	}
 }
