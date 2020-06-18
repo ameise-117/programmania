@@ -88,6 +88,7 @@ export default {
 	data() {
 		return {
 			tm: new TimelineMax(),
+			tl: new TimelineMax(),
 			commandLineOffsetTop: 10,
 			stepWidth: 100,
 			positionX: 0,
@@ -101,7 +102,10 @@ export default {
 			isCommandLimit: false,
 			isPlayHover: false,
 			isResetHover: false,
-			isClearHover: false
+			isClearHover: false,
+			tracks: [],
+			startX: 0,
+			startY: 0
 		}
 	},
 	mounted() {
@@ -242,14 +246,19 @@ export default {
 			this.isMoving = false
 			this.positionX = this.$store.state.startPointX
 			this.positionY = this.$store.state.startPointY
+			this.startX = this.$store.state.startPointX
+			this.startY = this.$store.state.startPointY
 			this.currentDegree = this.$store.state.startDegree
 			this.currentDirection = this.$store.state.startDirection
 			this.routeNum = 0
 			this.isRouteComplete = true
 			this.commandArray = []
+			this.tracks = []
 			this.$store.dispatch('isComplete', false)
 			this.$store.dispatch('countSecond', 0)
+			this.$store.dispatch('tracks', null)
 			this.tm.clear()
+			this.tl.clear()
 			TweenMax.to(target, duration, {
 				x: this.$store.state.startPointX,
 				y: this.$store.state.startPointY,
@@ -273,8 +282,6 @@ export default {
 		checkRoute() {
 			let commands = this.$refs.elCommand.$el.children
 			let target = this.$store.state.targetEl
-			let isHorizontal = false
-			let isVertical = false
 			let isDiagonal = false
 			let isRotate = false
 			let isRoopStart = false
@@ -312,16 +319,6 @@ export default {
 							} else if (isDiagonal) {
 								this.moveDiagonal(target, stepNum, this.currentDegree, direction, isLastCommand)
 								isDiagonal = false
-
-							// 直線で動く場合
-							} else {
-								if (isHorizontal) {
-									this.moveHorizontal(target, stepNum, direction, isLastCommand)
-									isHorizontal = false
-								} else if (isVertical) {
-									this.moveVertical(target, stepNum, direction, isLastCommand)
-									isVertical = false
-								}
 							}
 							break
 						case 'rolate':
@@ -354,22 +351,6 @@ export default {
 
 					if (stepNum && stepNum > 0) {
 						switch(commandVal) {
-							case 'right':
-								isHorizontal = true
-								direction = 1
-								break
-							case 'left':
-								isHorizontal = true
-								direction = -1
-								break
-							case 'top':
-								isVertical = true
-								direction = -1
-								break
-							case 'bottom':
-								isVertical = true
-								direction = 1
-								break
 							case 'forward':
 								isDiagonal = true
 								direction = this.currentDirection
@@ -458,68 +439,16 @@ export default {
 				}
 			}
 		},
-		async moveHorizontal(target, stepNum, direction, isLastCommand) {
+		async moveDiagonal(target, stepNum, calcNum, direction, isLastCommand) {
 			let trackG = document.getElementById('trackEl')
-			let startX = 145
-			let startY = 310
-			let tracks = []
-			let tl = new TimelineMax()
 
-			for (var i = 0; i < stepNum; i++) {
-				this.positionX += (this.stepWidth * direction)
-				let isComplete = isLastCommand && (i === (stepNum - 1))
-
-				let self = this
-				this.tm.to(target, this.translateTerm, {
-					x: this.positionX,
-					onComplete: function() {
-						self.checkPosition(isComplete)
-					}
-				})
-
-				tracks.push({
-					startx: startX,
-					starty: startY
-				})
-				this.$store.dispatch('tracks', tracks)
-
-				await this.$nextTick()
-
-				trackG = document.getElementById('trackEl')
-				let trackLine = trackG.childNodes[0]
-
-				tl.to(trackLine, self.translateTerm, {
-					attr: {
-						x2: self.positionX
-					},
-					onComplete: function() {
-						startY = self.positionX
-						startY = startY
-					}
-				})
-			}
-		},
-		moveVertical(target, stepNum, direction, isLastCommand) {
-			for (var i = 0; i < stepNum; i++) {
-				this.positionY += (this.stepWidth * direction)
-				let isComplete = isLastCommand && (i === (stepNum - 1))
-
-				let self = this
-				this.tm.to(target, this.translateTerm, {
-					y: this.positionY,
-					onComplete: function() {
-						self.checkPosition(isComplete)
-					}
-				})
-			}
-		},
-		moveDiagonal(target, stepNum, calcNum, direction, isLastCommand) {
 			for (var i = 0; i < stepNum; i++) {
 				this.positionX += (Math.cos(calcNum * (Math.PI / 180)) * this.stepWidth * direction)
 				this.positionY += (Math.sin(calcNum * (Math.PI / 180)) * this.stepWidth * direction)
 				let isComplete = isLastCommand && (i === (stepNum - 1))
 
 				let self = this
+				// 対象を移動する
 				this.tm.to(target, this.translateTerm, {
 					x: this.positionX,
 					y: this.positionY,
@@ -527,19 +456,53 @@ export default {
 						self.checkPosition(isComplete)
 					}
 				})
+
+				// 移動線を引く
+				this.tracks.push({
+					startx: this.startX,
+					starty: this.startY
+				})
+				this.$store.dispatch('tracks', this.tracks)
+				// DOM更新
+				await this.$nextTick()
+				let num = (trackG.childNodes.length - 1)
+				let trackLine = trackG.childNodes[num]
+				// 次ループ値設定
+				this.startX = this.positionX
+				this.startY = this.positionY
+
+				console.log('**move**')
+
+				this.tl.to(trackLine, this.translateTerm, {
+					attr: {
+						x2: this.positionX,
+						y2: this.positionY
+					}
+				})
 			}
 		},
 		rotate(target, calcNum, isLastCommand) {
 			let self = this
+			this.tl.pause()
+			console.log('**rotate**')
 			this.tm.to(target, 0.5, {
 				rotation: calcNum,
 				transformOrigin: 'center',
 				onComplete: function() {
+					self.tl.resume(2)
 					if (isLastCommand) {
 						self.checkPosition(true)
 					}
 				}
 			})
+
+			this.tl.to(target, 0.5, {
+				attr: {}
+			})
+
+			
+			// this.tl.pause(0.5)
+			// this.tl.resume(0.5)
 		}
 	}
 }
