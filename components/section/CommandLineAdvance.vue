@@ -233,14 +233,17 @@ export default {
 			this.$store.dispatch('isDragEnd', true)
 		},
 		play() {
-			// リセット
-			this.reset()
-			this.isMoving = true
+			let promise = new Promise((resolve, reject) => {
+				// リセット
+				this.reset(resolve, true)
+			})
 
-			// TODO:最終シャイプのみ確認？
-			this.checkRoute()
+			promise.then(() => {
+				this.isMoving = true
+				this.checkRoute()
+			})
 		},
-		reset() {
+		reset(resolve, isStart) {
 			let target = this.$store.state.targetEl
 			let duration =	(this.isMoving ? 0.5 : 0)
 			this.isMoving = false
@@ -268,6 +271,10 @@ export default {
 				y: this.$store.state.startPointY,
 				rotation: this.$store.state.startDegree
 			})
+
+			if (isStart) {
+				return resolve()
+			}
 		},
 		clear() {
 			this.$store.dispatch('isComplete', false)
