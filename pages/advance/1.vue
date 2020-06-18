@@ -40,9 +40,9 @@ export default {
       isAnswerHover: false,
       slideType: 'next',
       dragItems: {
-        'motion': [ true, false, false ],
-        'figures': [ true, true, true, true, false, false, false ],
-        'other': [ false, false ]
+        'motion': [ true, true, false ],
+        'figures': [ false, false, false, false, true, true, false ],
+        'other': [ true, true ]
       }
   	}
   },

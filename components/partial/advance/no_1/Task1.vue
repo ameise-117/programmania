@@ -28,9 +28,15 @@ export default {
 		return {
 			checkPoint: 2,
 			startDegree: 0,
-			commandLimit: 2,
+			commandLimit: 10,
 			answer: [
-				{ 'el': 'elDirRight', 'val': 3 },
+				{ 'el': 'elCalcDegree', 'val': -45 },
+				{ 'el': 'elMotRolate' },
+				{ 'el': 'elDirForward', 'val': 1 },
+				{ 'el': 'elMotGo' },
+				{ 'el': 'elCalcDegree', 'val': 30 },
+				{ 'el': 'elMotRolate' },
+				{ 'el': 'elDirForward', 'val': 1 },
 				{ 'el': 'elMotGo' }
 			]
 		}
