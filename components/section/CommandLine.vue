@@ -386,7 +386,14 @@ export default {
 										checkNum += 360
 									}
 								}
-								if (this.$store.state.rotateDegree[rotateCount] != checkNum) {
+								// 期待値がマイナスの場合
+								let checkDegreeA = this.$store.state.rotateDegree[rotateCount]
+								let checkDegreeB = checkDegreeA
+								if (checkDegreeA < 0) {
+									checkDegreeB += 360
+								}
+
+								if (checkDegreeA != checkNum && checkDegreeB != checkNum) {
 									this.isRouteComplete = false
 								}
 								rotateCount++
