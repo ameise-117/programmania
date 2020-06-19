@@ -11,7 +11,7 @@
 <script>
 import Globalheader from '~/components/global/Globalheader.vue'
 import Navigation from '~/components/section/Navigation.vue'
-import CommandLine from '~/components/section/CommandLine.vue'
+import CommandLine from '~/components/section/CommandLineBasic.vue'
 
 export default {
   components: {

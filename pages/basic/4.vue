@@ -22,11 +22,12 @@
 
 <script>
 import Palet from '~/components/section/Palet.vue'
-import Task1 from '~/components/partial/practice/no_4/Task1.vue'
-import Task2 from '~/components/partial/practice/no_4/Task2.vue'
-import Task3 from '~/components/partial/practice/no_4/Task3.vue'
+import Task1 from '~/components/partial/basic/no_4/Task1.vue'
+import Task2 from '~/components/partial/basic/no_4/Task2.vue'
+import Task3 from '~/components/partial/basic/no_4/Task3.vue'
 
 export default {
+  layout: 'basic',
 	components: {
     Palet,
     Task1,

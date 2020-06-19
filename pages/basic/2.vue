@@ -27,11 +27,12 @@
 <script>
 import Palet from '~/components/section/Palet.vue'
 import Hint from '~/components/partial/modal/Hint1.vue'
-import Task1 from '~/components/partial/practice/no_2/Task1.vue'
-import Task2 from '~/components/partial/practice/no_2/Task2.vue'
-import Task3 from '~/components/partial/practice/no_2/Task3.vue'
+import Task1 from '~/components/partial/basic/no_2/Task1.vue'
+import Task2 from '~/components/partial/basic/no_2/Task2.vue'
+import Task3 from '~/components/partial/basic/no_2/Task3.vue'
 
 export default {
+  layout: 'basic',
 	components: {
     Palet,
     Hint,
