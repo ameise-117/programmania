@@ -19,7 +19,7 @@
 				g(transform="translate(2258.667 1106.496) rotate(-45)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")
 					circle(cx="8" cy="8" r="7.25" fill="none")
-				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/practice/target_left.png")
+				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/task/target_left.png")
 				rect(ref="goalEl" width="40" height="38.62" transform="matrix(0.70711,-0.70711,0.70711,0.70711,2232.36645,1097.79205)" fill="none")
 </template>
 

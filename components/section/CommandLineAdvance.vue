@@ -297,11 +297,11 @@ export default {
 			let commands = this.$refs.elCommand.$el.children
 			let target = this.$store.state.targetEl
 			let isRoopStart = false
-			let isRoopEnd = false
+			let isRoopEnd = true
 			let stepNum = 0
 			let calcNum = 0
 			let roopNum = 0
-			let direction = 1
+			let direction = this.currentDirection
 			let isLastCommand = false
 
 			for (var i = 1; i < commands.length; i++) {
@@ -351,16 +351,16 @@ export default {
 				if (commandType == 'direction') {
 					stepNum = command.querySelector('.input').value
 
-					if (stepNum && stepNum > 0) {
-						switch(commandVal) {
-							case 'forward':
-								direction = this.currentDirection
-								break
-						}
-						continue
-					} else {
-						break
-					}
+					// if (stepNum && stepNum > 0) {
+					// 	switch(commandVal) {
+					// 		case 'forward':
+					// 			direction = this.currentDirection
+					// 			break
+					// 	}
+					// 	continue
+					// } else {
+					// 	break
+					// }
 				}
 
 				// 演算
@@ -455,8 +455,8 @@ export default {
 
 				// 移動線を引く
 				this.tracks.push({
-					startx: this.startX,
-					starty: this.startY,
+					startx: (this.startX + 20),
+					starty: (this.startY + 10),
 					stroke: "none"
 				})
 				let num = (this.tracks.length - 1)
@@ -464,8 +464,8 @@ export default {
 
 				this.tl.to(trackLine, this.translateTerm, {
 					attr: {
-						x2: this.positionX,
-						y2: this.positionY,
+						x2: (this.positionX + 20),
+						y2: (this.positionY + 10),
 						stroke: "#2D7066"
 					}
 				})

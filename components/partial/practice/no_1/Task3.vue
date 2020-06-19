@@ -17,7 +17,7 @@
 				text(transform="translate(826 627)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
 				line(y2="17" transform="translate(803 522) rotate(90)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
-				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/practice/target_left.png")
+				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/task/target_left.png")
 				rect(ref="routeEl1" width="40" height="38.62" transform="translate(975 383)" fill="none")
 				rect(ref="routeEl2" width="40" height="38.62" transform="translate(875 383)" fill="none")
 				rect(ref="routeEl3" width="40" height="38.62" transform="translate(775 383)" fill="none")

@@ -35,7 +35,7 @@
 				text(transform="translate(2631 337)" fill="#c1c1bd" font-size="12")
 					tspan(x="-18.674" y="0") 3
 					tspan(y="0") 周
-				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/practice/target_left.png")
+				image(ref="targetEl" width="40" height="38.621" :transform="startPosition" xlink:href="~/assets/images/task/target_left.png")
 				rect(ref="routeEl1" width="40" height="38.62" transform="translate(2649.068 443.247) rotate(60)" fill="none")
 				rect(ref="routeEl2" width="40" height="38.62" transform="translate(2599.068 356.645) rotate(60)" fill="none")
 				rect(ref="routeEl3" width="40" height="38.62" transform="matrix(0.5,-0.86603,0.86603,0.5,2515.62006,477.8857)" fill="none")

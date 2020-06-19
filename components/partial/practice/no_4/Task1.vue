@@ -28,7 +28,7 @@
 				line(x1="120" transform="translate(1687.5 602.071)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(x2="10" transform="translate(1807.5 602.071) rotate(-135)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
 				line(x2="10" transform="translate(1807.5 602) rotate(135)" fill="none" stroke="#c1c1bd" stroke-linecap="round" stroke-width="1")
-				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
+				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/task/target_right.png")
 				rect(ref="routeEl1" width="40" height="28.85" transform="translate(1588 531)" fill="none")
 				rect(ref="routeEl2" width="40" height="28.85" transform="translate(1688 531)" fill="none")
 				rect(ref="routeEl3" width="40" height="28.85" transform="translate(1788 531)" fill="none")

@@ -20,7 +20,7 @@
 				g(transform="translate(1586 1105)" fill="#fff" stroke="#d4d4d4" stroke-width="1.5")
 					circle(cx="8" cy="8" r="8" stroke="none")
 					circle(cx="8" cy="8" r="7.25" fill="none")
-				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
+				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/task/target_right.png")
 				rect(ref="goalEl" width="40" height="28.85" transform="matrix(1,0,0,1,1573,1090)" fill="none")
 </template>
 

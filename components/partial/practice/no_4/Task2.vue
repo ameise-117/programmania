@@ -29,7 +29,7 @@
 				line(y2="17" transform="translate(2085.5 492.5)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				line(y2="17" transform="translate(2181.5 412) rotate(90)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
 				line(y2="17" transform="translate(2003.5 412) rotate(90)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
-				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
+				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/task/target_right.png")
 				rect(ref="routeEl1" width="40" height="28.85" transform="translate(2065 297)" fill="none")
 				rect(ref="routeEl2" width="40" height="28.85" transform="translate(2165 297)" fill="none")
 				rect(ref="routeEl3" width="40" height="28.85" transform="translate(2199.425 391.425) rotate(90)" fill="none")

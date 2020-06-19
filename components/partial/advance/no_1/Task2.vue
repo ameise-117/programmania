@@ -13,7 +13,7 @@
 					tspan(x="-24" y="0") スタート
 				text(transform="translate(172 393)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
-				image(ref="targetEl" width="40" height="33.333" :transform="startPosition" xlink:href="~/assets/images/practice/target_center.png")
+				image(ref="targetEl" width="40" height="33.333" :transform="startPosition" xlink:href="~/assets/images/task/target_center.png")
 				rect(ref="routeEl1" width="40" height="33.33" transform="translate(121 455)" fill="none")
 				rect(ref="goalEl" width="40" height="33.33" transform="translate(121 355)" fill="none")
 </template>

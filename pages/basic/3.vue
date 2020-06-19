@@ -28,7 +28,7 @@
         ul.item.icon-hint(v-else, @click="openModal()", :class="{ 'hover': isHintHover }", v-on:mouseover="isHintHover = true", v-on:mouseleave="isHintHover = false") ?
         ul.item.icon-answer(v-if="$store.state.isTouchDevice", @click="setAnswer()", :class="{ 'hover': isAnswerHover }", v-on:touchstart="isAnswerHover = true", v-on:touchend="isAnswerHover = false") A
         ul.item.icon-answer(v-else, @click="setAnswer()", :class="{ 'hover': isAnswerHover }", v-on:mouseover="isAnswerHover = true", v-on:mouseleave="isAnswerHover = false") A
-      img.complete(src="~/assets/images/practice/complete.png", :class="{ visible: $store.state.isComplete }")
+      img.complete(src="~/assets/images/task/complete.png", :class="{ visible: $store.state.isComplete }")
     palet(:dragItems="dragItems")
     transition(name="modal")
       hint(v-show="isShowModal", v-on:close-modal="closeModal")

@@ -24,7 +24,7 @@
 				text(transform="translate(2076 1529)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 30°
 				line(y2="17" transform="translate(2099.099 1476.4) rotate(-30)" fill="none" stroke="#4e4e4e" stroke-width="1.5" stroke-dasharray="3")
-				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
+				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/task/target_right.png")
 				rect(ref="goalEl" width="40" height="28.85" transform="matrix(1,0,0,1,2268.0436,1409.144)" fill="none")
 </template>
 

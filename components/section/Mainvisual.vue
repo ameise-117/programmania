@@ -9,7 +9,7 @@
 				| 画面のコマンドを配置して
 				br.br
 				| ハリネズミを動かそう！
-			img.img(src="~/assets/images/practice/target_center.png")
+			img.img(src="~/assets/images/task/target_center.png")
 		a.button(href="/basic/1") スタート
 		guide(v-if="$store.state.windowWidth === 'mobile' || browser === 'other'")
 </template>

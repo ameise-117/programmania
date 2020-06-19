@@ -14,7 +14,7 @@
 					tspan(x="-24" y="0") スタート
 				text(transform="translate(445 333)" fill="#707070" font-size="12")
 					tspan(x="-17.58" y="0") ゴール
-				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
+				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/task/target_right.png")
 				rect(ref="routeEl1" width="40" height="28.85" transform="translate(225 282)" fill="none")
 				rect(ref="routeEl2" width="40" height="28.85" transform="translate(325 282)" fill="none")
 				rect(ref="goalEl" width="40" height="28.85" transform="translate(425 282)" fill="none")

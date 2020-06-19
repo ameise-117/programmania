@@ -26,7 +26,7 @@
 					tspan(x="-9.073" y="0") 45°
 				text(transform="translate(1331 1526)" fill="#c1c1bd" font-size="12")
 					tspan(x="-9.073" y="0") 90°
-				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/practice/target_right.png")
+				image(ref="targetEl" width="40" height="28.852" :transform="startPosition" xlink:href="~/assets/images/task/target_right.png")
 				rect(ref="routeEl1" width="40" height="28.85" transform="matrix(0.70711,-0.70711,0.70711,0.70711,1233.69473,1524.54473)" fill="none")
 				rect(ref="routeEl2" width="40" height="28.85" transform="matrix(0.70711,-0.70711,0.70711,0.70711,1304.40543,1453.83403)" fill="none")
 				rect(ref="routeEl3" width="40" height="28.85" transform="matrix(0.70711,0.70711,-0.70711,0.70711,1395.51757,1496.26033)" fill="none")
