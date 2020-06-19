@@ -30,7 +30,7 @@
 				slide-up-down(:active="isG2Active", :duration="300")
 					ul.contents
 						li.item
-							nuxt-link.link(to="/advance/1", :class="{ hover: $route.path.indexOf('/advance/1') !== -1 }") 正多角形を描く
+							nuxt-link.link(to="/advance/1", :class="{ hover: $route.path.indexOf('/advance/1') !== -1 }") 図形を描く
 						li.item
 							nuxt-link.link(to="/advance/2", :class="{ hover: $route.path.indexOf('/advance/2') !== -1 }") 星座を見つける
 						//- li.item

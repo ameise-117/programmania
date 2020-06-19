@@ -26,18 +26,17 @@
 export default {
 	data() {
 		return {
-			checkPoint: 2,
 			startDegree: 0,
-			commandLimit: 10,
+			commandLimit: 8,
 			answer: [
-				{ 'el': 'elCalcDegree', 'val': -45 },
+				{ 'el': 'elCalcDegree', 'val': -108 },
 				{ 'el': 'elMotRolate' },
+				{ 'el': 'elRoopStart', 'val': 5 },
 				{ 'el': 'elDirForward', 'val': 1 },
 				{ 'el': 'elMotGo' },
-				{ 'el': 'elCalcDegree', 'val': 30 },
+				{ 'el': 'elCalcDegree', 'val': 72 },
 				{ 'el': 'elMotRolate' },
-				{ 'el': 'elDirForward', 'val': 1 },
-				{ 'el': 'elMotGo' }
+				{ 'el': 'elRoopEnd' }
 			]
 		}
 	},
@@ -52,16 +51,8 @@ export default {
   	setTargetEl() {
       // 動作対象を設定
     	this.$store.dispatch('targetEl', this.$refs.targetEl)
-    	this.$store.dispatch('goalEl', this.$refs.goalEl)
     	this.$store.dispatch('startPointX', 125)
     	this.$store.dispatch('startPointY', 282)
-
-    	// チェックポイントを格納
-    	let routeEls = []
-    	for (var i = 1; i <= this.checkPoint; i++) {
-    		routeEls.push(this.$refs['routeEl' + i])
-    	}
-    	this.$store.dispatch('routeEls', routeEls)
 
     	// 起点角度を設定
     	this.$store.dispatch('startDegree', this.startDegree)

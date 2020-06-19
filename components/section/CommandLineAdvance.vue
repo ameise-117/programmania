@@ -296,8 +296,6 @@ export default {
 		checkRoute() {
 			let commands = this.$refs.elCommand.$el.children
 			let target = this.$store.state.targetEl
-			let isDiagonal = false
-			let isRotate = false
 			let isRoopStart = false
 			let isRoopEnd = false
 			let stepNum = 0
@@ -325,14 +323,9 @@ export default {
 								}
 
 							// 繰り返し終了後にコマンドが設定されている場合
-							} else if (this.commandArray && this.commandArray.length > 0) {
+							} else {
 								let roopCommand = { 'motion': 'go', 'step': stepNum, 'direction': direction }
 								this.commandArray.push({ 'roop_num': 1, 'command_set': [ roopCommand ] })
-
-							// 斜めに動く場合
-							} else if (isDiagonal) {
-								this.moveDiagonal(target, stepNum, this.currentDegree, direction, isLastCommand)
-								isDiagonal = false
 							}
 							break
 						case 'rolate':
@@ -345,14 +338,9 @@ export default {
 								}
 
 							// 繰り返し終了後にコマンドが設定されている場合
-							} else if (this.commandArray && this.commandArray.length > 0) {
+							} else {
 								let roopCommand = { 'motion': 'rolate', 'degree': parseInt(calcNum, 10) }
 								this.commandArray.push({ 'roop_num': 1, 'command_set': [ roopCommand ] })
-
-							// 回転する場合
-							} else if (isRotate) {
-								this.rotate(target, this.currentDegree, false)
-								isRotate = false
 							}
 							break
 					}
@@ -366,7 +354,6 @@ export default {
 					if (stepNum && stepNum > 0) {
 						switch(commandVal) {
 							case 'forward':
-								isDiagonal = true
 								direction = this.currentDirection
 								break
 						}
@@ -383,7 +370,6 @@ export default {
 					if (calcNum) {
 						switch(commandVal) {
 							case 'degree':
-								isRotate = true
 								this.currentDegree = (this.currentDegree + parseInt(calcNum, 10))
 								break
 						}
@@ -502,6 +488,10 @@ export default {
 			this.tl.to(target, 0.5, {
 				attr: {}
 			})
+
+			if (isLastCommand) {
+				this.checkPosition()
+			}
 		}
 	}
 }
