@@ -62,7 +62,7 @@
     "postcss-will-change": "^3.0.0",
     "prettier": "^1.16.4",
     "prettier-stylelint": "^0.4.2",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "stylelint": "^10.1.0",
     "stylelint-config-recess-order": "^2.0.3",
